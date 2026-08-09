@@ -8,6 +8,7 @@
 <style>
 :root{
   --pink:#d85b91;
+  --pink-dark:#b94778;
   --pink-light:#fff0f6;
   --pink-soft:#fff8fb;
   --text:#342c34;
@@ -15,10 +16,14 @@
   --border:#eadde4;
   --white:#ffffff;
   --danger:#c94b61;
+  --green:#4f9b78;
   --shadow:0 8px 25px rgba(80,45,65,.08);
 }
 
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
 body{
   margin:0;
@@ -27,20 +32,27 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 }
 
-button,input,select{font:inherit}
-button{cursor:pointer}
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
 
 .app{
   max-width:620px;
   margin:auto;
-  padding:22px 16px 110px;
+  padding:22px 16px 115px;
 }
+
+/* HEADER */
 
 header{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 h1{
@@ -55,14 +67,57 @@ h1{
   font-size:14px;
 }
 
-.icon-button{
-  border:0;
+/* MONTH SELECTOR */
+
+.month-card{
   background:white;
-  width:44px;
-  height:44px;
-  border-radius:15px;
+  border-radius:21px;
+  padding:12px;
   box-shadow:var(--shadow);
+  margin-bottom:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
 }
+
+.month-arrow{
+  border:0;
+  background:var(--pink-light);
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  font-size:20px;
+  color:var(--pink-dark);
+}
+
+.month-center{
+  flex:1;
+  text-align:center;
+}
+
+.month-title{
+  font-size:16px;
+  font-weight:800;
+}
+
+.month-subtitle{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.today-button{
+  border:0;
+  background:#f7eef3;
+  color:var(--text);
+  padding:7px 10px;
+  border-radius:10px;
+  font-size:11px;
+  margin-top:6px;
+}
+
+/* CARDS */
 
 .card{
   background:var(--white);
@@ -118,11 +173,15 @@ h1{
   margin-top:3px;
 }
 
+/* SECTIONS */
+
 .section-title{
   margin:0 0 14px;
   font-size:20px;
   font-weight:850;
 }
+
+/* CATEGORIES */
 
 .category{
   display:flex;
@@ -132,7 +191,9 @@ h1{
   border-bottom:1px solid #f1e8ed;
 }
 
-.category:last-child{border-bottom:0}
+.category:last-child{
+  border-bottom:0;
+}
 
 .category-left{
   display:flex;
@@ -151,7 +212,9 @@ h1{
   font-size:21px;
 }
 
-.category-name{font-weight:650}
+.category-name{
+  font-weight:650;
+}
 
 .category-amount{
   font-weight:800;
@@ -164,6 +227,7 @@ h1{
   border-radius:10px;
   margin-top:6px;
   overflow:hidden;
+  width:120px;
 }
 
 .progress-bar{
@@ -172,23 +236,78 @@ h1{
   border-radius:10px;
 }
 
+/* PAYMENT */
+
+.payment-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  border-bottom:1px solid #f1e8ed;
+}
+
+.payment-row:last-child{
+  border-bottom:0;
+}
+
+.payment-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.payment-icon{
+  width:43px;
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f8f0f4;
+  border-radius:14px;
+  font-size:20px;
+}
+
+.payment-name{
+  font-weight:700;
+}
+
+.payment-amount{
+  font-weight:850;
+  direction:ltr;
+}
+
+.payment-total{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+  padding-top:15px;
+  border-top:2px solid #f1e5eb;
+  font-weight:850;
+}
+
+/* EXPENSES */
+
 .expense{
   padding:14px 0;
   border-bottom:1px solid #f1e8ed;
 }
 
-.expense:last-child{border-bottom:0}
+.expense:last-child{
+  border-bottom:0;
+}
 
 .expense-main{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
 }
 
 .expense-info{
   display:flex;
   gap:11px;
   align-items:center;
+  min-width:0;
 }
 
 .expense-icon{
@@ -199,9 +318,18 @@ h1{
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-shrink:0;
 }
 
-.expense-name{font-weight:700}
+.expense-text{
+  min-width:0;
+}
+
+.expense-name{
+  font-weight:700;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
 .expense-date{
   color:var(--muted);
@@ -209,9 +337,16 @@ h1{
   margin-top:3px;
 }
 
+.expense-payment{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:2px;
+}
+
 .expense-amount{
   font-weight:800;
   direction:ltr;
+  white-space:nowrap;
 }
 
 .actions{
@@ -229,25 +364,36 @@ h1{
   font-size:12px;
 }
 
-.delete{color:var(--danger)}
+.delete{
+  color:var(--danger);
+}
+
+/* FIXED */
 
 .fixed-item{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
   padding:13px 0;
   border-bottom:1px solid #f1e8ed;
 }
 
-.fixed-item:last-child{border-bottom:0}
+.fixed-item:last-child{
+  border-bottom:0;
+}
 
-.fixed-name{font-weight:700}
+.fixed-name{
+  font-weight:700;
+}
 
 .fixed-meta{
   color:var(--muted);
   font-size:12px;
   margin-top:3px;
 }
+
+/* BUTTONS */
 
 .add-category{
   width:100%;
@@ -275,7 +421,10 @@ h1{
   font-size:17px;
   font-weight:850;
   box-shadow:0 9px 25px rgba(216,91,145,.3);
+  z-index:5;
 }
+
+/* MODALS */
 
 .modal{
   display:none;
@@ -287,7 +436,9 @@ h1{
   justify-content:center;
 }
 
-.modal.show{display:flex}
+.modal.show{
+  display:flex;
+}
 
 .sheet{
   background:white;
@@ -304,6 +455,10 @@ h1{
   justify-content:space-between;
   align-items:center;
   margin-bottom:18px;
+}
+
+.sheet-header h2{
+  margin:0;
 }
 
 .close{
@@ -330,7 +485,9 @@ input,select{
   outline:none;
 }
 
-input:focus,select:focus{border-color:#dca0bb}
+input:focus,select:focus{
+  border-color:#dca0bb;
+}
 
 .checkbox{
   display:flex;
@@ -356,17 +513,31 @@ input:focus,select:focus{border-color:#dca0bb}
   margin-top:10px;
 }
 
+.secondary{
+  width:100%;
+  border:0;
+  background:var(--pink-light);
+  color:var(--pink-dark);
+  padding:14px;
+  border-radius:15px;
+  font-weight:750;
+  margin-top:9px;
+}
+
 .empty{
   text-align:center;
   color:var(--muted);
   padding:18px 5px;
 }
 
-.hidden{display:none!important}
+.hidden{
+  display:none!important;
+}
 
 @media(max-width:380px){
   h1{font-size:26px}
   .total{font-size:34px}
+  .progress{width:90px}
 }
 </style>
 </head>
@@ -378,17 +549,42 @@ input:focus,select:focus{border-color:#dca0bb}
 <header>
   <div>
     <h1>הכסף שלי 💕</h1>
-    <div class="subtitle" id="periodText"></div>
+    <div class="subtitle">ניהול ההוצאות שלי</div>
   </div>
+
   <button class="icon-button" onclick="openFixed()">🔄</button>
 </header>
 
+<!-- MONTH -->
+
+<section class="month-card">
+
+  <button class="month-arrow" onclick="changeMonth(-1)">‹</button>
+
+  <div class="month-center">
+    <div class="month-title" id="monthTitle"></div>
+    <div class="month-subtitle" id="monthSubtitle"></div>
+    <button class="today-button" onclick="goToCurrentMonth()">
+      חזרה לחודש הנוכחי
+    </button>
+  </div>
+
+  <button class="month-arrow" onclick="changeMonth(1)">›</button>
+
+</section>
+
+<!-- SUMMARY -->
+
 <section class="card summary">
-  <div class="summary-label">הוצאתי במחזור הנוכחי</div>
+
+  <div class="summary-label">הוצאתי בחודש הנבחר</div>
+
   <div class="total" id="total">₪0</div>
-  <div class="period" id="daysText"></div>
+
+  <div class="period" id="periodText"></div>
 
   <div class="stats">
+
     <div class="stat">
       <div class="stat-title">מספר הוצאות</div>
       <div class="stat-value" id="expenseCount">0</div>
@@ -398,25 +594,61 @@ input:focus,select:focus{border-color:#dca0bb}
       <div class="stat-title">הוצאה ממוצעת</div>
       <div class="stat-value" id="average">₪0</div>
     </div>
+
   </div>
+
 </section>
 
+<!-- CATEGORIES -->
+
 <section class="card">
+
   <h2 class="section-title">לפי קטגוריה</h2>
+
   <div id="categories"></div>
-  <button class="add-category" onclick="openCategoryModal()">＋ הוספת קטגוריה</button>
+
+  <button class="add-category" onclick="openCategoryModal()">
+    ＋ הוספת קטגוריה
+  </button>
+
 </section>
 
+<!-- PAYMENT -->
+
 <section class="card">
-  <h2 class="section-title">הוצאות אחרונות</h2>
+
+  <h2 class="section-title">איך שילמתי 💳</h2>
+
+  <div id="payments"></div>
+
+  <div class="payment-total">
+    <span>סה״כ</span>
+    <span id="paymentTotal">₪0</span>
+  </div>
+
+</section>
+
+<!-- EXPENSES -->
+
+<section class="card">
+
+  <h2 class="section-title">הוצאות בחודש הזה</h2>
+
   <div id="expenses"></div>
+
 </section>
 
 </div>
 
-<button class="bottom-button" onclick="openExpense()">＋ הוספת הוצאה</button>
+<button class="bottom-button" onclick="openExpense()">
+  ＋ הוספת הוצאה
+</button>
+
+
+<!-- EXPENSE MODAL -->
 
 <div class="modal" id="expenseModal">
+
   <div class="sheet">
 
     <div class="sheet-header">
@@ -425,25 +657,52 @@ input:focus,select:focus{border-color:#dca0bb}
     </div>
 
     <label>סכום</label>
-    <input id="amount" type="number" inputmode="decimal" placeholder="לדוגמה 50">
+    <input
+      id="amount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 50"
+    >
 
     <label>קטגוריה</label>
     <select id="category"></select>
 
+    <label>איך שילמת?</label>
+
+    <select id="payment">
+      <option value="visa">💳 ויזה</option>
+      <option value="direct">🟣 דיירקט</option>
+      <option value="cash">💵 מזומן</option>
+    </select>
+
     <label>מה קנית?</label>
-    <input id="description" type="text" placeholder="לדוגמה: קפה ועוגה">
+
+    <input
+      id="description"
+      type="text"
+      placeholder="לדוגמה: קפה ועוגה"
+    >
 
     <label>תאריך</label>
+
     <input id="date" type="date">
 
     <div class="checkbox">
-      <input id="isFixed" type="checkbox" onchange="toggleFixedFields()">
+
+      <input
+        id="isFixed"
+        type="checkbox"
+        onchange="toggleFixedFields()"
+      >
+
       <span>הוצאה קבועה / חוזרת</span>
+
     </div>
 
     <div id="fixedFields" class="hidden">
 
       <label>תדירות</label>
+
       <select id="frequency">
         <option value="monthly">כל חודש</option>
         <option value="quarterly">כל 3 חודשים</option>
@@ -452,414 +711,1033 @@ input:focus,select:focus{border-color:#dca0bb}
 
     </div>
 
-    <button class="primary" onclick="saveExpense()">שמירת הוצאה</button>
+    <button class="primary" onclick="saveExpense()">
+      שמירת הוצאה
+    </button>
 
   </div>
+
 </div>
 
+
+<!-- CATEGORY MODAL -->
+
 <div class="modal" id="categoryModal">
+
   <div class="sheet">
 
     <div class="sheet-header">
+
       <h2>קטגוריה חדשה</h2>
-      <button class="close" onclick="closeModal('categoryModal')">✕</button>
+
+      <button class="close" onclick="closeModal('categoryModal')">
+        ✕
+      </button>
+
     </div>
 
     <label>שם הקטגוריה</label>
-    <input id="newCategory" type="text" placeholder="לדוגמה: לימודים">
+
+    <input
+      id="newCategory"
+      type="text"
+      placeholder="לדוגמה: לימודים"
+    >
 
     <label>אייקון</label>
-    <input id="newIcon" type="text" maxlength="2" placeholder="🎓">
 
-    <button class="primary" onclick="saveCategory()">הוספת קטגוריה</button>
+    <input
+      id="newIcon"
+      type="text"
+      maxlength="2"
+      placeholder="🎓"
+    >
+
+    <button class="primary" onclick="saveCategory()">
+      הוספת קטגוריה
+    </button>
 
   </div>
+
 </div>
 
+
+<!-- FIXED EXPENSES MODAL -->
+
 <div class="modal" id="fixedModal">
+
   <div class="sheet">
 
     <div class="sheet-header">
+
       <h2>הוצאות קבועות 🔄</h2>
-      <button class="close" onclick="closeModal('fixedModal')">✕</button>
+
+      <button class="close" onclick="closeModal('fixedModal')">
+        ✕
+      </button>
+
     </div>
 
     <div id="fixedList"></div>
 
   </div>
+
 </div>
+
 
 <script>
 
 const defaultCategories = [
-  {name:"אוכל בחוץ", icon:"🍔"},
-  {name:"אחזקת רכב", icon:"🚗"},
-  {name:"אחר", icon:"📦"},
-  {name:"בגדים ואביזרים", icon:"👗"},
-  {name:"בתי קפה", icon:"☕"},
-  {name:"מנויים ושירותים", icon:"📱"},
-  {name:"תחבורה", icon:"🚕"},
-  {name:"טיפוח", icon:"💅"},
-  {name:"הופעות ואירועים", icon:"🎵"}
+
+  {name:"אוכל בחוץ",icon:"🍔"},
+  {name:"אחזקת רכב",icon:"🚗"},
+  {name:"אחר",icon:"📦"},
+  {name:"בגדים ואביזרים",icon:"👗"},
+  {name:"בתי קפה",icon:"☕"},
+  {name:"מנויים ושירותים",icon:"📱"},
+  {name:"תחבורה",icon:"🚕"},
+  {name:"טיפוח",icon:"💅"},
+  {name:"הופעות ואירועים",icon:"🎵"}
+
 ];
 
-let categories = JSON.parse(localStorage.getItem("moneyCategories")) || defaultCategories;
-let expenses = JSON.parse(localStorage.getItem("moneyExpenses")) || [];
-let fixedExpenses = JSON.parse(localStorage.getItem("moneyFixed")) || [];
+const payments = [
+
+  {id:"visa",name:"ויזה",icon:"💳"},
+  {id:"direct",name:"דיירקט",icon:"🟣"},
+  {id:"cash",name:"מזומן",icon:"💵"}
+
+];
+
+let categories =
+  JSON.parse(localStorage.getItem("moneyCategories"))
+  || defaultCategories;
+
+let expenses =
+  JSON.parse(localStorage.getItem("moneyExpenses"))
+  || [];
+
+let fixedExpenses =
+  JSON.parse(localStorage.getItem("moneyFixed"))
+  || [];
+
+let selectedOffset = 0;
+
 let editingId = null;
 
+
+/* STORAGE */
+
 function saveData(){
-  localStorage.setItem("moneyCategories", JSON.stringify(categories));
-  localStorage.setItem("moneyExpenses", JSON.stringify(expenses));
-  localStorage.setItem("moneyFixed", JSON.stringify(fixedExpenses));
+
+  localStorage.setItem(
+    "moneyCategories",
+    JSON.stringify(categories)
+  );
+
+  localStorage.setItem(
+    "moneyExpenses",
+    JSON.stringify(expenses)
+  );
+
+  localStorage.setItem(
+    "moneyFixed",
+    JSON.stringify(fixedExpenses)
+  );
+
 }
+
+
+/* SORT */
 
 function sortCategories(){
-  categories.sort((a,b)=>a.name.localeCompare(b.name,"he"));
+
+  categories.sort(
+    (a,b)=>a.name.localeCompare(b.name,"he")
+  );
+
 }
 
-function getCycle(){
+
+/* MONTH */
+
+function getBaseCycle(){
 
   const today = new Date();
 
-  let start = new Date(today.getFullYear(), today.getMonth(), 10);
+  let start =
+    new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      10
+    );
 
-  if(today.getDate() < 10){
-    start = new Date(today.getFullYear(), today.getMonth()-1, 10);
+  if(today.getDate()<10){
+
+    start =
+      new Date(
+        today.getFullYear(),
+        today.getMonth()-1,
+        10
+      );
+
   }
 
-  let end = new Date(start.getFullYear(), start.getMonth()+1, 9, 23,59,59);
+  return start;
+
+}
+
+
+function getCycle(offset=0){
+
+  const base = getBaseCycle();
+
+  const start =
+    new Date(
+      base.getFullYear(),
+      base.getMonth()+offset,
+      10
+    );
+
+  const end =
+    new Date(
+      start.getFullYear(),
+      start.getMonth()+1,
+      9,
+      23,
+      59,
+      59
+    );
 
   return {start,end};
+
 }
 
-function isCurrentCycle(dateString){
 
-  const d = new Date(dateString+"T12:00:00");
-  const cycle = getCycle();
+function changeMonth(direction){
 
-  return d >= cycle.start && d <= cycle.end;
+  selectedOffset += direction;
+
+  render();
+
 }
 
-function formatMoney(value){
-  return "₪"+Number(value).toLocaleString("he-IL",{
-    minimumFractionDigits:0,
-    maximumFractionDigits:2
-  });
+
+function goToCurrentMonth(){
+
+  selectedOffset=0;
+
+  render();
+
 }
+
+
+function dateToString(date){
+
+  const y=date.getFullYear();
+
+  const m=String(
+    date.getMonth()+1
+  ).padStart(2,"0");
+
+  const d=String(
+    date.getDate()
+  ).padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
 
 function formatDate(date){
-  return new Date(date+"T12:00:00").toLocaleDateString("he-IL",{
-    day:"numeric",
-    month:"numeric",
-    year:"numeric"
-  });
+
+  return new Date(
+    date+"T12:00:00"
+  ).toLocaleDateString(
+    "he-IL",
+    {
+      day:"numeric",
+      month:"numeric",
+      year:"numeric"
+    }
+  );
+
 }
+
+
+function monthName(date){
+
+  return date.toLocaleDateString(
+    "he-IL",
+    {
+      month:"long",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* MONEY */
+
+function formatMoney(value){
+
+  return "₪"+
+    Number(value).toLocaleString(
+      "he-IL",
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+/* CURRENT MONTH EXPENSES */
+
+function getSelectedExpenses(){
+
+  const cycle=getCycle(selectedOffset);
+
+  return expenses.filter(e=>{
+
+    const date=
+      new Date(e.date+"T12:00:00");
+
+    return date>=cycle.start &&
+           date<=cycle.end;
+
+  });
+
+}
+
+
+/* FIXED EXPENSE GENERATION */
+
+function generateFixedExpenses(){
+
+  const cycle=getCycle(selectedOffset);
+
+  fixedExpenses.forEach(f=>{
+
+    const startDate =
+      new Date(f.startDate+"T12:00:00");
+
+    if(startDate>cycle.end){
+      return;
+    }
+
+    let candidate =
+      new Date(startDate);
+
+    let months=1;
+
+    if(f.frequency==="quarterly"){
+      months=3;
+    }
+
+    if(f.frequency==="yearly"){
+      months=12;
+    }
+
+    while(candidate<cycle.start){
+
+      candidate.setMonth(
+        candidate.getMonth()+months
+      );
+
+    }
+
+    while(candidate<=cycle.end){
+
+      if(candidate>=startDate){
+
+        const dateString=
+          dateToString(candidate);
+
+        const exists=
+          expenses.some(e=>
+            e.fixedSource===f.id &&
+            e.date===dateString
+          );
+
+        if(!exists){
+
+          expenses.push({
+
+            id:
+              Date.now().toString()+
+              Math.random(),
+
+            amount:f.amount,
+
+            category:f.category,
+
+            payment:f.payment,
+
+            description:f.description,
+
+            date:dateString,
+
+            fixed:true,
+
+            fixedSource:f.id,
+
+            frequency:f.frequency
+
+          });
+
+        }
+
+      }
+
+      candidate.setMonth(
+        candidate.getMonth()+months
+      );
+
+    }
+
+  });
+
+  saveData();
+
+}
+
+
+/* RENDER */
 
 function render(){
 
   sortCategories();
 
-  const current = expenses.filter(e=>isCurrentCycle(e.date));
+  generateFixedExpenses();
 
-  const total = current.reduce((sum,e)=>sum+Number(e.amount),0);
+  const current=
+    getSelectedExpenses();
 
-  document.getElementById("total").textContent=formatMoney(total);
+  const total=
+    current.reduce(
+      (sum,e)=>
+        sum+Number(e.amount),
+      0
+    );
 
-  document.getElementById("expenseCount").textContent=current.length;
+  renderMonth();
 
-  document.getElementById("average").textContent=
-    current.length ? formatMoney(total/current.length) : "₪0";
+  document.getElementById(
+    "total"
+  ).textContent=
+    formatMoney(total);
 
-  const cycle=getCycle();
+  document.getElementById(
+    "expenseCount"
+  ).textContent=
+    current.length;
 
-  document.getElementById("periodText").textContent=
-    formatDate(cycle.start.toISOString().split("T")[0])+
-    " – "+
-    formatDate(cycle.end.toISOString().split("T")[0]);
+  document.getElementById(
+    "average"
+  ).textContent=
+    current.length
+      ? formatMoney(
+          total/current.length
+        )
+      : "₪0";
 
-  const remaining=Math.max(
-    0,
-    Math.ceil((cycle.end-new Date())/(1000*60*60*24))
+  renderCategories(
+    current,
+    total
   );
 
-  document.getElementById("daysText").textContent=
-    remaining+" ימים עד סוף המחזור";
+  renderPayments(current);
 
-  renderCategories(current,total);
   renderExpenses(current);
+
   renderCategorySelect();
+
   renderFixed();
 
   saveData();
+
 }
 
-function renderCategories(current,total){
 
-  const container=document.getElementById("categories");
+/* MONTH UI */
+
+function renderMonth(){
+
+  const cycle=
+    getCycle(selectedOffset);
+
+  document.getElementById(
+    "monthTitle"
+  ).textContent=
+    monthName(cycle.start);
+
+  document.getElementById(
+    "monthSubtitle"
+  ).textContent=
+    formatDate(
+      dateToString(cycle.start)
+    )+
+    " – "+
+    formatDate(
+      dateToString(cycle.end)
+    );
+
+  document.getElementById(
+    "periodText"
+  ).textContent=
+    "מחזור "+
+    formatDate(
+      dateToString(cycle.start)
+    )+
+    " – "+
+    formatDate(
+      dateToString(cycle.end)
+    );
+
+}
+
+
+/* CATEGORIES */
+
+function renderCategories(
+  current,
+  total
+){
+
+  const container=
+    document.getElementById(
+      "categories"
+    );
 
   if(!categories.length){
-    container.innerHTML='<div class="empty">אין עדיין קטגוריות</div>';
-    return;
-  }
 
-  container.innerHTML=categories.map(cat=>{
-
-    const sum=current
-      .filter(e=>e.category===cat.name)
-      .reduce((s,e)=>s+Number(e.amount),0);
-
-    const percent=total ? Math.min(100,(sum/total)*100) : 0;
-
-    return `
-      <div class="category">
-        <div class="category-left">
-          <div class="category-icon">${cat.icon}</div>
-          <div>
-            <div class="category-name">${escapeHTML(cat.name)}</div>
-            <div class="progress">
-              <div class="progress-bar" style="width:${percent}%"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-amount">${formatMoney(sum)}</div>
-      </div>
-    `;
-
-  }).join("");
-}
-
-function renderExpenses(current){
-
-  const container=document.getElementById("expenses");
-
-  const sorted=[...current].sort((a,b)=>new Date(b.date)-new Date(a.date));
-
-  if(!sorted.length){
     container.innerHTML=
-      '<div class="empty">עדיין אין הוצאות במחזור הזה 💕</div>';
+      '<div class="empty">אין עדיין קטגוריות</div>';
+
     return;
+
   }
 
-  container.innerHTML=sorted.map(e=>{
+  container.innerHTML=
+    categories.map(cat=>{
 
-    const cat=categories.find(c=>c.name===e.category);
+      const sum=
+        current
+          .filter(
+            e=>e.category===cat.name
+          )
+          .reduce(
+            (s,e)=>
+              s+Number(e.amount),
+            0
+          );
 
-    return `
-      <div class="expense">
+      const percent=
+        total
+          ? Math.min(
+              100,
+              (sum/total)*100
+            )
+          : 0;
 
-        <div class="expense-main">
+      return `
 
-          <div class="expense-info">
+        <div class="category">
 
-            <div class="expense-icon">
-              ${cat ? cat.icon : "💸"}
+          <div class="category-left">
+
+            <div class="category-icon">
+              ${cat.icon}
             </div>
 
             <div>
-              <div class="expense-name">
-                ${escapeHTML(e.description || e.category)}
+
+              <div class="category-name">
+                ${escapeHTML(cat.name)}
               </div>
 
-              <div class="expense-date">
-                ${escapeHTML(e.category)} · ${formatDate(e.date)}
-                ${e.fixed ? " · 🔄 קבועה" : ""}
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  style="width:${percent}%"
+                ></div>
               </div>
+
             </div>
 
           </div>
 
-          <div class="expense-amount">
-            ${formatMoney(e.amount)}
+          <div class="category-amount">
+            ${formatMoney(sum)}
           </div>
 
         </div>
 
-        <div class="actions">
-          <button class="small-button" onclick="editExpense('${e.id}')">
-            ✏️ עריכה
-          </button>
+      `;
 
-          <button class="small-button delete" onclick="deleteExpense('${e.id}')">
-            🗑️ מחיקה
-          </button>
+    }).join("");
+
+}
+
+
+/* PAYMENTS */
+
+function renderPayments(current){
+
+  const container=
+    document.getElementById(
+      "payments"
+    );
+
+  let total=0;
+
+  container.innerHTML=
+    payments.map(p=>{
+
+      const sum=
+        current
+          .filter(
+            e=>e.payment===p.id
+          )
+          .reduce(
+            (s,e)=>
+              s+Number(e.amount),
+            0
+          );
+
+      total+=sum;
+
+      return `
+
+        <div class="payment-row">
+
+          <div class="payment-left">
+
+            <div class="payment-icon">
+              ${p.icon}
+            </div>
+
+            <div class="payment-name">
+              ${p.name}
+            </div>
+
+          </div>
+
+          <div class="payment-amount">
+            ${formatMoney(sum)}
+          </div>
+
         </div>
 
-      </div>
-    `;
+      `;
 
-  }).join("");
+    }).join("");
+
+  document.getElementById(
+    "paymentTotal"
+  ).textContent=
+    formatMoney(total);
+
 }
+
+
+/* EXPENSES */
+
+function renderExpenses(current){
+
+  const container=
+    document.getElementById(
+      "expenses"
+    );
+
+  const sorted=
+    [...current].sort(
+      (a,b)=>
+        new Date(b.date)-
+        new Date(a.date)
+    );
+
+  if(!sorted.length){
+
+    container.innerHTML=
+      '<div class="empty">עדיין אין הוצאות בחודש הזה 💕</div>';
+
+    return;
+
+  }
+
+  container.innerHTML=
+    sorted.map(e=>{
+
+      const cat=
+        categories.find(
+          c=>c.name===e.category
+        );
+
+      const payment=
+        payments.find(
+          p=>p.id===e.payment
+        );
+
+      return `
+
+        <div class="expense">
+
+          <div class="expense-main">
+
+            <div class="expense-info">
+
+              <div class="expense-icon">
+                ${cat ? cat.icon : "💸"}
+              </div>
+
+              <div class="expense-text">
+
+                <div class="expense-name">
+                  ${escapeHTML(
+                    e.description ||
+                    e.category
+                  )}
+                </div>
+
+                <div class="expense-date">
+                  ${escapeHTML(
+                    e.category
+                  )}
+                  ·
+                  ${formatDate(e.date)}
+                  ${e.fixed ? " · 🔄 קבועה" : ""}
+                </div>
+
+                <div class="expense-payment">
+                  ${payment ? payment.icon+" "+payment.name : ""}
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="expense-amount">
+              ${formatMoney(e.amount)}
+            </div>
+
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="small-button"
+              onclick="editExpense('${e.id}')"
+            >
+              ✏️ עריכה
+            </button>
+
+            <button
+              class="small-button delete"
+              onclick="deleteExpense('${e.id}')"
+            >
+              🗑️ מחיקה
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* CATEGORY SELECT */
 
 function renderCategorySelect(){
 
   sortCategories();
 
-  document.getElementById("category").innerHTML=
+  document.getElementById(
+    "category"
+  ).innerHTML=
     categories.map(c=>
-      `<option value="${escapeHTML(c.name)}">${escapeHTML(c.name)}</option>`
+      `<option value="${escapeHTML(c.name)}">
+        ${escapeHTML(c.name)}
+      </option>`
     ).join("");
+
 }
+
+
+/* ADD EXPENSE */
 
 function openExpense(){
 
   editingId=null;
 
-  document.getElementById("expenseTitle").textContent="הוספת הוצאה";
+  document.getElementById(
+    "expenseTitle"
+  ).textContent=
+    "הוספת הוצאה";
 
-  document.getElementById("amount").value="";
-  document.getElementById("description").value="";
-  document.getElementById("isFixed").checked=false;
+  document.getElementById(
+    "amount"
+  ).value="";
 
-  document.getElementById("date").value=
-    new Date().toISOString().split("T")[0];
+  document.getElementById(
+    "description"
+  ).value="";
+
+  document.getElementById(
+    "payment"
+  ).value="visa";
+
+  document.getElementById(
+    "isFixed"
+  ).checked=false;
+
+  const cycle=
+    getCycle(selectedOffset);
+
+  let defaultDate=
+    new Date();
+
+  if(selectedOffset!==0){
+    defaultDate=
+      new Date(cycle.start);
+  }
+
+  document.getElementById(
+    "date"
+  ).value=
+    dateToString(defaultDate);
 
   toggleFixedFields();
 
-  document.getElementById("expenseModal").classList.add("show");
+  document.getElementById(
+    "expenseModal"
+  ).classList.add("show");
+
 }
+
+
+/* EDIT */
 
 function editExpense(id){
 
-  const e=expenses.find(x=>x.id===id);
+  const e=
+    expenses.find(
+      x=>x.id===id
+    );
 
   if(!e)return;
 
   editingId=id;
 
-  document.getElementById("expenseTitle").textContent="עריכת הוצאה";
+  document.getElementById(
+    "expenseTitle"
+  ).textContent=
+    "עריכת הוצאה";
 
-  document.getElementById("amount").value=e.amount;
-  document.getElementById("description").value=e.description;
-  document.getElementById("category").value=e.category;
-  document.getElementById("date").value=e.date;
-  document.getElementById("isFixed").checked=!!e.fixed;
+  document.getElementById(
+    "amount"
+  ).value=e.amount;
+
+  document.getElementById(
+    "description"
+  ).value=e.description || "";
+
+  document.getElementById(
+    "category"
+  ).value=e.category;
+
+  document.getElementById(
+    "payment"
+  ).value=e.payment || "visa";
+
+  document.getElementById(
+    "date"
+  ).value=e.date;
+
+  document.getElementById(
+    "isFixed"
+  ).checked=!!e.fixed;
+
+  document.getElementById(
+    "frequency"
+  ).value=
+    e.frequency || "monthly";
 
   toggleFixedFields();
 
-  document.getElementById("expenseModal").classList.add("show");
+  document.getElementById(
+    "expenseModal"
+  ).classList.add("show");
+
 }
+
+
+/* SAVE EXPENSE */
 
 function saveExpense(){
 
-  const amount=Number(document.getElementById("amount").value);
+  const amount=
+    Number(
+      document.getElementById(
+        "amount"
+      ).value
+    );
 
   if(!amount || amount<=0){
+
     alert("נא להזין סכום תקין");
+
     return;
+
   }
 
   const data={
+
     amount,
-    category:document.getElementById("category").value,
-    description:document.getElementById("description").value.trim(),
-    date:document.getElementById("date").value,
-    fixed:document.getElementById("isFixed").checked,
-    frequency:document.getElementById("frequency").value
+
+    category:
+      document.getElementById(
+        "category"
+      ).value,
+
+    payment:
+      document.getElementById(
+        "payment"
+      ).value,
+
+    description:
+      document.getElementById(
+        "description"
+      ).value.trim(),
+
+    date:
+      document.getElementById(
+        "date"
+      ).value,
+
+    fixed:
+      document.getElementById(
+        "isFixed"
+      ).checked,
+
+    frequency:
+      document.getElementById(
+        "frequency"
+      ).value
+
   };
 
   if(!data.date){
+
     alert("נא לבחור תאריך");
+
     return;
+
   }
 
   if(editingId){
 
-    const index=expenses.findIndex(e=>e.id===editingId);
+    const index=
+      expenses.findIndex(
+        e=>e.id===editingId
+      );
 
     if(index!==-1){
-      expenses[index]={...expenses[index],...data};
+
+      expenses[index]={
+        ...expenses[index],
+        ...data
+      };
+
     }
 
   }else{
 
-    expenses.push({
-      id:Date.now().toString(),
+    const newExpense={
+
+      id:
+        Date.now().toString(),
+
       ...data
-    });
+
+    };
+
+    expenses.push(
+      newExpense
+    );
 
     if(data.fixed){
-      addFixed(data);
+
+      fixedExpenses.push({
+
+        id:
+          Date.now().toString()+
+          "-fixed",
+
+        amount:data.amount,
+
+        category:data.category,
+
+        payment:data.payment,
+
+        description:data.description,
+
+        startDate:data.date,
+
+        frequency:data.frequency
+
+      });
+
     }
 
   }
 
-  closeModal("expenseModal");
+  saveData();
+
+  closeModal(
+    "expenseModal"
+  );
+
   render();
+
 }
+
+
+/* DELETE */
 
 function deleteExpense(id){
 
-  if(!confirm("למחוק את ההוצאה?"))return;
+  if(!confirm(
+    "למחוק את ההוצאה?"
+  )){
+    return;
+  }
 
-  expenses=expenses.filter(e=>e.id!==id);
+  expenses=
+    expenses.filter(
+      e=>e.id!==id
+    );
 
   render();
+
 }
 
-function addFixed(data){
 
-  fixedExpenses.push({
-    id:Date.now().toString(),
-    amount:data.amount,
-    category:data.category,
-    description:data.description,
-    startDate:data.date,
-    frequency:data.frequency
-  });
-
-  generateFixedExpenses();
-}
-
-function generateFixedExpenses(){
-
-  fixedExpenses.forEach(f=>{
-
-    let next=new Date(f.startDate+"T12:00:00");
-
-    const cycle=getCycle();
-
-    let months=1;
-
-    if(f.frequency==="quarterly")months=3;
-    if(f.frequency==="yearly")months=12;
-
-    while(next<=cycle.end){
-
-      const dateString=next.toISOString().split("T")[0];
-
-      const exists=expenses.some(e=>
-        e.fixedSource===f.id &&
-        e.date===dateString
-      );
-
-      if(!exists && next>=cycle.start){
-
-        expenses.push({
-          id:Date.now().toString()+Math.random(),
-          amount:f.amount,
-          category:f.category,
-          description:f.description,
-          date:dateString,
-          fixed:true,
-          fixedSource:f.id,
-          frequency:f.frequency
-        });
-
-      }
-
-      next.setMonth(next.getMonth()+months);
-    }
-
-  });
-
-  saveData();
-}
+/* FIXED EXPENSES */
 
 function renderFixed(){
 
-  const container=document.getElementById("fixedList");
+  const container=
+    document.getElementById(
+      "fixedList"
+    );
 
   if(!fixedExpenses.length){
 
@@ -867,90 +1745,182 @@ function renderFixed(){
       '<div class="empty">עדיין אין הוצאות קבועות 🔄</div>';
 
     return;
+
   }
 
-  container.innerHTML=fixedExpenses.map(f=>`
+  container.innerHTML=
+    fixedExpenses.map(f=>`
 
-    <div class="fixed-item">
+      <div class="fixed-item">
 
-      <div>
-        <div class="fixed-name">
-          ${escapeHTML(f.description || f.category)}
+        <div>
+
+          <div class="fixed-name">
+            ${escapeHTML(
+              f.description ||
+              f.category
+            )}
+          </div>
+
+          <div class="fixed-meta">
+
+            ${escapeHTML(f.category)}
+            ·
+            ${formatMoney(f.amount)}
+            ·
+            ${frequencyText(
+              f.frequency
+            )}
+
+          </div>
+
         </div>
 
-        <div class="fixed-meta">
-          ${escapeHTML(f.category)} · ${formatMoney(f.amount)} · ${frequencyText(f.frequency)}
-        </div>
+        <button
+          class="small-button delete"
+          onclick="deleteFixed('${f.id}')"
+        >
+          מחיקה
+        </button>
+
       </div>
 
-      <button class="small-button delete"
-        onclick="deleteFixed('${f.id}')">
-        מחיקה
-      </button>
+    `).join("");
 
-    </div>
-
-  `).join("");
 }
+
 
 function openFixed(){
 
-  generateFixedExpenses();
   renderFixed();
 
-  document.getElementById("fixedModal").classList.add("show");
+  document.getElementById(
+    "fixedModal"
+  ).classList.add("show");
+
 }
+
 
 function deleteFixed(id){
 
-  if(!confirm("למחוק את ההוצאה הקבועה?"))return;
-
-  fixedExpenses=fixedExpenses.filter(f=>f.id!==id);
-
-  expenses=expenses.filter(e=>e.fixedSource!==id);
-
-  saveData();
-  render();
-  renderFixed();
-}
-
-function frequencyText(frequency){
-
-  if(frequency==="quarterly")return"כל 3 חודשים";
-  if(frequency==="yearly")return"פעם בשנה";
-
-  return"כל חודש";
-}
-
-function toggleFixedFields(){
-
-  const checked=document.getElementById("isFixed").checked;
-
-  document.getElementById("fixedFields")
-    .classList.toggle("hidden",!checked);
-}
-
-function openCategoryModal(){
-
-  document.getElementById("newCategory").value="";
-  document.getElementById("newIcon").value="";
-
-  document.getElementById("categoryModal").classList.add("show");
-}
-
-function saveCategory(){
-
-  const name=document.getElementById("newCategory").value.trim();
-  const icon=document.getElementById("newIcon").value.trim() || "💸";
-
-  if(!name){
-    alert("נא להכניס שם לקטגוריה");
+  if(!confirm(
+    "למחוק את ההוצאה הקבועה?"
+  )){
     return;
   }
 
-  if(categories.some(c=>c.name===name)){
-    alert("הקטגוריה כבר קיימת");
+  fixedExpenses=
+    fixedExpenses.filter(
+      f=>f.id!==id
+    );
+
+  expenses=
+    expenses.filter(
+      e=>e.fixedSource!==id
+    );
+
+  saveData();
+
+  render();
+
+  renderFixed();
+
+}
+
+
+function frequencyText(frequency){
+
+  if(
+    frequency==="quarterly"
+  ){
+    return "כל 3 חודשים";
+  }
+
+  if(
+    frequency==="yearly"
+  ){
+    return "פעם בשנה";
+  }
+
+  return "כל חודש";
+
+}
+
+
+/* FIXED FIELDS */
+
+function toggleFixedFields(){
+
+  const checked=
+    document.getElementById(
+      "isFixed"
+    ).checked;
+
+  document.getElementById(
+    "fixedFields"
+  )
+  .classList.toggle(
+    "hidden",
+    !checked
+  );
+
+}
+
+
+/* NEW CATEGORY */
+
+function openCategoryModal(){
+
+  document.getElementById(
+    "newCategory"
+  ).value="";
+
+  document.getElementById(
+    "newIcon"
+  ).value="";
+
+  document.getElementById(
+    "categoryModal"
+  ).classList.add("show");
+
+}
+
+
+function saveCategory(){
+
+  const name=
+    document.getElementById(
+      "newCategory"
+    ).value.trim();
+
+  const icon=
+    document.getElementById(
+      "newIcon"
+    ).value.trim()
+    || "💸";
+
+  if(!name){
+
+    alert(
+      "נא להכניס שם לקטגוריה"
+    );
+
     return;
+
+  }
+
+  if(
+    categories.some(
+      c=>c.name===name
+    )
+  ){
+
+    alert(
+      "הקטגוריה כבר קיימת"
+    );
+
+    return;
+
   }
 
   categories.push({
@@ -961,15 +1931,28 @@ function saveCategory(){
   sortCategories();
 
   saveData();
+
   render();
 
-  closeModal("categoryModal");
+  closeModal(
+    "categoryModal"
+  );
+
 }
+
+
+/* MODALS */
 
 function closeModal(id){
 
-  document.getElementById(id).classList.remove("show");
+  document.getElementById(
+    id
+  ).classList.remove("show");
+
 }
+
+
+/* SECURITY */
 
 function escapeHTML(value){
 
@@ -979,9 +1962,16 @@ function escapeHTML(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
+
+/* START */
+
+sortCategories();
+
 generateFixedExpenses();
+
 render();
 
 </script>
