@@ -14,7 +14,7 @@
   --text:#342c34;
   --muted:#857985;
   --border:#eadde4;
-  --white:#ffffff;
+  --white:#fff;
   --danger:#c94b61;
   --green:#4f9b78;
   --shadow:0 8px 25px rgba(80,45,65,.08);
@@ -46,8 +46,6 @@ button{
   padding:22px 16px 115px;
 }
 
-/* HEADER */
-
 header{
   display:flex;
   justify-content:space-between;
@@ -67,7 +65,7 @@ h1{
   font-size:14px;
 }
 
-/* MONTH SELECTOR */
+/* MONTH */
 
 .month-card{
   background:white;
@@ -117,7 +115,57 @@ h1{
   margin-top:6px;
 }
 
-/* CARDS */
+/* BALANCE */
+
+.balance-card{
+  background:linear-gradient(145deg,#fff,#fff0f6);
+  border-radius:26px;
+  padding:23px;
+  box-shadow:var(--shadow);
+  margin-bottom:17px;
+}
+
+.balance-label{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.balance{
+  font-size:42px;
+  font-weight:900;
+  color:var(--pink);
+  margin:5px 0 17px;
+  direction:ltr;
+  text-align:right;
+}
+
+.balance-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.balance-button{
+  border:0;
+  padding:12px 8px;
+  border-radius:14px;
+  background:white;
+  color:var(--text);
+  font-weight:750;
+}
+
+.balance-button.pink{
+  background:var(--pink);
+  color:white;
+}
+
+.balance-info{
+  margin-top:13px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* SUMMARY */
 
 .card{
   background:var(--white);
@@ -150,11 +198,44 @@ h1{
   font-size:13px;
 }
 
-.stats{
+.month-money{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
   margin-top:16px;
+}
+
+.money-box{
+  background:white;
+  border-radius:17px;
+  padding:13px;
+}
+
+.money-title{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.money-value{
+  font-weight:850;
+  margin-top:4px;
+  direction:ltr;
+  text-align:right;
+}
+
+.income-value{
+  color:var(--green);
+}
+
+.expense-value{
+  color:var(--pink-dark);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
 }
 
 .stat{
@@ -285,35 +366,39 @@ h1{
   font-weight:850;
 }
 
-/* EXPENSES */
+/* EXPENSES & INCOME */
 
-.expense{
+.expense,
+.income-item{
   padding:14px 0;
   border-bottom:1px solid #f1e8ed;
 }
 
-.expense:last-child{
+.expense:last-child,
+.income-item:last-child{
   border-bottom:0;
 }
 
-.expense-main{
+.expense-main,
+.income-main{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
 }
 
-.expense-info{
+.expense-info,
+.income-info{
   display:flex;
   gap:11px;
   align-items:center;
   min-width:0;
 }
 
-.expense-icon{
+.expense-icon,
+.income-icon{
   width:40px;
   height:40px;
-  background:var(--pink-light);
   border-radius:13px;
   display:flex;
   align-items:center;
@@ -321,17 +406,28 @@ h1{
   flex-shrink:0;
 }
 
-.expense-text{
+.expense-icon{
+  background:var(--pink-light);
+}
+
+.income-icon{
+  background:#edf8f2;
+}
+
+.expense-text,
+.income-text{
   min-width:0;
 }
 
-.expense-name{
+.expense-name,
+.income-name{
   font-weight:700;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
-.expense-date{
+.expense-date,
+.income-date{
   color:var(--muted);
   font-size:12px;
   margin-top:3px;
@@ -343,10 +439,15 @@ h1{
   margin-top:2px;
 }
 
-.expense-amount{
-  font-weight:800;
+.expense-amount,
+.income-amount{
+  font-weight:850;
   direction:ltr;
   white-space:nowrap;
+}
+
+.income-amount{
+  color:var(--green);
 }
 
 .actions{
@@ -406,22 +507,32 @@ h1{
   margin-top:12px;
 }
 
-.bottom-button{
+.bottom-buttons{
   position:fixed;
   bottom:17px;
   left:50%;
   transform:translateX(-50%);
   width:calc(100% - 32px);
   max-width:588px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  z-index:5;
+}
+
+.bottom-button{
   border:0;
   border-radius:19px;
-  padding:17px;
+  padding:16px 8px;
   background:var(--pink);
   color:white;
-  font-size:17px;
+  font-size:16px;
   font-weight:850;
   box-shadow:0 9px 25px rgba(216,91,145,.3);
-  z-index:5;
+}
+
+.bottom-button.income{
+  background:var(--green);
 }
 
 /* MODALS */
@@ -485,7 +596,8 @@ input,select{
   outline:none;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
   border-color:#dca0bb;
 }
 
@@ -524,20 +636,41 @@ input:focus,select:focus{
   margin-top:9px;
 }
 
+.hidden{
+  display:none!important;
+}
+
 .empty{
   text-align:center;
   color:var(--muted);
   padding:18px 5px;
 }
 
-.hidden{
-  display:none!important;
+.green-note{
+  background:#edf8f2;
+  color:#39775a;
+  border-radius:14px;
+  padding:12px;
+  font-size:13px;
+  margin-top:10px;
 }
 
 @media(max-width:380px){
-  h1{font-size:26px}
-  .total{font-size:34px}
-  .progress{width:90px}
+  h1{
+    font-size:26px;
+  }
+
+  .balance{
+    font-size:36px;
+  }
+
+  .total{
+    font-size:34px;
+  }
+
+  .progress{
+    width:90px;
+  }
 }
 </style>
 </head>
@@ -547,92 +680,258 @@ input:focus,select:focus{
 <div class="app">
 
 <header>
+
   <div>
     <h1>הכסף שלי 💕</h1>
-    <div class="subtitle">ניהול ההוצאות שלי</div>
+    <div class="subtitle">ניהול הכסף וההוצאות שלי</div>
   </div>
 
-  <button class="icon-button" onclick="openFixed()">🔄</button>
+  <button
+    class="small-button"
+    onclick="openFixed()"
+  >
+    🔄 קבועות
+  </button>
+
 </header>
+
+
+<!-- BALANCE -->
+
+<section class="balance-card">
+
+  <div class="balance-label">
+    כמה כסף יש לי עכשיו
+  </div>
+
+  <div
+    class="balance"
+    id="currentBalance"
+  >
+    ₪0
+  </div>
+
+  <div class="balance-buttons">
+
+    <button
+      class="balance-button pink"
+      onclick="openIncome()"
+    >
+      ＋ הכנסה חד־פעמית
+    </button>
+
+    <button
+      class="balance-button"
+      onclick="openOpeningBalance()"
+    >
+      🏦 יתרת פתיחה
+    </button>
+
+  </div>
+
+  <div class="balance-info" id="balanceInfo">
+    הגדירי יתרת פתיחה כדי להתחיל 💕
+  </div>
+
+</section>
+
 
 <!-- MONTH -->
 
 <section class="month-card">
 
-  <button class="month-arrow" onclick="changeMonth(-1)">‹</button>
+  <button
+    class="month-arrow"
+    onclick="changeMonth(-1)"
+  >
+    ‹
+  </button>
 
   <div class="month-center">
-    <div class="month-title" id="monthTitle"></div>
-    <div class="month-subtitle" id="monthSubtitle"></div>
-    <button class="today-button" onclick="goToCurrentMonth()">
+
+    <div
+      class="month-title"
+      id="monthTitle"
+    ></div>
+
+    <div
+      class="month-subtitle"
+      id="monthSubtitle"
+    ></div>
+
+    <button
+      class="today-button"
+      onclick="goToCurrentMonth()"
+    >
       חזרה לחודש הנוכחי
     </button>
+
   </div>
 
-  <button class="month-arrow" onclick="changeMonth(1)">›</button>
+  <button
+    class="month-arrow"
+    onclick="changeMonth(1)"
+  >
+    ›
+  </button>
 
 </section>
 
-<!-- SUMMARY -->
+
+<!-- MONTH SUMMARY -->
 
 <section class="card summary">
 
-  <div class="summary-label">הוצאתי בחודש הנבחר</div>
+  <div class="summary-label">
+    סיכום החודש הנבחר
+  </div>
 
-  <div class="total" id="total">₪0</div>
+  <div
+    class="total"
+    id="total"
+  >
+    ₪0
+  </div>
 
-  <div class="period" id="periodText"></div>
+  <div
+    class="period"
+    id="periodText"
+  ></div>
+
+  <div class="month-money">
+
+    <div class="money-box">
+
+      <div class="money-title">
+        הכנסות החודש
+      </div>
+
+      <div
+        class="money-value income-value"
+        id="monthIncome"
+      >
+        ₪0
+      </div>
+
+    </div>
+
+    <div class="money-box">
+
+      <div class="money-title">
+        הוצאות החודש
+      </div>
+
+      <div
+        class="money-value expense-value"
+        id="monthExpense"
+      >
+        ₪0
+      </div>
+
+    </div>
+
+  </div>
 
   <div class="stats">
 
     <div class="stat">
-      <div class="stat-title">מספר הוצאות</div>
-      <div class="stat-value" id="expenseCount">0</div>
+
+      <div class="stat-title">
+        מספר הוצאות
+      </div>
+
+      <div
+        class="stat-value"
+        id="expenseCount"
+      >
+        0
+      </div>
+
     </div>
 
     <div class="stat">
-      <div class="stat-title">הוצאה ממוצעת</div>
-      <div class="stat-value" id="average">₪0</div>
+
+      <div class="stat-title">
+        הוצאה ממוצעת
+      </div>
+
+      <div
+        class="stat-value"
+        id="average"
+      >
+        ₪0
+      </div>
+
     </div>
 
   </div>
 
 </section>
+
 
 <!-- CATEGORIES -->
 
 <section class="card">
 
-  <h2 class="section-title">לפי קטגוריה</h2>
+  <h2 class="section-title">
+    לפי קטגוריה
+  </h2>
 
   <div id="categories"></div>
 
-  <button class="add-category" onclick="openCategoryModal()">
+  <button
+    class="add-category"
+    onclick="openCategoryModal()"
+  >
     ＋ הוספת קטגוריה
   </button>
 
 </section>
 
+
 <!-- PAYMENT -->
 
 <section class="card">
 
-  <h2 class="section-title">איך שילמתי 💳</h2>
+  <h2 class="section-title">
+    איך שילמתי 💳
+  </h2>
 
   <div id="payments"></div>
 
   <div class="payment-total">
+
     <span>סה״כ</span>
-    <span id="paymentTotal">₪0</span>
+
+    <span id="paymentTotal">
+      ₪0
+    </span>
+
   </div>
 
 </section>
+
+
+<!-- INCOMES -->
+
+<section class="card">
+
+  <h2 class="section-title">
+    הכנסות בחודש הזה 💰
+  </h2>
+
+  <div id="incomes"></div>
+
+</section>
+
 
 <!-- EXPENSES -->
 
 <section class="card">
 
-  <h2 class="section-title">הוצאות בחודש הזה</h2>
+  <h2 class="section-title">
+    הוצאות בחודש הזה
+  </h2>
 
   <div id="expenses"></div>
 
@@ -640,23 +939,54 @@ input:focus,select:focus{
 
 </div>
 
-<button class="bottom-button" onclick="openExpense()">
-  ＋ הוספת הוצאה
-</button>
+
+<!-- BOTTOM BUTTONS -->
+
+<div class="bottom-buttons">
+
+  <button
+    class="bottom-button income"
+    onclick="openIncome()"
+  >
+    ＋ הכנסה
+  </button>
+
+  <button
+    class="bottom-button"
+    onclick="openExpense()"
+  >
+    ＋ הוצאה
+  </button>
+
+</div>
 
 
 <!-- EXPENSE MODAL -->
 
-<div class="modal" id="expenseModal">
+<div
+  class="modal"
+  id="expenseModal"
+>
 
   <div class="sheet">
 
     <div class="sheet-header">
-      <h2 id="expenseTitle">הוספת הוצאה</h2>
-      <button class="close" onclick="closeModal('expenseModal')">✕</button>
+
+      <h2 id="expenseTitle">
+        הוספת הוצאה
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('expenseModal')"
+      >
+        ✕
+      </button>
+
     </div>
 
     <label>סכום</label>
+
     <input
       id="amount"
       type="number"
@@ -665,14 +995,25 @@ input:focus,select:focus{
     >
 
     <label>קטגוריה</label>
+
     <select id="category"></select>
 
     <label>איך שילמת?</label>
 
     <select id="payment">
-      <option value="visa">💳 ויזה</option>
-      <option value="direct">🟣 דיירקט</option>
-      <option value="cash">💵 מזומן</option>
+
+      <option value="visa">
+        💳 ויזה
+      </option>
+
+      <option value="direct">
+        🟣 דיירקט
+      </option>
+
+      <option value="cash">
+        💵 מזומן
+      </option>
+
     </select>
 
     <label>מה קנית?</label>
@@ -685,7 +1026,10 @@ input:focus,select:focus{
 
     <label>תאריך</label>
 
-    <input id="date" type="date">
+    <input
+      id="date"
+      type="date"
+    >
 
     <div class="checkbox">
 
@@ -695,24 +1039,157 @@ input:focus,select:focus{
         onchange="toggleFixedFields()"
       >
 
-      <span>הוצאה קבועה / חוזרת</span>
+      <span>
+        הוצאה קבועה / חוזרת
+      </span>
 
     </div>
 
-    <div id="fixedFields" class="hidden">
+    <div
+      id="fixedFields"
+      class="hidden"
+    >
 
       <label>תדירות</label>
 
       <select id="frequency">
-        <option value="monthly">כל חודש</option>
-        <option value="quarterly">כל 3 חודשים</option>
-        <option value="yearly">פעם בשנה</option>
+
+        <option value="monthly">
+          כל חודש
+        </option>
+
+        <option value="quarterly">
+          כל 3 חודשים
+        </option>
+
+        <option value="yearly">
+          פעם בשנה
+        </option>
+
       </select>
 
     </div>
 
-    <button class="primary" onclick="saveExpense()">
+    <button
+      class="primary"
+      onclick="saveExpense()"
+    >
       שמירת הוצאה
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- INCOME MODAL -->
+
+<div
+  class="modal"
+  id="incomeModal"
+>
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2 id="incomeTitle">
+        הוספת הכנסה חד־פעמית
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('incomeModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <label>סכום</label>
+
+    <input
+      id="incomeAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 500"
+    >
+
+    <label>על מה קיבלתי את הכסף?</label>
+
+    <input
+      id="incomeDescription"
+      type="text"
+      placeholder="לדוגמה: מתנה / עבודה / החזר"
+    >
+
+    <label>תאריך</label>
+
+    <input
+      id="incomeDate"
+      type="date"
+    >
+
+    <div class="green-note">
+      ההכנסה תתווסף ליתרה שלך ותופיע בחודש שבו התקבלה.
+    </div>
+
+    <button
+      class="primary"
+      onclick="saveIncome()"
+    >
+      שמירת הכנסה
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- OPENING BALANCE MODAL -->
+
+<div
+  class="modal"
+  id="openingModal"
+>
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>
+        🏦 יתרת פתיחה
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('openingModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <label>
+      כמה כסף יש לך כרגע?
+    </label>
+
+    <input
+      id="openingAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 4,500"
+    >
+
+    <div class="green-note">
+      זו נקודת ההתחלה של האתר. אחר כך האתר יחשב ממנה את היתרה שלך אוטומטית לפי כל ההכנסות וההוצאות שתוסיפי.
+    </div>
+
+    <button
+      class="primary"
+      onclick="saveOpeningBalance()"
+    >
+      שמירת יתרת פתיחה
     </button>
 
   </div>
@@ -722,21 +1199,31 @@ input:focus,select:focus{
 
 <!-- CATEGORY MODAL -->
 
-<div class="modal" id="categoryModal">
+<div
+  class="modal"
+  id="categoryModal"
+>
 
   <div class="sheet">
 
     <div class="sheet-header">
 
-      <h2>קטגוריה חדשה</h2>
+      <h2>
+        קטגוריה חדשה
+      </h2>
 
-      <button class="close" onclick="closeModal('categoryModal')">
+      <button
+        class="close"
+        onclick="closeModal('categoryModal')"
+      >
         ✕
       </button>
 
     </div>
 
-    <label>שם הקטגוריה</label>
+    <label>
+      שם הקטגוריה
+    </label>
 
     <input
       id="newCategory"
@@ -744,7 +1231,9 @@ input:focus,select:focus{
       placeholder="לדוגמה: לימודים"
     >
 
-    <label>אייקון</label>
+    <label>
+      אייקון
+    </label>
 
     <input
       id="newIcon"
@@ -753,7 +1242,10 @@ input:focus,select:focus{
       placeholder="🎓"
     >
 
-    <button class="primary" onclick="saveCategory()">
+    <button
+      class="primary"
+      onclick="saveCategory()"
+    >
       הוספת קטגוריה
     </button>
 
@@ -762,17 +1254,25 @@ input:focus,select:focus{
 </div>
 
 
-<!-- FIXED EXPENSES MODAL -->
+<!-- FIXED MODAL -->
 
-<div class="modal" id="fixedModal">
+<div
+  class="modal"
+  id="fixedModal"
+>
 
   <div class="sheet">
 
     <div class="sheet-header">
 
-      <h2>הוצאות קבועות 🔄</h2>
+      <h2>
+        הוצאות קבועות 🔄
+      </h2>
 
-      <button class="close" onclick="closeModal('fixedModal')">
+      <button
+        class="close"
+        onclick="closeModal('fixedModal')"
+      >
         ✕
       </button>
 
@@ -786,6 +1286,10 @@ input:focus,select:focus{
 
 
 <script>
+
+/* =========================
+   DATA
+========================= */
 
 const defaultCategories = [
 
@@ -810,23 +1314,39 @@ const payments = [
 ];
 
 let categories =
-  JSON.parse(localStorage.getItem("moneyCategories"))
-  || defaultCategories;
+  JSON.parse(
+    localStorage.getItem("moneyCategories")
+  ) || defaultCategories;
 
 let expenses =
-  JSON.parse(localStorage.getItem("moneyExpenses"))
-  || [];
+  JSON.parse(
+    localStorage.getItem("moneyExpenses")
+  ) || [];
 
 let fixedExpenses =
-  JSON.parse(localStorage.getItem("moneyFixed"))
-  || [];
+  JSON.parse(
+    localStorage.getItem("moneyFixed")
+  ) || [];
+
+let incomes =
+  JSON.parse(
+    localStorage.getItem("moneyIncomes")
+  ) || [];
+
+let openingBalance =
+  Number(
+    localStorage.getItem("moneyOpeningBalance")
+  ) || 0;
 
 let selectedOffset = 0;
 
-let editingId = null;
+let editingExpenseId = null;
+let editingIncomeId = null;
 
 
-/* STORAGE */
+/* =========================
+   SAVE
+========================= */
 
 function saveData(){
 
@@ -845,21 +1365,39 @@ function saveData(){
     JSON.stringify(fixedExpenses)
   );
 
-}
+  localStorage.setItem(
+    "moneyIncomes",
+    JSON.stringify(incomes)
+  );
 
-
-/* SORT */
-
-function sortCategories(){
-
-  categories.sort(
-    (a,b)=>a.name.localeCompare(b.name,"he")
+  localStorage.setItem(
+    "moneyOpeningBalance",
+    String(openingBalance)
   );
 
 }
 
 
-/* MONTH */
+/* =========================
+   SORT
+========================= */
+
+function sortCategories(){
+
+  categories.sort(
+    (a,b)=>
+      a.name.localeCompare(
+        b.name,
+        "he"
+      )
+  );
+
+}
+
+
+/* =========================
+   MONTH
+========================= */
 
 function getBaseCycle(){
 
@@ -872,7 +1410,7 @@ function getBaseCycle(){
       10
     );
 
-  if(today.getDate()<10){
+  if(today.getDate() < 10){
 
     start =
       new Date(
@@ -890,7 +1428,8 @@ function getBaseCycle(){
 
 function getCycle(offset=0){
 
-  const base = getBaseCycle();
+  const base =
+    getBaseCycle();
 
   const start =
     new Date(
@@ -909,7 +1448,10 @@ function getCycle(offset=0){
       59
     );
 
-  return {start,end};
+  return {
+    start,
+    end
+  };
 
 }
 
@@ -934,15 +1476,18 @@ function goToCurrentMonth(){
 
 function dateToString(date){
 
-  const y=date.getFullYear();
+  const y =
+    date.getFullYear();
 
-  const m=String(
-    date.getMonth()+1
-  ).padStart(2,"0");
+  const m =
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
 
-  const d=String(
-    date.getDate()
-  ).padStart(2,"0");
+  const d =
+    String(
+      date.getDate()
+    ).padStart(2,"0");
 
   return `${y}-${m}-${d}`;
 
@@ -978,7 +1523,9 @@ function monthName(date){
 }
 
 
-/* MONEY */
+/* =========================
+   MONEY
+========================= */
 
 function formatMoney(value){
 
@@ -994,37 +1541,137 @@ function formatMoney(value){
 }
 
 
-/* CURRENT MONTH EXPENSES */
+/* =========================
+   BALANCE
+========================= */
+
+function calculateCurrentBalance(){
+
+  const totalIncome =
+    incomes.reduce(
+      (sum,i)=>
+        sum+Number(i.amount),
+      0
+    );
+
+  const totalExpenses =
+    expenses.reduce(
+      (sum,e)=>
+        sum+Number(e.amount),
+      0
+    );
+
+  return (
+    openingBalance +
+    totalIncome -
+    totalExpenses
+  );
+
+}
+
+
+function renderBalance(){
+
+  const balance =
+    calculateCurrentBalance();
+
+  document.getElementById(
+    "currentBalance"
+  ).textContent =
+    formatMoney(balance);
+
+  if(openingBalance){
+
+    document.getElementById(
+      "balanceInfo"
+    ).textContent =
+      "יתרת פתיחה: "+
+      formatMoney(openingBalance)+
+      " · מתעדכן אוטומטית לפי ההכנסות וההוצאות";
+
+  }else{
+
+    document.getElementById(
+      "balanceInfo"
+    ).textContent =
+      "הגדירי יתרת פתיחה כדי להתחיל 💕";
+
+  }
+
+}
+
+
+/* =========================
+   SELECTED MONTH
+========================= */
 
 function getSelectedExpenses(){
 
-  const cycle=getCycle(selectedOffset);
+  const cycle =
+    getCycle(
+      selectedOffset
+    );
 
   return expenses.filter(e=>{
 
-    const date=
-      new Date(e.date+"T12:00:00");
+    const date =
+      new Date(
+        e.date+"T12:00:00"
+      );
 
-    return date>=cycle.start &&
-           date<=cycle.end;
+    return (
+      date>=cycle.start &&
+      date<=cycle.end
+    );
 
   });
 
 }
 
 
-/* FIXED EXPENSE GENERATION */
+function getSelectedIncomes(){
+
+  const cycle =
+    getCycle(
+      selectedOffset
+    );
+
+  return incomes.filter(i=>{
+
+    const date =
+      new Date(
+        i.date+"T12:00:00"
+      );
+
+    return (
+      date>=cycle.start &&
+      date<=cycle.end
+    );
+
+  });
+
+}
+
+
+/* =========================
+   FIXED EXPENSES
+========================= */
 
 function generateFixedExpenses(){
 
-  const cycle=getCycle(selectedOffset);
+  const cycle =
+    getCycle(
+      selectedOffset
+    );
 
   fixedExpenses.forEach(f=>{
 
     const startDate =
-      new Date(f.startDate+"T12:00:00");
+      new Date(
+        f.startDate+"T12:00:00"
+      );
 
-    if(startDate>cycle.end){
+    if(startDate > cycle.end){
       return;
     }
 
@@ -1041,7 +1688,7 @@ function generateFixedExpenses(){
       months=12;
     }
 
-    while(candidate<cycle.start){
+    while(candidate < cycle.start){
 
       candidate.setMonth(
         candidate.getMonth()+months
@@ -1049,14 +1696,14 @@ function generateFixedExpenses(){
 
     }
 
-    while(candidate<=cycle.end){
+    while(candidate <= cycle.end){
 
-      if(candidate>=startDate){
+      if(candidate >= startDate){
 
-        const dateString=
+        const dateString =
           dateToString(candidate);
 
-        const exists=
+        const exists =
           expenses.some(e=>
             e.fixedSource===f.id &&
             e.date===dateString
@@ -1105,7 +1752,9 @@ function generateFixedExpenses(){
 }
 
 
-/* RENDER */
+/* =========================
+   RENDER
+========================= */
 
 function render(){
 
@@ -1113,13 +1762,25 @@ function render(){
 
   generateFixedExpenses();
 
-  const current=
+  renderBalance();
+
+  const currentExpenses =
     getSelectedExpenses();
 
-  const total=
-    current.reduce(
+  const currentIncomes =
+    getSelectedIncomes();
+
+  const totalExpenses =
+    currentExpenses.reduce(
       (sum,e)=>
         sum+Number(e.amount),
+      0
+    );
+
+  const totalIncomes =
+    currentIncomes.reduce(
+      (sum,i)=>
+        sum+Number(i.amount),
       0
     );
 
@@ -1127,31 +1788,50 @@ function render(){
 
   document.getElementById(
     "total"
-  ).textContent=
-    formatMoney(total);
+  ).textContent =
+    formatMoney(totalExpenses);
+
+  document.getElementById(
+    "monthIncome"
+  ).textContent =
+    formatMoney(totalIncomes);
+
+  document.getElementById(
+    "monthExpense"
+  ).textContent =
+    formatMoney(totalExpenses);
 
   document.getElementById(
     "expenseCount"
-  ).textContent=
-    current.length;
+  ).textContent =
+    currentExpenses.length;
 
   document.getElementById(
     "average"
-  ).textContent=
-    current.length
+  ).textContent =
+    currentExpenses.length
       ? formatMoney(
-          total/current.length
+          totalExpenses /
+          currentExpenses.length
         )
       : "₪0";
 
   renderCategories(
-    current,
-    total
+    currentExpenses,
+    totalExpenses
   );
 
-  renderPayments(current);
+  renderPayments(
+    currentExpenses
+  );
 
-  renderExpenses(current);
+  renderExpenses(
+    currentExpenses
+  );
+
+  renderIncomes(
+    currentIncomes
+  );
 
   renderCategorySelect();
 
@@ -1162,69 +1842,85 @@ function render(){
 }
 
 
-/* MONTH UI */
+/* =========================
+   MONTH UI
+========================= */
 
 function renderMonth(){
 
-  const cycle=
-    getCycle(selectedOffset);
+  const cycle =
+    getCycle(
+      selectedOffset
+    );
 
   document.getElementById(
     "monthTitle"
-  ).textContent=
-    monthName(cycle.start);
+  ).textContent =
+    monthName(
+      cycle.start
+    );
 
   document.getElementById(
     "monthSubtitle"
-  ).textContent=
+  ).textContent =
     formatDate(
-      dateToString(cycle.start)
+      dateToString(
+        cycle.start
+      )
     )+
     " – "+
     formatDate(
-      dateToString(cycle.end)
+      dateToString(
+        cycle.end
+      )
     );
 
   document.getElementById(
     "periodText"
-  ).textContent=
+  ).textContent =
     "מחזור "+
     formatDate(
-      dateToString(cycle.start)
+      dateToString(
+        cycle.start
+      )
     )+
     " – "+
     formatDate(
-      dateToString(cycle.end)
+      dateToString(
+        cycle.end
+      )
     );
 
 }
 
 
-/* CATEGORIES */
+/* =========================
+   CATEGORIES
+========================= */
 
 function renderCategories(
   current,
   total
 ){
 
-  const container=
+  const container =
     document.getElementById(
       "categories"
     );
 
   if(!categories.length){
 
-    container.innerHTML=
+    container.innerHTML =
       '<div class="empty">אין עדיין קטגוריות</div>';
 
     return;
 
   }
 
-  container.innerHTML=
+  container.innerHTML =
     categories.map(cat=>{
 
-      const sum=
+      const sum =
         current
           .filter(
             e=>e.category===cat.name
@@ -1235,7 +1931,7 @@ function renderCategories(
             0
           );
 
-      const percent=
+      const percent =
         total
           ? Math.min(
               100,
@@ -1256,14 +1952,18 @@ function renderCategories(
             <div>
 
               <div class="category-name">
-                ${escapeHTML(cat.name)}
+                ${escapeHTML(
+                  cat.name
+                )}
               </div>
 
               <div class="progress">
+
                 <div
                   class="progress-bar"
                   style="width:${percent}%"
                 ></div>
+
               </div>
 
             </div>
@@ -1283,21 +1983,23 @@ function renderCategories(
 }
 
 
-/* PAYMENTS */
+/* =========================
+   PAYMENTS
+========================= */
 
 function renderPayments(current){
 
-  const container=
+  const container =
     document.getElementById(
       "payments"
     );
 
   let total=0;
 
-  container.innerHTML=
+  container.innerHTML =
     payments.map(p=>{
 
-      const sum=
+      const sum =
         current
           .filter(
             e=>e.payment===p.id
@@ -1308,7 +2010,7 @@ function renderPayments(current){
             0
           );
 
-      total+=sum;
+      total += sum;
 
       return `
 
@@ -1338,46 +2040,48 @@ function renderPayments(current){
 
   document.getElementById(
     "paymentTotal"
-  ).textContent=
+  ).textContent =
     formatMoney(total);
 
 }
 
 
-/* EXPENSES */
+/* =========================
+   EXPENSES
+========================= */
 
 function renderExpenses(current){
 
-  const container=
+  const container =
     document.getElementById(
       "expenses"
     );
 
-  const sorted=
+  const sorted =
     [...current].sort(
       (a,b)=>
-        new Date(b.date)-
+        new Date(b.date) -
         new Date(a.date)
     );
 
   if(!sorted.length){
 
-    container.innerHTML=
+    container.innerHTML =
       '<div class="empty">עדיין אין הוצאות בחודש הזה 💕</div>';
 
     return;
 
   }
 
-  container.innerHTML=
+  container.innerHTML =
     sorted.map(e=>{
 
-      const cat=
+      const cat =
         categories.find(
           c=>c.name===e.category
         );
 
-      const payment=
+      const payment =
         payments.find(
           p=>p.id===e.payment
         );
@@ -1413,7 +2117,13 @@ function renderExpenses(current){
                 </div>
 
                 <div class="expense-payment">
-                  ${payment ? payment.icon+" "+payment.name : ""}
+                  ${
+                    payment
+                      ? payment.icon+
+                        " "+
+                        payment.name
+                      : ""
+                  }
                 </div>
 
               </div>
@@ -1453,7 +2163,99 @@ function renderExpenses(current){
 }
 
 
-/* CATEGORY SELECT */
+/* =========================
+   INCOMES
+========================= */
+
+function renderIncomes(current){
+
+  const container =
+    document.getElementById(
+      "incomes"
+    );
+
+  const sorted =
+    [...current].sort(
+      (a,b)=>
+        new Date(b.date) -
+        new Date(a.date)
+    );
+
+  if(!sorted.length){
+
+    container.innerHTML =
+      '<div class="empty">אין הכנסות בחודש הזה</div>';
+
+    return;
+
+  }
+
+  container.innerHTML =
+    sorted.map(i=>`
+
+      <div class="income-item">
+
+        <div class="income-main">
+
+          <div class="income-info">
+
+            <div class="income-icon">
+              💰
+            </div>
+
+            <div class="income-text">
+
+              <div class="income-name">
+                ${escapeHTML(
+                  i.description ||
+                  "הכנסה חד־פעמית"
+                )}
+              </div>
+
+              <div class="income-date">
+                ${formatDate(i.date)}
+                ·
+                חד־פעמית
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="income-amount">
+            +${formatMoney(i.amount)}
+          </div>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="small-button"
+            onclick="editIncome('${i.id}')"
+          >
+            ✏️ עריכה
+          </button>
+
+          <button
+            class="small-button delete"
+            onclick="deleteIncome('${i.id}')"
+          >
+            🗑️ מחיקה
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   CATEGORY SELECT
+========================= */
 
 function renderCategorySelect(){
 
@@ -1461,7 +2263,7 @@ function renderCategorySelect(){
 
   document.getElementById(
     "category"
-  ).innerHTML=
+  ).innerHTML =
     categories.map(c=>
       `<option value="${escapeHTML(c.name)}">
         ${escapeHTML(c.name)}
@@ -1471,15 +2273,17 @@ function renderCategorySelect(){
 }
 
 
-/* ADD EXPENSE */
+/* =========================
+   EXPENSE MODAL
+========================= */
 
 function openExpense(){
 
-  editingId=null;
+  editingExpenseId=null;
 
   document.getElementById(
     "expenseTitle"
-  ).textContent=
+  ).textContent =
     "הוספת הוצאה";
 
   document.getElementById(
@@ -1498,21 +2302,27 @@ function openExpense(){
     "isFixed"
   ).checked=false;
 
-  const cycle=
-    getCycle(selectedOffset);
+  const cycle =
+    getCycle(
+      selectedOffset
+    );
 
-  let defaultDate=
+  let defaultDate =
     new Date();
 
   if(selectedOffset!==0){
-    defaultDate=
-      new Date(cycle.start);
+    defaultDate =
+      new Date(
+        cycle.start
+      );
   }
 
   document.getElementById(
     "date"
-  ).value=
-    dateToString(defaultDate);
+  ).value =
+    dateToString(
+      defaultDate
+    );
 
   toggleFixedFields();
 
@@ -1523,51 +2333,59 @@ function openExpense(){
 }
 
 
-/* EDIT */
+/* =========================
+   EDIT EXPENSE
+========================= */
 
 function editExpense(id){
 
-  const e=
+  const e =
     expenses.find(
       x=>x.id===id
     );
 
   if(!e)return;
 
-  editingId=id;
+  editingExpenseId=id;
 
   document.getElementById(
     "expenseTitle"
-  ).textContent=
+  ).textContent =
     "עריכת הוצאה";
 
   document.getElementById(
     "amount"
-  ).value=e.amount;
+  ).value =
+    e.amount;
 
   document.getElementById(
     "description"
-  ).value=e.description || "";
+  ).value =
+    e.description || "";
 
   document.getElementById(
     "category"
-  ).value=e.category;
+  ).value =
+    e.category;
 
   document.getElementById(
     "payment"
-  ).value=e.payment || "visa";
+  ).value =
+    e.payment || "visa";
 
   document.getElementById(
     "date"
-  ).value=e.date;
+  ).value =
+    e.date;
 
   document.getElementById(
     "isFixed"
-  ).checked=!!e.fixed;
+  ).checked =
+    !!e.fixed;
 
   document.getElementById(
     "frequency"
-  ).value=
+  ).value =
     e.frequency || "monthly";
 
   toggleFixedFields();
@@ -1579,11 +2397,13 @@ function editExpense(id){
 }
 
 
-/* SAVE EXPENSE */
+/* =========================
+   SAVE EXPENSE
+========================= */
 
 function saveExpense(){
 
-  const amount=
+  const amount =
     Number(
       document.getElementById(
         "amount"
@@ -1592,13 +2412,15 @@ function saveExpense(){
 
   if(!amount || amount<=0){
 
-    alert("נא להזין סכום תקין");
+    alert(
+      "נא להזין סכום תקין"
+    );
 
     return;
 
   }
 
-  const data={
+  const data = {
 
     amount,
 
@@ -1636,22 +2458,24 @@ function saveExpense(){
 
   if(!data.date){
 
-    alert("נא לבחור תאריך");
+    alert(
+      "נא לבחור תאריך"
+    );
 
     return;
 
   }
 
-  if(editingId){
+  if(editingExpenseId){
 
-    const index=
+    const index =
       expenses.findIndex(
-        e=>e.id===editingId
+        e=>e.id===editingExpenseId
       );
 
     if(index!==-1){
 
-      expenses[index]={
+      expenses[index] = {
         ...expenses[index],
         ...data
       };
@@ -1660,7 +2484,7 @@ function saveExpense(){
 
   }else{
 
-    const newExpense={
+    const newExpense = {
 
       id:
         Date.now().toString(),
@@ -1710,7 +2534,9 @@ function saveExpense(){
 }
 
 
-/* DELETE */
+/* =========================
+   DELETE EXPENSE
+========================= */
 
 function deleteExpense(id){
 
@@ -1720,7 +2546,7 @@ function deleteExpense(id){
     return;
   }
 
-  expenses=
+  expenses =
     expenses.filter(
       e=>e.id!==id
     );
@@ -1730,25 +2556,282 @@ function deleteExpense(id){
 }
 
 
-/* FIXED EXPENSES */
+/* =========================
+   INCOME
+========================= */
+
+function openIncome(){
+
+  editingIncomeId=null;
+
+  document.getElementById(
+    "incomeTitle"
+  ).textContent =
+    "הוספת הכנסה חד־פעמית";
+
+  document.getElementById(
+    "incomeAmount"
+  ).value="";
+
+  document.getElementById(
+    "incomeDescription"
+  ).value="";
+
+  const cycle =
+    getCycle(
+      selectedOffset
+    );
+
+  let defaultDate =
+    new Date();
+
+  if(selectedOffset!==0){
+
+    defaultDate =
+      new Date(
+        cycle.start
+      );
+
+  }
+
+  document.getElementById(
+    "incomeDate"
+  ).value =
+    dateToString(
+      defaultDate
+    );
+
+  document.getElementById(
+    "incomeModal"
+  ).classList.add("show");
+
+}
+
+
+function saveIncome(){
+
+  const amount =
+    Number(
+      document.getElementById(
+        "incomeAmount"
+      ).value
+    );
+
+  const description =
+    document.getElementById(
+      "incomeDescription"
+    ).value.trim();
+
+  const date =
+    document.getElementById(
+      "incomeDate"
+    ).value;
+
+  if(!amount || amount<=0){
+
+    alert(
+      "נא להזין סכום תקין"
+    );
+
+    return;
+
+  }
+
+  if(!date){
+
+    alert(
+      "נא לבחור תאריך"
+    );
+
+    return;
+
+  }
+
+  const data = {
+
+    amount,
+
+    description,
+
+    date
+
+  };
+
+  if(editingIncomeId){
+
+    const index =
+      incomes.findIndex(
+        i=>i.id===editingIncomeId
+      );
+
+    if(index!==-1){
+
+      incomes[index] = {
+        ...incomes[index],
+        ...data
+      };
+
+    }
+
+  }else{
+
+    incomes.push({
+
+      id:
+        Date.now().toString(),
+
+      ...data
+
+    });
+
+  }
+
+  saveData();
+
+  closeModal(
+    "incomeModal"
+  );
+
+  render();
+
+}
+
+
+/* =========================
+   EDIT INCOME
+========================= */
+
+function editIncome(id){
+
+  const income =
+    incomes.find(
+      i=>i.id===id
+    );
+
+  if(!income)return;
+
+  editingIncomeId=id;
+
+  document.getElementById(
+    "incomeTitle"
+  ).textContent =
+    "עריכת הכנסה";
+
+  document.getElementById(
+    "incomeAmount"
+  ).value =
+    income.amount;
+
+  document.getElementById(
+    "incomeDescription"
+  ).value =
+    income.description || "";
+
+  document.getElementById(
+    "incomeDate"
+  ).value =
+    income.date;
+
+  document.getElementById(
+    "incomeModal"
+  ).classList.add("show");
+
+}
+
+
+/* =========================
+   DELETE INCOME
+========================= */
+
+function deleteIncome(id){
+
+  if(!confirm(
+    "למחוק את ההכנסה?"
+  )){
+    return;
+  }
+
+  incomes =
+    incomes.filter(
+      i=>i.id!==id
+    );
+
+  render();
+
+}
+
+
+/* =========================
+   OPENING BALANCE
+========================= */
+
+function openOpeningBalance(){
+
+  document.getElementById(
+    "openingAmount"
+  ).value =
+    openingBalance || "";
+
+  document.getElementById(
+    "openingModal"
+  ).classList.add("show");
+
+}
+
+
+function saveOpeningBalance(){
+
+  const amount =
+    Number(
+      document.getElementById(
+        "openingAmount"
+      ).value
+    );
+
+  if(amount<0){
+
+    alert(
+      "נא להזין סכום תקין"
+    );
+
+    return;
+
+  }
+
+  openingBalance=amount;
+
+  saveData();
+
+  closeModal(
+    "openingModal"
+  );
+
+  render();
+
+}
+
+
+/* =========================
+   FIXED
+========================= */
 
 function renderFixed(){
 
-  const container=
+  const container =
     document.getElementById(
       "fixedList"
     );
 
   if(!fixedExpenses.length){
 
-    container.innerHTML=
+    container.innerHTML =
       '<div class="empty">עדיין אין הוצאות קבועות 🔄</div>';
 
     return;
 
   }
 
-  container.innerHTML=
+  container.innerHTML =
     fixedExpenses.map(f=>`
 
       <div class="fixed-item">
@@ -1763,7 +2846,6 @@ function renderFixed(){
           </div>
 
           <div class="fixed-meta">
-
             ${escapeHTML(f.category)}
             ·
             ${formatMoney(f.amount)}
@@ -1771,7 +2853,6 @@ function renderFixed(){
             ${frequencyText(
               f.frequency
             )}
-
           </div>
 
         </div>
@@ -1809,12 +2890,12 @@ function deleteFixed(id){
     return;
   }
 
-  fixedExpenses=
+  fixedExpenses =
     fixedExpenses.filter(
       f=>f.id!==id
     );
 
-  expenses=
+  expenses =
     expenses.filter(
       e=>e.fixedSource!==id
     );
@@ -1847,19 +2928,20 @@ function frequencyText(frequency){
 }
 
 
-/* FIXED FIELDS */
+/* =========================
+   FIXED FIELDS
+========================= */
 
 function toggleFixedFields(){
 
-  const checked=
+  const checked =
     document.getElementById(
       "isFixed"
     ).checked;
 
   document.getElementById(
     "fixedFields"
-  )
-  .classList.toggle(
+  ).classList.toggle(
     "hidden",
     !checked
   );
@@ -1867,7 +2949,9 @@ function toggleFixedFields(){
 }
 
 
-/* NEW CATEGORY */
+/* =========================
+   CATEGORY
+========================= */
 
 function openCategoryModal(){
 
@@ -1888,12 +2972,12 @@ function openCategoryModal(){
 
 function saveCategory(){
 
-  const name=
+  const name =
     document.getElementById(
       "newCategory"
     ).value.trim();
 
-  const icon=
+  const icon =
     document.getElementById(
       "newIcon"
     ).value.trim()
@@ -1941,7 +3025,9 @@ function saveCategory(){
 }
 
 
-/* MODALS */
+/* =========================
+   MODALS
+========================= */
 
 function closeModal(id){
 
@@ -1952,7 +3038,9 @@ function closeModal(id){
 }
 
 
-/* SECURITY */
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(value){
 
@@ -1966,7 +3054,9 @@ function escapeHTML(value){
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 sortCategories();
 
