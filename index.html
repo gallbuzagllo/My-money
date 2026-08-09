@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הכסף שלי 💕</title>
+
+<style>
+:root{
+  --pink:#d85b91;
+  --pink-light:#fff0f6;
+  --pink-soft:#fff8fb;
+  --text:#342c34;
+  --muted:#857985;
+  --border:#eadde4;
+  --white:#ffffff;
+  --danger:#c94b61;
+  --shadow:0 8px 25px rgba(80,45,65,.08);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+body{
+  margin:0;
+  background:var(--pink-soft);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.app{
+  max-width:620px;
+  margin:auto;
+  padding:22px 16px 110px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+
+h1{
+  margin:0;
+  font-size:29px;
+  font-weight:850;
+}
+
+.subtitle{
+  color:var(--muted);
+  margin-top:5px;
+  font-size:14px;
+}
+
+.icon-button{
+  border:0;
+  background:white;
+  width:44px;
+  height:44px;
+  border-radius:15px;
+  box-shadow:var(--shadow);
+}
+
+.card{
+  background:var(--white);
+  border-radius:24px;
+  padding:21px;
+  box-shadow:var(--shadow);
+  margin-bottom:17px;
+}
+
+.summary{
+  background:linear-gradient(145deg,#fff,#fff1f7);
+}
+
+.summary-label{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.total{
+  font-size:39px;
+  font-weight:850;
+  color:var(--pink);
+  margin:4px 0;
+  direction:ltr;
+  text-align:right;
+}
+
+.period{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
+
+.stat{
+  background:white;
+  border-radius:17px;
+  padding:13px;
+}
+
+.stat-title{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat-value{
+  font-weight:800;
+  margin-top:3px;
+}
+
+.section-title{
+  margin:0 0 14px;
+  font-size:20px;
+  font-weight:850;
+}
+
+.category{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #f1e8ed;
+}
+
+.category:last-child{border-bottom:0}
+
+.category-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.category-icon{
+  width:43px;
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--pink-light);
+  border-radius:14px;
+  font-size:21px;
+}
+
+.category-name{font-weight:650}
+
+.category-amount{
+  font-weight:800;
+  direction:ltr;
+}
+
+.progress{
+  height:5px;
+  background:#f1e7ed;
+  border-radius:10px;
+  margin-top:6px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  background:var(--pink);
+  border-radius:10px;
+}
+
+.expense{
+  padding:14px 0;
+  border-bottom:1px solid #f1e8ed;
+}
+
+.expense:last-child{border-bottom:0}
+
+.expense-main{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.expense-info{
+  display:flex;
+  gap:11px;
+  align-items:center;
+}
+
+.expense-icon{
+  width:40px;
+  height:40px;
+  background:var(--pink-light);
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.expense-name{font-weight:700}
+
+.expense-date{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.expense-amount{
+  font-weight:800;
+  direction:ltr;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  margin-top:9px;
+}
+
+.small-button{
+  border:0;
+  border-radius:10px;
+  padding:7px 11px;
+  background:#f7eef3;
+  color:var(--text);
+  font-size:12px;
+}
+
+.delete{color:var(--danger)}
+
+.fixed-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #f1e8ed;
+}
+
+.fixed-item:last-child{border-bottom:0}
+
+.fixed-name{font-weight:700}
+
+.fixed-meta{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.add-category{
+  width:100%;
+  border:2px dashed #e9c7d8;
+  background:#fffafd;
+  color:var(--pink);
+  padding:13px;
+  border-radius:15px;
+  font-weight:750;
+  margin-top:12px;
+}
+
+.bottom-button{
+  position:fixed;
+  bottom:17px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 32px);
+  max-width:588px;
+  border:0;
+  border-radius:19px;
+  padding:17px;
+  background:var(--pink);
+  color:white;
+  font-size:17px;
+  font-weight:850;
+  box-shadow:0 9px 25px rgba(216,91,145,.3);
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(45,30,40,.38);
+  z-index:10;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal.show{display:flex}
+
+.sheet{
+  background:white;
+  width:100%;
+  max-width:620px;
+  border-radius:27px 27px 0 0;
+  padding:22px 18px 30px;
+  max-height:90vh;
+  overflow:auto;
+}
+
+.sheet-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.close{
+  border:0;
+  background:#f6edf2;
+  width:40px;
+  height:40px;
+  border-radius:13px;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  font-weight:750;
+  margin:12px 0 7px;
+}
+
+input,select{
+  width:100%;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#fffafb;
+  outline:none;
+}
+
+input:focus,select:focus{border-color:#dca0bb}
+
+.checkbox{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:15px 0;
+  font-size:14px;
+}
+
+.checkbox input{
+  width:19px;
+  height:19px;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  background:var(--text);
+  color:white;
+  padding:15px;
+  border-radius:15px;
+  font-weight:800;
+  margin-top:10px;
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:18px 5px;
+}
+
+.hidden{display:none!important}
+
+@media(max-width:380px){
+  h1{font-size:26px}
+  .total{font-size:34px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div>
+    <h1>הכסף שלי 💕</h1>
+    <div class="subtitle" id="periodText"></div>
+  </div>
+  <button class="icon-button" onclick="openFixed()">🔄</button>
+</header>
+
+<section class="card summary">
+  <div class="summary-label">הוצאתי במחזור הנוכחי</div>
+  <div class="total" id="total">₪0</div>
+  <div class="period" id="daysText"></div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-title">מספר הוצאות</div>
+      <div class="stat-value" id="expenseCount">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">הוצאה ממוצעת</div>
+      <div class="stat-value" id="average">₪0</div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2 class="section-title">לפי קטגוריה</h2>
+  <div id="categories"></div>
+  <button class="add-category" onclick="openCategoryModal()">＋ הוספת קטגוריה</button>
+</section>
+
+<section class="card">
+  <h2 class="section-title">הוצאות אחרונות</h2>
+  <div id="expenses"></div>
+</section>
+
+</div>
+
+<button class="bottom-button" onclick="openExpense()">＋ הוספת הוצאה</button>
+
+<div class="modal" id="expenseModal">
+  <div class="sheet">
+
+    <div class="sheet-header">
+      <h2 id="expenseTitle">הוספת הוצאה</h2>
+      <button class="close" onclick="closeModal('expenseModal')">✕</button>
+    </div>
+
+    <label>סכום</label>
+    <input id="amount" type="number" inputmode="decimal" placeholder="לדוגמה 50">
+
+    <label>קטגוריה</label>
+    <select id="category"></select>
+
+    <label>מה קנית?</label>
+    <input id="description" type="text" placeholder="לדוגמה: קפה ועוגה">
+
+    <label>תאריך</label>
+    <input id="date" type="date">
+
+    <div class="checkbox">
+      <input id="isFixed" type="checkbox" onchange="toggleFixedFields()">
+      <span>הוצאה קבועה / חוזרת</span>
+    </div>
+
+    <div id="fixedFields" class="hidden">
+
+      <label>תדירות</label>
+      <select id="frequency">
+        <option value="monthly">כל חודש</option>
+        <option value="quarterly">כל 3 חודשים</option>
+        <option value="yearly">פעם בשנה</option>
+      </select>
+
+    </div>
+
+    <button class="primary" onclick="saveExpense()">שמירת הוצאה</button>
+
+  </div>
+</div>
+
+<div class="modal" id="categoryModal">
+  <div class="sheet">
+
+    <div class="sheet-header">
+      <h2>קטגוריה חדשה</h2>
+      <button class="close" onclick="closeModal('categoryModal')">✕</button>
+    </div>
+
+    <label>שם הקטגוריה</label>
+    <input id="newCategory" type="text" placeholder="לדוגמה: לימודים">
+
+    <label>אייקון</label>
+    <input id="newIcon" type="text" maxlength="2" placeholder="🎓">
+
+    <button class="primary" onclick="saveCategory()">הוספת קטגוריה</button>
+
+  </div>
+</div>
+
+<div class="modal" id="fixedModal">
+  <div class="sheet">
+
+    <div class="sheet-header">
+      <h2>הוצאות קבועות 🔄</h2>
+      <button class="close" onclick="closeModal('fixedModal')">✕</button>
+    </div>
+
+    <div id="fixedList"></div>
+
+  </div>
+</div>
+
+<script>
+
+const defaultCategories = [
+  {name:"אוכל בחוץ", icon:"🍔"},
+  {name:"אחזקת רכב", icon:"🚗"},
+  {name:"אחר", icon:"📦"},
+  {name:"בגדים ואביזרים", icon:"👗"},
+  {name:"בתי קפה", icon:"☕"},
+  {name:"מנויים ושירותים", icon:"📱"},
+  {name:"תחבורה", icon:"🚕"},
+  {name:"טיפוח", icon:"💅"},
+  {name:"הופעות ואירועים", icon:"🎵"}
+];
+
+let categories = JSON.parse(localStorage.getItem("moneyCategories")) || defaultCategories;
+let expenses = JSON.parse(localStorage.getItem("moneyExpenses")) || [];
+let fixedExpenses = JSON.parse(localStorage.getItem("moneyFixed")) || [];
+let editingId = null;
+
+function saveData(){
+  localStorage.setItem("moneyCategories", JSON.stringify(categories));
+  localStorage.setItem("moneyExpenses", JSON.stringify(expenses));
+  localStorage.setItem("moneyFixed", JSON.stringify(fixedExpenses));
+}
+
+function sortCategories(){
+  categories.sort((a,b)=>a.name.localeCompare(b.name,"he"));
+}
+
+function getCycle(){
+
+  const today = new Date();
+
+  let start = new Date(today.getFullYear(), today.getMonth(), 10);
+
+  if(today.getDate() < 10){
+    start = new Date(today.getFullYear(), today.getMonth()-1, 10);
+  }
+
+  let end = new Date(start.getFullYear(), start.getMonth()+1, 9, 23,59,59);
+
+  return {start,end};
+}
+
+function isCurrentCycle(dateString){
+
+  const d = new Date(dateString+"T12:00:00");
+  const cycle = getCycle();
+
+  return d >= cycle.start && d <= cycle.end;
+}
+
+function formatMoney(value){
+  return "₪"+Number(value).toLocaleString("he-IL",{
+    minimumFractionDigits:0,
+    maximumFractionDigits:2
+  });
+}
+
+function formatDate(date){
+  return new Date(date+"T12:00:00").toLocaleDateString("he-IL",{
+    day:"numeric",
+    month:"numeric",
+    year:"numeric"
+  });
+}
+
+function render(){
+
+  sortCategories();
+
+  const current = expenses.filter(e=>isCurrentCycle(e.date));
+
+  const total = current.reduce((sum,e)=>sum+Number(e.amount),0);
+
+  document.getElementById("total").textContent=formatMoney(total);
+
+  document.getElementById("expenseCount").textContent=current.length;
+
+  document.getElementById("average").textContent=
+    current.length ? formatMoney(total/current.length) : "₪0";
+
+  const cycle=getCycle();
+
+  document.getElementById("periodText").textContent=
+    formatDate(cycle.start.toISOString().split("T")[0])+
+    " – "+
+    formatDate(cycle.end.toISOString().split("T")[0]);
+
+  const remaining=Math.max(
+    0,
+    Math.ceil((cycle.end-new Date())/(1000*60*60*24))
+  );
+
+  document.getElementById("daysText").textContent=
+    remaining+" ימים עד סוף המחזור";
+
+  renderCategories(current,total);
+  renderExpenses(current);
+  renderCategorySelect();
+  renderFixed();
+
+  saveData();
+}
+
+function renderCategories(current,total){
+
+  const container=document.getElementById("categories");
+
+  if(!categories.length){
+    container.innerHTML='<div class="empty">אין עדיין קטגוריות</div>';
+    return;
+  }
+
+  container.innerHTML=categories.map(cat=>{
+
+    const sum=current
+      .filter(e=>e.category===cat.name)
+      .reduce((s,e)=>s+Number(e.amount),0);
+
+    const percent=total ? Math.min(100,(sum/total)*100) : 0;
+
+    return `
+      <div class="category">
+        <div class="category-left">
+          <div class="category-icon">${cat.icon}</div>
+          <div>
+            <div class="category-name">${escapeHTML(cat.name)}</div>
+            <div class="progress">
+              <div class="progress-bar" style="width:${percent}%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-amount">${formatMoney(sum)}</div>
+      </div>
+    `;
+
+  }).join("");
+}
+
+function renderExpenses(current){
+
+  const container=document.getElementById("expenses");
+
+  const sorted=[...current].sort((a,b)=>new Date(b.date)-new Date(a.date));
+
+  if(!sorted.length){
+    container.innerHTML=
+      '<div class="empty">עדיין אין הוצאות במחזור הזה 💕</div>';
+    return;
+  }
+
+  container.innerHTML=sorted.map(e=>{
+
+    const cat=categories.find(c=>c.name===e.category);
+
+    return `
+      <div class="expense">
+
+        <div class="expense-main">
+
+          <div class="expense-info">
+
+            <div class="expense-icon">
+              ${cat ? cat.icon : "💸"}
+            </div>
+
+            <div>
+              <div class="expense-name">
+                ${escapeHTML(e.description || e.category)}
+              </div>
+
+              <div class="expense-date">
+                ${escapeHTML(e.category)} · ${formatDate(e.date)}
+                ${e.fixed ? " · 🔄 קבועה" : ""}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="expense-amount">
+            ${formatMoney(e.amount)}
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button class="small-button" onclick="editExpense('${e.id}')">
+            ✏️ עריכה
+          </button>
+
+          <button class="small-button delete" onclick="deleteExpense('${e.id}')">
+            🗑️ מחיקה
+          </button>
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+function renderCategorySelect(){
+
+  sortCategories();
+
+  document.getElementById("category").innerHTML=
+    categories.map(c=>
+      `<option value="${escapeHTML(c.name)}">${escapeHTML(c.name)}</option>`
+    ).join("");
+}
+
+function openExpense(){
+
+  editingId=null;
+
+  document.getElementById("expenseTitle").textContent="הוספת הוצאה";
+
+  document.getElementById("amount").value="";
+  document.getElementById("description").value="";
+  document.getElementById("isFixed").checked=false;
+
+  document.getElementById("date").value=
+    new Date().toISOString().split("T")[0];
+
+  toggleFixedFields();
+
+  document.getElementById("expenseModal").classList.add("show");
+}
+
+function editExpense(id){
+
+  const e=expenses.find(x=>x.id===id);
+
+  if(!e)return;
+
+  editingId=id;
+
+  document.getElementById("expenseTitle").textContent="עריכת הוצאה";
+
+  document.getElementById("amount").value=e.amount;
+  document.getElementById("description").value=e.description;
+  document.getElementById("category").value=e.category;
+  document.getElementById("date").value=e.date;
+  document.getElementById("isFixed").checked=!!e.fixed;
+
+  toggleFixedFields();
+
+  document.getElementById("expenseModal").classList.add("show");
+}
+
+function saveExpense(){
+
+  const amount=Number(document.getElementById("amount").value);
+
+  if(!amount || amount<=0){
+    alert("נא להזין סכום תקין");
+    return;
+  }
+
+  const data={
+    amount,
+    category:document.getElementById("category").value,
+    description:document.getElementById("description").value.trim(),
+    date:document.getElementById("date").value,
+    fixed:document.getElementById("isFixed").checked,
+    frequency:document.getElementById("frequency").value
+  };
+
+  if(!data.date){
+    alert("נא לבחור תאריך");
+    return;
+  }
+
+  if(editingId){
+
+    const index=expenses.findIndex(e=>e.id===editingId);
+
+    if(index!==-1){
+      expenses[index]={...expenses[index],...data};
+    }
+
+  }else{
+
+    expenses.push({
+      id:Date.now().toString(),
+      ...data
+    });
+
+    if(data.fixed){
+      addFixed(data);
+    }
+
+  }
+
+  closeModal("expenseModal");
+  render();
+}
+
+function deleteExpense(id){
+
+  if(!confirm("למחוק את ההוצאה?"))return;
+
+  expenses=expenses.filter(e=>e.id!==id);
+
+  render();
+}
+
+function addFixed(data){
+
+  fixedExpenses.push({
+    id:Date.now().toString(),
+    amount:data.amount,
+    category:data.category,
+    description:data.description,
+    startDate:data.date,
+    frequency:data.frequency
+  });
+
+  generateFixedExpenses();
+}
+
+function generateFixedExpenses(){
+
+  fixedExpenses.forEach(f=>{
+
+    let next=new Date(f.startDate+"T12:00:00");
+
+    const cycle=getCycle();
+
+    let months=1;
+
+    if(f.frequency==="quarterly")months=3;
+    if(f.frequency==="yearly")months=12;
+
+    while(next<=cycle.end){
+
+      const dateString=next.toISOString().split("T")[0];
+
+      const exists=expenses.some(e=>
+        e.fixedSource===f.id &&
+        e.date===dateString
+      );
+
+      if(!exists && next>=cycle.start){
+
+        expenses.push({
+          id:Date.now().toString()+Math.random(),
+          amount:f.amount,
+          category:f.category,
+          description:f.description,
+          date:dateString,
+          fixed:true,
+          fixedSource:f.id,
+          frequency:f.frequency
+        });
+
+      }
+
+      next.setMonth(next.getMonth()+months);
+    }
+
+  });
+
+  saveData();
+}
+
+function renderFixed(){
+
+  const container=document.getElementById("fixedList");
+
+  if(!fixedExpenses.length){
+
+    container.innerHTML=
+      '<div class="empty">עדיין אין הוצאות קבועות 🔄</div>';
+
+    return;
+  }
+
+  container.innerHTML=fixedExpenses.map(f=>`
+
+    <div class="fixed-item">
+
+      <div>
+        <div class="fixed-name">
+          ${escapeHTML(f.description || f.category)}
+        </div>
+
+        <div class="fixed-meta">
+          ${escapeHTML(f.category)} · ${formatMoney(f.amount)} · ${frequencyText(f.frequency)}
+        </div>
+      </div>
+
+      <button class="small-button delete"
+        onclick="deleteFixed('${f.id}')">
+        מחיקה
+      </button>
+
+    </div>
+
+  `).join("");
+}
+
+function openFixed(){
+
+  generateFixedExpenses();
+  renderFixed();
+
+  document.getElementById("fixedModal").classList.add("show");
+}
+
+function deleteFixed(id){
+
+  if(!confirm("למחוק את ההוצאה הקבועה?"))return;
+
+  fixedExpenses=fixedExpenses.filter(f=>f.id!==id);
+
+  expenses=expenses.filter(e=>e.fixedSource!==id);
+
+  saveData();
+  render();
+  renderFixed();
+}
+
+function frequencyText(frequency){
+
+  if(frequency==="quarterly")return"כל 3 חודשים";
+  if(frequency==="yearly")return"פעם בשנה";
+
+  return"כל חודש";
+}
+
+function toggleFixedFields(){
+
+  const checked=document.getElementById("isFixed").checked;
+
+  document.getElementById("fixedFields")
+    .classList.toggle("hidden",!checked);
+}
+
+function openCategoryModal(){
+
+  document.getElementById("newCategory").value="";
+  document.getElementById("newIcon").value="";
+
+  document.getElementById("categoryModal").classList.add("show");
+}
+
+function saveCategory(){
+
+  const name=document.getElementById("newCategory").value.trim();
+  const icon=document.getElementById("newIcon").value.trim() || "💸";
+
+  if(!name){
+    alert("נא להכניס שם לקטגוריה");
+    return;
+  }
+
+  if(categories.some(c=>c.name===name)){
+    alert("הקטגוריה כבר קיימת");
+    return;
+  }
+
+  categories.push({
+    name,
+    icon
+  });
+
+  sortCategories();
+
+  saveData();
+  render();
+
+  closeModal("categoryModal");
+}
+
+function closeModal(id){
+
+  document.getElementById(id).classList.remove("show");
+}
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+generateFixedExpenses();
+render();
+
+</script>
+
+</body>
+</html>
