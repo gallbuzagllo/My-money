@@ -196,10 +196,6 @@ button{
   color:#44363e;
 }
 
-.category-button:active{
-  transform:scale(.97);
-}
-
 .category-top{
   display:flex;
   align-items:center;
@@ -227,6 +223,26 @@ button{
   font-weight:850;
   direction:ltr;
   text-align:right;
+}
+
+.category-goal{
+  margin-top:7px;
+  font-size:11px;
+  color:#8e7d86;
+}
+
+.progress{
+  height:7px;
+  background:#f2e8ed;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress-fill{
+  height:100%;
+  border-radius:20px;
+  background:#d45b91;
 }
 
 .list-row{
@@ -415,7 +431,16 @@ input,select{
   font-weight:900;
 }
 
-.category-modal-title{color:#d45b91}
+.back-button{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:14px;
+  background:#f8edf2;
+  color:#4d3d45;
+  font-weight:800;
+  margin-top:12px;
+}
 
 .category-summary{
   background:#fff8fb;
@@ -431,15 +456,123 @@ input,select{
   color:#d45b91;
 }
 
-.back-button{
-  width:100%;
-  border:0;
-  padding:13px;
-  border-radius:14px;
-  background:#f8edf2;
-  color:#4d3d45;
+.goal-card{
+  background:#fff8fb;
+  border-radius:18px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.goal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.goal-name{
+  font-weight:850;
+}
+
+.goal-numbers{
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+  color:#81717a;
+  font-size:12px;
+}
+
+.goal-status{
+  margin-top:7px;
+  font-size:12px;
   font-weight:800;
-  margin-bottom:12px;
+}
+
+.dream-card{
+  background:#fff8fb;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:10px;
+}
+
+.dream-top{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.dream-check{
+  width:28px;
+  height:28px;
+  border:2px solid #e2b4c8;
+  border-radius:9px;
+  background:white;
+  flex-shrink:0;
+  font-size:16px;
+}
+
+.dream-name{
+  font-size:16px;
+  font-weight:900;
+}
+
+.dream-price{
+  color:#8c7a83;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.dream-saved{
+  margin-top:14px;
+  font-weight:850;
+}
+
+.dream-progress{
+  height:9px;
+  background:#eadfe4;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.dream-progress-fill{
+  height:100%;
+  background:#d45b91;
+  border-radius:20px;
+}
+
+.dream-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.dream-actions button{
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:9px;
+  background:#f8edf2;
+  color:#5b4a52;
+  font-size:12px;
+  font-weight:800;
+}
+
+.dream-purchased{
+  opacity:.58;
+}
+
+.purchased-title{
+  margin:25px 0 12px;
+  font-size:17px;
+  font-weight:900;
+  color:#81717a;
+}
+
+.swipe-hint{
+  text-align:center;
+  color:#a28f98;
+  font-size:11px;
+  margin-top:5px;
 }
 
 @media(max-width:380px){
@@ -451,11 +584,12 @@ input,select{
 
 <body>
 
-<div class="app">
+<div class="app" id="mainApp">
 
   <div class="header">
     <h1>הכסף שלי 💕</h1>
     <div class="subtitle">המקום הקטן שלי לעשות סדר בכסף</div>
+    <div class="swipe-hint">החליקי לצד כדי להגיע לחלומות שלך ✨</div>
   </div>
 
   <div class="card balance-card">
@@ -489,15 +623,12 @@ input,select{
       <button class="arrow" onclick="changeMonth(-1)">‹</button>
 
       <div class="month-center">
-
         <div class="month-title" id="monthTitle"></div>
-
         <div class="month-dates" id="monthDates"></div>
 
         <button class="current-button" onclick="currentMonth()">
           חזרה לחודש הנוכחי
         </button>
-
       </div>
 
       <button class="arrow" onclick="changeMonth(1)">›</button>
@@ -562,6 +693,7 @@ input,select{
 
 </div>
 
+
 <div class="bottom-buttons">
 
   <button class="bottom-button income-button" onclick="openModal('incomeModal')">
@@ -571,6 +703,128 @@ input,select{
   <button class="bottom-button expense-button" onclick="openModal('expenseModal')">
     ＋ הוצאה
   </button>
+
+</div>
+
+
+<!-- חלומות -->
+
+<div class="modal" id="dreamsModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>✨ החלומות שלי</h2>
+
+      <button class="close" onclick="closeModal('dreamsModal')">✕</button>
+
+    </div>
+
+    <div id="dreamsList"></div>
+
+    <button class="save-button" onclick="openModal('dreamModal')">
+      ＋ הוספת חלום
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- הוספת חלום -->
+
+<div class="modal" id="dreamModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>✨ חלום חדש</h2>
+
+      <button class="close" onclick="closeModal('dreamModal')">✕</button>
+
+    </div>
+
+    <label>מה אני רוצה לקנות?</label>
+
+    <input id="dreamName" type="text" placeholder="לדוגמה: עדשה למצלמה">
+
+    <label>מחיר יעד</label>
+
+    <input id="dreamTarget" type="number" inputmode="decimal" placeholder="לדוגמה 3000">
+
+    <label>כמה כבר חסכתי לחלום?</label>
+
+    <input id="dreamSaved" type="number" inputmode="decimal" placeholder="לדוגמה 500">
+
+    <label>הערה (לא חובה)</label>
+
+    <input id="dreamNote" type="text" placeholder="לדוגמה: העדשה שאני רוצה להופעות">
+
+    <button class="save-button" onclick="saveDream()">
+      שמירת החלום ✨
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- הוספת כסף לחלום -->
+
+<div class="modal" id="dreamMoneyModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>💗 חסכתי לחלום</h2>
+
+      <button class="close" onclick="closeModal('dreamMoneyModal')">✕</button>
+
+    </div>
+
+    <div class="info" id="dreamMoneyTitle"></div>
+
+    <label>כמה להוסיף?</label>
+
+    <input id="dreamMoneyAmount" type="number" inputmode="decimal" placeholder="לדוגמה 200">
+
+    <button class="save-button" onclick="addDreamMoney()">
+      הוספת כסף לחלום
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- הגדרת סכום רצוי -->
+
+<div class="modal" id="goalModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>🎯 הסכום הרצוי שלי</h2>
+
+      <button class="close" onclick="closeModal('goalModal')">✕</button>
+
+    </div>
+
+    <div class="info" id="goalTitle"></div>
+
+    <label>כמה הייתי רוצה להוציא בחודש?</label>
+
+    <input id="goalAmount" type="number" inputmode="decimal" placeholder="לדוגמה 300">
+
+    <button class="save-button" onclick="saveGoal()">
+      שמירת הסכום הרצוי
+    </button>
+
+  </div>
 
 </div>
 
@@ -590,29 +844,23 @@ input,select{
     </div>
 
     <label>סכום</label>
-
     <input id="expenseAmount" type="number" inputmode="decimal" placeholder="לדוגמה 80">
 
     <label>קטגוריה</label>
-
     <select id="expenseCategory"></select>
 
     <label>איך שילמתי?</label>
 
     <select id="expensePayment">
-
       <option value="visa">💳 ויזה</option>
       <option value="direct">🟣 דיירקט</option>
       <option value="cash">💵 מזומן</option>
-
     </select>
 
     <label>על מה הוצאתי?</label>
-
     <input id="expenseDescription" type="text" placeholder="לדוגמה: כרטיס להופעה">
 
     <label>תאריך</label>
-
     <input id="expenseDate" type="date">
 
     <button class="save-button" onclick="saveExpense()">
@@ -639,15 +887,12 @@ input,select{
     </div>
 
     <label>סכום</label>
-
     <input id="incomeAmount" type="number" inputmode="decimal" placeholder="לדוגמה 500">
 
     <label>מאיפה הכסף?</label>
-
-    <input id="incomeDescription" type="text" placeholder="לדוגמה: מתנה / החזר / עבודה">
+    <input id="incomeDescription" type="text" placeholder="לדוגמה: מתנה / החזר">
 
     <label>תאריך</label>
-
     <input id="incomeDate" type="date">
 
     <button class="save-button" onclick="saveIncome()">
@@ -694,7 +939,7 @@ input,select{
 
     <div class="sheet-header">
 
-      <h2 class="category-modal-title" id="categoryModalTitle"></h2>
+      <h2 id="categoryModalTitle"></h2>
 
       <button class="close" onclick="closeModal('categoryModal')">✕</button>
 
@@ -724,7 +969,6 @@ input,select{
 <script>
 
 const categories = [
-
   {name:"אוכל בחוץ",icon:"🍔"},
   {name:"אחזקת רכב",icon:"🚗"},
   {name:"אחר",icon:"📦"},
@@ -734,37 +978,32 @@ const categories = [
   {name:"מנויים ושירותים",icon:"📱"},
   {name:"טיפוח",icon:"💅"},
   {name:"תחבורה",icon:"🚕"}
-
 ];
 
 const payments = [
-
   {id:"visa",name:"ויזה",icon:"💳"},
   {id:"direct",name:"דיירקט",icon:"🟣"},
   {id:"cash",name:"מזומן",icon:"💵"}
-
 ];
 
-
 let expenses =
-  JSON.parse(
-    localStorage.getItem("moneyExpenses")
-  ) || [];
-
+  JSON.parse(localStorage.getItem("moneyExpenses")) || [];
 
 let incomes =
-  JSON.parse(
-    localStorage.getItem("moneyIncomes")
-  ) || [];
+  JSON.parse(localStorage.getItem("moneyIncomes")) || [];
 
+let dreams =
+  JSON.parse(localStorage.getItem("moneyDreams")) || [];
+
+let goals =
+  JSON.parse(localStorage.getItem("moneyGoals")) || {};
 
 let openingBalance =
-  Number(
-    localStorage.getItem("moneyOpeningBalance")
-  ) || 0;
-
+  Number(localStorage.getItem("moneyOpeningBalance")) || 0;
 
 let monthOffset = 0;
+let selectedDreamId = null;
+let selectedGoalCategory = null;
 
 
 function saveData(){
@@ -780,10 +1019,19 @@ function saveData(){
   );
 
   localStorage.setItem(
+    "moneyDreams",
+    JSON.stringify(dreams)
+  );
+
+  localStorage.setItem(
+    "moneyGoals",
+    JSON.stringify(goals)
+  );
+
+  localStorage.setItem(
     "moneyOpeningBalance",
     String(openingBalance)
   );
-
 }
 
 
@@ -794,7 +1042,6 @@ function money(value){
       "he-IL",
       {maximumFractionDigits:2}
     );
-
 }
 
 
@@ -807,7 +1054,6 @@ function todayString(){
     String(d.getMonth()+1).padStart(2,"0") +
     "-" +
     String(d.getDate()).padStart(2,"0");
-
 }
 
 
@@ -816,7 +1062,6 @@ function formatDate(date){
   return new Date(
     date + "T12:00:00"
   ).toLocaleDateString("he-IL");
-
 }
 
 
@@ -841,20 +1086,16 @@ function getCycle(){
       now.getMonth() - 1 + monthOffset,
       10
     );
-
   }
 
   const end = new Date(
     start.getFullYear(),
     start.getMonth()+1,
     9,
-    23,
-    59,
-    59
+    23,59,59
   );
 
   return {start,end};
-
 }
 
 
@@ -862,7 +1103,6 @@ function changeMonth(value){
 
   monthOffset += value;
   render();
-
 }
 
 
@@ -870,7 +1110,6 @@ function currentMonth(){
 
   monthOffset = 0;
   render();
-
 }
 
 
@@ -883,7 +1122,6 @@ function inCurrentCycle(date){
   );
 
   return d >= cycle.start && d <= cycle.end;
-
 }
 
 
@@ -892,7 +1130,6 @@ function currentExpenses(){
   return expenses.filter(
     e => inCurrentCycle(e.date)
   );
-
 }
 
 
@@ -901,7 +1138,6 @@ function currentIncomes(){
   return incomes.filter(
     i => inCurrentCycle(i.date)
   );
-
 }
 
 
@@ -924,7 +1160,6 @@ function getBalance(){
   return openingBalance +
     totalIncome -
     totalExpense;
-
 }
 
 
@@ -935,21 +1170,12 @@ function openModal(id){
     .classList.add("show");
 
   if(id === "expenseModal"){
-
-    document
-      .getElementById("expenseDate")
-      .value = todayString();
-
+    document.getElementById("expenseDate").value = todayString();
   }
 
   if(id === "incomeModal"){
-
-    document
-      .getElementById("incomeDate")
-      .value = todayString();
-
+    document.getElementById("incomeDate").value = todayString();
   }
-
 }
 
 
@@ -958,61 +1184,38 @@ function closeModal(id){
   document
     .getElementById(id)
     .classList.remove("show");
-
 }
 
 
 function saveExpense(){
 
   const amount =
-    Number(
-      document
-        .getElementById("expenseAmount")
-        .value
-    );
+    Number(document.getElementById("expenseAmount").value);
 
   const category =
-    document
-      .getElementById("expenseCategory")
-      .value;
+    document.getElementById("expenseCategory").value;
 
   const payment =
-    document
-      .getElementById("expensePayment")
-      .value;
+    document.getElementById("expensePayment").value;
 
   const description =
-    document
-      .getElementById("expenseDescription")
-      .value
-      .trim();
+    document.getElementById("expenseDescription").value.trim();
 
   const date =
-    document
-      .getElementById("expenseDate")
-      .value;
+    document.getElementById("expenseDate").value;
 
   if(!amount || amount <= 0 || !date){
-
     alert("צריך למלא סכום ותאריך ❤️");
     return;
-
   }
 
   expenses.push({
-
-    id: Date.now(),
-
-    amount: amount,
-
-    category: category,
-
-    payment: payment,
-
-    description: description || "הוצאה",
-
-    date: date
-
+    id:Date.now(),
+    amount,
+    category,
+    payment,
+    description:description || "הוצאה",
+    date
   });
 
   saveData();
@@ -1023,47 +1226,30 @@ function saveExpense(){
   document.getElementById("expenseDescription").value = "";
 
   render();
-
 }
 
 
 function saveIncome(){
 
   const amount =
-    Number(
-      document
-        .getElementById("incomeAmount")
-        .value
-    );
+    Number(document.getElementById("incomeAmount").value);
 
   const description =
-    document
-      .getElementById("incomeDescription")
-      .value
-      .trim();
+    document.getElementById("incomeDescription").value.trim();
 
   const date =
-    document
-      .getElementById("incomeDate")
-      .value;
+    document.getElementById("incomeDate").value;
 
   if(!amount || amount <= 0 || !date){
-
     alert("צריך למלא סכום ותאריך ❤️");
     return;
-
   }
 
   incomes.push({
-
-    id: Date.now(),
-
-    amount: amount,
-
-    description: description || "הכנסה",
-
-    date: date
-
+    id:Date.now(),
+    amount,
+    description:description || "הכנסה",
+    date
   });
 
   saveData();
@@ -1074,24 +1260,17 @@ function saveIncome(){
   document.getElementById("incomeDescription").value = "";
 
   render();
-
 }
 
 
 function saveOpening(){
 
   const amount =
-    Number(
-      document
-        .getElementById("openingAmount")
-        .value
-    );
+    Number(document.getElementById("openingAmount").value);
 
   if(amount < 0 || isNaN(amount)){
-
     alert("הכניסי סכום תקין ❤️");
     return;
-
   }
 
   openingBalance = amount;
@@ -1103,27 +1282,18 @@ function saveOpening(){
   document.getElementById("openingAmount").value = "";
 
   render();
-
 }
 
-
-/* ================================
-   מחיקת הוצאה - מתוקנת
-================================ */
 
 function deleteExpense(id){
 
   const expenseId = Number(id);
 
-  const confirmDelete =
-    confirm("למחוק את ההוצאה?");
-
-  if(!confirmDelete){
+  if(!confirm("למחוק את ההוצאה?")){
     return;
   }
 
-  const originalLength =
-    expenses.length;
+  const oldLength = expenses.length;
 
   expenses =
     expenses.filter(
@@ -1131,32 +1301,21 @@ function deleteExpense(id){
         Number(expense.id) !== expenseId
     );
 
-  if(expenses.length === originalLength){
-
-    alert("לא הצלחתי למצוא את ההוצאה למחיקה.");
+  if(expenses.length === oldLength){
+    alert("לא הצלחתי למצוא את ההוצאה.");
     return;
-
   }
 
   saveData();
-
   render();
-
 }
 
-
-/* ================================
-   מחיקת הכנסה
-================================ */
 
 function deleteIncome(id){
 
   const incomeId = Number(id);
 
-  const confirmDelete =
-    confirm("למחוק את ההכנסה?");
-
-  if(!confirmDelete){
+  if(!confirm("למחוק את ההכנסה?")){
     return;
   }
 
@@ -1167,18 +1326,14 @@ function deleteIncome(id){
     );
 
   saveData();
-
   render();
-
 }
 
 
 function renderCategorySelect(){
 
   const select =
-    document.getElementById(
-      "expenseCategory"
-    );
+    document.getElementById("expenseCategory");
 
   select.innerHTML = "";
 
@@ -1187,25 +1342,19 @@ function renderCategorySelect(){
     const option =
       document.createElement("option");
 
-    option.value =
-      category.name;
-
-    option.textContent =
-      category.name;
+    option.value = category.name;
+    option.textContent = category.name;
 
     select.appendChild(option);
 
   });
-
 }
 
 
 function renderCategories(){
 
   const container =
-    document.getElementById(
-      "categories"
-    );
+    document.getElementById("categories");
 
   container.innerHTML = "";
 
@@ -1213,18 +1362,15 @@ function renderCategories(){
 
   categories
     .slice()
-    .sort(
-      (a,b) =>
-        a.name.localeCompare(b.name,"he")
+    .sort((a,b) =>
+      a.name.localeCompare(b.name,"he")
     )
     .forEach(category => {
 
       const total =
         ex
-          .filter(
-            e =>
-              e.category ===
-              category.name
+          .filter(e =>
+            e.category === category.name
           )
           .reduce(
             (sum,e) =>
@@ -1232,15 +1378,26 @@ function renderCategories(){
             0
           );
 
+      const goal =
+        Number(goals[category.name] || 0);
+
+      let percent = 0;
+
+      if(goal > 0){
+        percent =
+          Math.min(
+            100,
+            (total / goal) * 100
+          );
+      }
+
       const button =
         document.createElement("button");
 
-      button.className =
-        "category-button";
+      button.className = "category-button";
 
       button.onclick =
-        () =>
-          openCategory(category.name);
+        () => openCategory(category.name);
 
       button.innerHTML = `
 
@@ -1260,12 +1417,38 @@ function renderCategories(){
           ${money(total)}
         </div>
 
+        ${
+          goal > 0
+          ? `
+            <div class="category-goal">
+              רצוי: ${money(goal)}
+              ·
+              ${
+                total <= goal
+                ? "נשארו " + money(goal-total)
+                : "עברתי ב־" + money(total-goal)
+              }
+            </div>
+
+            <div class="progress">
+              <div
+                class="progress-fill"
+                style="width:${percent}%"
+              ></div>
+            </div>
+          `
+          : `
+            <div class="category-goal">
+              לחצי כדי להגדיר סכום רצוי
+            </div>
+          `
+        }
+
       `;
 
       container.appendChild(button);
 
     });
-
 }
 
 
@@ -1273,8 +1456,7 @@ function openCategory(categoryName){
 
   const category =
     categories.find(
-      c =>
-        c.name === categoryName
+      c => c.name === categoryName
     );
 
   const categoryExpenses =
@@ -1292,21 +1474,15 @@ function openCategory(categoryName){
         0
       );
 
-  document
-    .getElementById(
-      "categoryModalTitle"
-    )
-    .textContent =
-      category.icon +
-      " " +
-      category.name;
+  document.getElementById(
+    "categoryModalTitle"
+  ).textContent =
+    category.icon + " " + category.name;
 
-  document
-    .getElementById(
-      "categoryModalTotal"
-    )
-    .textContent =
-      money(total);
+  document.getElementById(
+    "categoryModalTotal"
+  ).textContent =
+    money(total);
 
   const container =
     document.getElementById(
@@ -1315,13 +1491,51 @@ function openCategory(categoryName){
 
   container.innerHTML = "";
 
+  const goal =
+    Number(goals[categoryName] || 0);
+
+  const goalButton =
+    document.createElement("button");
+
+  goalButton.className = "back-button";
+
+  goalButton.textContent =
+    goal > 0
+      ? "🎯 שינוי הסכום הרצוי"
+      : "🎯 הגדרת סכום רצוי";
+
+  goalButton.onclick = () => {
+
+    selectedGoalCategory = categoryName;
+
+    document.getElementById(
+      "goalTitle"
+    ).textContent =
+      categoryName;
+
+    document.getElementById(
+      "goalAmount"
+    ).value =
+      goal || "";
+
+    closeModal("categoryModal");
+    openModal("goalModal");
+
+  };
+
+  container.appendChild(goalButton);
+
   if(categoryExpenses.length === 0){
 
-    container.innerHTML = `
-      <div class="empty">
-        אין עדיין הוצאות בקטגוריה הזאת בחודש הזה 💕
-      </div>
-    `;
+    const empty =
+      document.createElement("div");
+
+    empty.className = "empty";
+
+    empty.textContent =
+      "אין עדיין הוצאות בקטגוריה הזאת בחודש הזה 💕";
+
+    container.appendChild(empty);
 
   }else{
 
@@ -1383,26 +1597,393 @@ function openCategory(categoryName){
             </button>
 
           </div>
-
         `;
 
         container.appendChild(row);
 
       });
-
   }
 
   openModal("categoryModal");
+}
 
+
+function saveGoal(){
+
+  const amount =
+    Number(
+      document.getElementById("goalAmount").value
+    );
+
+  if(!selectedGoalCategory){
+    return;
+  }
+
+  if(amount < 0 || isNaN(amount)){
+    alert("הכניסי סכום תקין ❤️");
+    return;
+  }
+
+  if(amount === 0){
+    delete goals[selectedGoalCategory];
+  }else{
+    goals[selectedGoalCategory] = amount;
+  }
+
+  saveData();
+
+  closeModal("goalModal");
+
+  render();
+}
+
+
+function saveDream(){
+
+  const name =
+    document.getElementById("dreamName").value.trim();
+
+  const target =
+    Number(
+      document.getElementById("dreamTarget").value
+    );
+
+  const saved =
+    Number(
+      document.getElementById("dreamSaved").value
+    ) || 0;
+
+  const note =
+    document.getElementById("dreamNote").value.trim();
+
+  if(!name || !target || target <= 0){
+    alert("צריך למלא שם ומחיר יעד ❤️");
+    return;
+  }
+
+  dreams.push({
+
+    id:Date.now(),
+
+    name,
+
+    target,
+
+    saved:Math.max(0,saved),
+
+    note,
+
+    purchased:false
+
+  });
+
+  saveData();
+
+  closeModal("dreamModal");
+
+  document.getElementById("dreamName").value = "";
+  document.getElementById("dreamTarget").value = "";
+  document.getElementById("dreamSaved").value = "";
+  document.getElementById("dreamNote").value = "";
+
+  renderDreams();
+
+  openModal("dreamsModal");
+}
+
+
+function addDreamMoney(){
+
+  const amount =
+    Number(
+      document.getElementById("dreamMoneyAmount").value
+    );
+
+  if(!amount || amount <= 0){
+    alert("הכניסי סכום תקין ❤️");
+    return;
+  }
+
+  const dream =
+    dreams.find(
+      d =>
+        Number(d.id) ===
+        Number(selectedDreamId)
+    );
+
+  if(!dream){
+    return;
+  }
+
+  dream.saved =
+    Number(dream.saved || 0) + amount;
+
+  saveData();
+
+  closeModal("dreamMoneyModal");
+
+  document.getElementById(
+    "dreamMoneyAmount"
+  ).value = "";
+
+  renderDreams();
+}
+
+
+function toggleDream(id){
+
+  const dream =
+    dreams.find(
+      d =>
+        Number(d.id) === Number(id)
+    );
+
+  if(!dream){
+    return;
+  }
+
+  dream.purchased =
+    !dream.purchased;
+
+  saveData();
+
+  renderDreams();
+}
+
+
+function deleteDream(id){
+
+  if(!confirm("למחוק את החלום?")){
+    return;
+  }
+
+  dreams =
+    dreams.filter(
+      d =>
+        Number(d.id) !== Number(id)
+    );
+
+  saveData();
+
+  renderDreams();
+}
+
+
+function renderDreams(){
+
+  const container =
+    document.getElementById("dreamsList");
+
+  if(!container){
+    return;
+  }
+
+  container.innerHTML = "";
+
+  const active =
+    dreams.filter(
+      d => !d.purchased
+    );
+
+  const purchased =
+    dreams.filter(
+      d => d.purchased
+    );
+
+  if(active.length === 0){
+
+    container.innerHTML = `
+      <div class="empty">
+        עדיין אין חלומות ברשימה ✨
+        <br>
+        הגיע הזמן להוסיף משהו שאת רוצה 💗
+      </div>
+    `;
+
+  }else{
+
+    active.forEach(
+      dream =>
+        container.appendChild(
+          dreamElement(dream)
+        )
+    );
+
+  }
+
+  if(purchased.length > 0){
+
+    const title =
+      document.createElement("div");
+
+    title.className =
+      "purchased-title";
+
+    title.textContent =
+      "🛍️ נרכש";
+
+    container.appendChild(title);
+
+    purchased.forEach(
+      dream =>
+        container.appendChild(
+          dreamElement(dream)
+        )
+    );
+
+  }
+
+}
+
+
+function dreamElement(dream){
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "dream-card" +
+    (dream.purchased
+      ? " dream-purchased"
+      : "");
+
+  const percent =
+    dream.target > 0
+      ? Math.min(
+          100,
+          (Number(dream.saved) /
+          Number(dream.target)) * 100
+        )
+      : 0;
+
+  const remaining =
+    Math.max(
+      0,
+      Number(dream.target) -
+      Number(dream.saved)
+    );
+
+  card.innerHTML = `
+
+    <div class="dream-top">
+
+      <button
+        class="dream-check"
+        onclick="toggleDream(${Number(dream.id)})"
+      >
+        ${dream.purchased ? "✓" : ""}
+      </button>
+
+      <div style="flex:1">
+
+        <div class="dream-name">
+          ✨ ${escapeHtml(dream.name)}
+        </div>
+
+        <div class="dream-price">
+          יעד: ${money(dream.target)}
+        </div>
+
+        ${
+          dream.note
+          ? `
+            <div class="dream-price">
+              ${escapeHtml(dream.note)}
+            </div>
+          `
+          : ""
+        }
+
+      </div>
+
+    </div>
+
+    <div class="dream-saved">
+      💗 חסכתי לחלום: ${money(dream.saved)}
+    </div>
+
+    ${
+      !dream.purchased
+      ? `
+        <div class="dream-price">
+          🎯 נשאר לי: ${money(remaining)}
+        </div>
+
+        <div class="dream-progress">
+          <div
+            class="dream-progress-fill"
+            style="width:${percent}%"
+          ></div>
+        </div>
+
+        <div class="dream-price">
+          ${percent.toFixed(0)}% מהדרך
+        </div>
+
+        <div class="dream-actions">
+
+          <button
+            onclick="openDreamMoney(${Number(dream.id)})"
+          >
+            ＋ חסכתי
+          </button>
+
+          <button
+            onclick="deleteDream(${Number(dream.id)})"
+          >
+            מחיקה
+          </button>
+
+        </div>
+      `
+      : `
+        <div class="dream-actions">
+
+          <button
+            onclick="deleteDream(${Number(dream.id)})"
+          >
+            מחיקה
+          </button>
+
+        </div>
+      `
+    }
+
+  `;
+
+  return card;
+}
+
+
+function openDreamMoney(id){
+
+  selectedDreamId =
+    Number(id);
+
+  const dream =
+    dreams.find(
+      d =>
+        Number(d.id) ===
+        selectedDreamId
+    );
+
+  if(!dream){
+    return;
+  }
+
+  document.getElementById(
+    "dreamMoneyTitle"
+  ).textContent =
+    dream.name;
+
+  openModal("dreamMoneyModal");
 }
 
 
 function renderExpenses(){
 
   const container =
-    document.getElementById(
-      "expenses"
-    );
+    document.getElementById("expenses");
 
   container.innerHTML = "";
 
@@ -1424,7 +2005,6 @@ function renderExpenses(){
     `;
 
     return;
-
   }
 
   ex.forEach(expense => {
@@ -1432,22 +2012,19 @@ function renderExpenses(){
     const category =
       categories.find(
         c =>
-          c.name ===
-          expense.category
+          c.name === expense.category
       );
 
     const payment =
       payments.find(
         p =>
-          p.id ===
-          expense.payment
+          p.id === expense.payment
       );
 
     const row =
       document.createElement("div");
 
-    row.className =
-      "list-row";
+    row.className = "list-row";
 
     row.innerHTML = `
 
@@ -1464,17 +2041,11 @@ function renderExpenses(){
           </div>
 
           <div class="row-subtitle">
-
             ${category ? category.name : ""}
-
             ·
-
             ${formatDate(expense.date)}
-
             ·
-
             ${payment ? payment.name : ""}
-
           </div>
 
         </div>
@@ -1502,16 +2073,13 @@ function renderExpenses(){
     container.appendChild(row);
 
   });
-
 }
 
 
 function renderIncomes(){
 
   const container =
-    document.getElementById(
-      "incomes"
-    );
+    document.getElementById("incomes");
 
   container.innerHTML = "";
 
@@ -1533,7 +2101,6 @@ function renderIncomes(){
     `;
 
     return;
-
   }
 
   inc.forEach(income => {
@@ -1541,8 +2108,7 @@ function renderIncomes(){
     const row =
       document.createElement("div");
 
-    row.className =
-      "list-row";
+    row.className = "list-row";
 
     row.innerHTML = `
 
@@ -1587,16 +2153,13 @@ function renderIncomes(){
     container.appendChild(row);
 
   });
-
 }
 
 
 function renderPayments(){
 
   const container =
-    document.getElementById(
-      "payments"
-    );
+    document.getElementById("payments");
 
   container.innerHTML = "";
 
@@ -1609,8 +2172,7 @@ function renderPayments(){
       ex
         .filter(
           e =>
-            e.payment ===
-            payment.id
+            e.payment === payment.id
         )
         .reduce(
           (sum,e) =>
@@ -1643,7 +2205,6 @@ function renderPayments(){
     container.appendChild(box);
 
   });
-
 }
 
 
@@ -1684,59 +2245,45 @@ function render(){
   const cycle =
     getCycle();
 
-  document
-    .getElementById("balance")
-    .textContent =
-      money(getBalance());
+  document.getElementById("balance").textContent =
+    money(getBalance());
 
-  document
-    .getElementById("balanceInfo")
-    .textContent =
-      openingBalance
-        ? "יתרת פתיחה: " +
-          money(openingBalance) +
-          " · היתרה מתעדכנת אוטומטית"
-        : "הגדירי יתרת פתיחה כדי להתחיל 💕";
+  document.getElementById("balanceInfo").textContent =
+    openingBalance
+      ? "יתרת פתיחה: " +
+        money(openingBalance) +
+        " · היתרה מתעדכנת אוטומטית"
+      : "הגדירי יתרת פתיחה כדי להתחיל 💕";
 
-  document
-    .getElementById("monthTitle")
-    .textContent =
-      cycle.start.toLocaleDateString(
-        "he-IL",
-        {
-          month:"long",
-          year:"numeric"
-        }
-      );
+  document.getElementById("monthTitle").textContent =
+    cycle.start.toLocaleDateString(
+      "he-IL",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    );
 
-  document
-    .getElementById("monthDates")
-    .textContent =
-      cycle.start.toLocaleDateString("he-IL") +
-      " – " +
-      cycle.end.toLocaleDateString("he-IL");
+  document.getElementById("monthDates").textContent =
+    cycle.start.toLocaleDateString("he-IL") +
+    " – " +
+    cycle.end.toLocaleDateString("he-IL");
 
-  document
-    .getElementById("monthExpenseTotal")
-    .textContent =
-      money(expenseTotal);
+  document.getElementById("monthExpenseTotal").textContent =
+    money(expenseTotal);
 
-  document
-    .getElementById("monthIncomeTotal")
-    .textContent =
-      money(incomeTotal);
+  document.getElementById("monthIncomeTotal").textContent =
+    money(incomeTotal);
 
-  document
-    .getElementById("monthExpenseSmall")
-    .textContent =
-      money(expenseTotal);
+  document.getElementById("monthExpenseSmall").textContent =
+    money(expenseTotal);
 
   renderCategorySelect();
   renderCategories();
   renderExpenses();
   renderIncomes();
   renderPayments();
-
+  renderDreams();
 }
 
 
@@ -1749,6 +2296,50 @@ document.addEventListener(
   }
 );
 
+
+/* החלקה לצד */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener(
+  "touchstart",
+  function(event){
+
+    touchStartX =
+      event.changedTouches[0].screenX;
+
+  },
+  {passive:true}
+);
+
+
+document.addEventListener(
+  "touchend",
+  function(event){
+
+    touchEndX =
+      event.changedTouches[0].screenX;
+
+    const difference =
+      touchEndX - touchStartX;
+
+    if(Math.abs(difference) < 80){
+      return;
+    }
+
+    if(difference < 0){
+
+      openModal("dreamsModal");
+
+    }
+
+  },
+  {passive:true}
+);
+
+
+/* סגירת חלונות בלחיצה על הרקע */
 
 document.addEventListener(
   "click",
