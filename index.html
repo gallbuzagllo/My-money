@@ -2,598 +2,646 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8e8ef">
 <title>הכסף שלי 💕</title>
 
 <style>
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
 body{
   margin:0;
   background:#fff8fb;
-  color:#3f3740;
+  color:#3d3339;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 }
 
-button,input,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
 .app{
-  width:100%;
-  max-width:820px;
+  max-width:650px;
   margin:auto;
-  padding:20px 18px 120px;
+  padding:22px 16px 110px;
 }
 
-/* HEADER */
 .header{
-  text-align:center;
-  padding:10px 0 22px;
+  margin-bottom:18px;
 }
 
-.header h1{
+h1{
   margin:0;
-  font-size:34px;
+  font-size:30px;
   font-weight:900;
 }
 
-.header p{
-  margin:6px 0 0;
-  color:#a48f9c;
-  font-size:15px;
+.subtitle{
+  margin-top:5px;
+  color:#917f89;
+  font-size:14px;
 }
 
-/* BALANCE */
-.balance-card{
-  background:#fff;
-  border-radius:30px;
-  padding:25px 22px;
-  box-shadow:0 8px 30px rgba(150,100,125,.08);
-  margin-bottom:18px;
+.swipe-hint{
   text-align:center;
+  color:#a28f98;
+  font-size:11px;
+  margin-top:8px;
 }
 
-.balance-label{
-  color:#a48f9c;
-  font-size:16px;
+.card{
+  background:#fff;
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 8px 25px rgba(70,40,55,.07);
+}
+
+.balance-card{
+  background:linear-gradient(145deg,#fff,#fff0f6);
+}
+
+.small-label{
+  color:#91818a;
+  font-size:14px;
 }
 
 .balance{
   font-size:42px;
   font-weight:900;
-  margin:5px 0 8px;
+  color:#d45b91;
+  margin:4px 0 18px;
+  direction:ltr;
+  text-align:right;
 }
 
-.balance-sub{
-  color:#b39da9;
-  font-size:14px;
-}
-
-/* PERIOD */
-.period-card{
-  background:#fff;
-  border-radius:25px;
-  padding:14px 18px;
-  margin-bottom:18px;
-  box-shadow:0 8px 30px rgba(150,100,125,.06);
-}
-
-.period-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.period-title{
-  font-weight:800;
-  font-size:15px;
-}
-
-.period-dates{
-  color:#a48f9c;
-  font-size:14px;
-}
-
-.period-edit{
-  border:0;
-  background:#fff0f6;
-  color:#cf5a8d;
-  border-radius:12px;
-  padding:7px 11px;
-  font-size:13px;
-}
-
-/* SUMMARY */
-.summary{
+.button-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:20px;
+  gap:9px;
 }
 
-.summary-card{
-  background:#fff;
-  border-radius:25px;
-  padding:20px 15px;
-  text-align:center;
-  box-shadow:0 8px 30px rgba(150,100,125,.06);
+button{
+  font:inherit;
+  cursor:pointer;
 }
 
-.summary-title{
-  color:#a48f9c;
-  font-size:14px;
+.main-button{
+  border:0;
+  border-radius:15px;
+  padding:14px 8px;
+  background:#d45b91;
+  color:white;
+  font-weight:800;
 }
 
-.summary-value{
-  font-size:27px;
-  font-weight:900;
-  margin-top:5px;
+.main-button.green{
+  background:#5b9d7d;
 }
 
-.income-value{
-  color:#55a17f;
+.secondary-button{
+  border:0;
+  border-radius:15px;
+  padding:14px 8px;
+  background:#f8edf2;
+  color:#4a3c43;
+  font-weight:800;
 }
 
-.expense-value{
-  color:#d4568c;
+.info{
+  margin-top:12px;
+  font-size:12px;
+  color:#91818a;
 }
 
-/* SECTION */
-.section{
-  background:#fff;
-  border-radius:30px;
-  padding:22px 18px;
-  margin-bottom:20px;
-  box-shadow:0 8px 30px rgba(150,100,125,.07);
-}
-
-.section-header{
+.month-navigation{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:17px;
+  gap:8px;
+}
+
+.arrow{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:14px;
+  background:#f9edf3;
+  color:#c14f80;
+  font-size:25px;
+}
+
+.month-center{
+  flex:1;
+  text-align:center;
+}
+
+.month-title{
+  font-size:18px;
+  font-weight:850;
+}
+
+.month-dates{
+  margin-top:3px;
+  color:#95858d;
+  font-size:12px;
+}
+
+.current-button{
+  margin-top:7px;
+  border:0;
+  background:#f7edf2;
+  color:#735c67;
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:11px;
 }
 
 .section-title{
-  margin:0;
-  font-size:26px;
+  margin:0 0 15px;
+  font-size:20px;
+  font-weight:850;
+}
+
+.total{
+  font-size:38px;
   font-weight:900;
+  color:#d45b91;
 }
 
-/* CATEGORIES */
-.categories{
+.money-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
 }
 
-.category-card{
-  background:#fff7fb;
-  border-radius:24px;
-  padding:17px 14px;
-  min-height:120px;
-  border:1px solid #f8e8ef;
-  transition:.15s;
+.money-box{
+  background:#fff8fb;
+  border-radius:17px;
+  padding:13px;
 }
 
-.category-card:active{
-  transform:scale(.98);
+.money-label{
+  color:#92818b;
+  font-size:12px;
+}
+
+.money-value{
+  margin-top:5px;
+  font-weight:850;
+  direction:ltr;
+  text-align:right;
+}
+
+.green-text{
+  color:#4d9474;
+}
+
+.red-text{
+  color:#c84e76;
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.category-button{
+  border:0;
+  background:#fff8fb;
+  border-radius:18px;
+  padding:15px 10px;
+  text-align:right;
+  color:#44363e;
 }
 
 .category-top{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  gap:9px;
 }
 
 .category-icon{
-  width:52px;
-  height:52px;
-  border-radius:18px;
-  background:#fdebf3;
+  width:39px;
+  height:39px;
   display:flex;
-  align-items:center;
   justify-content:center;
-  font-size:27px;
+  align-items:center;
+  border-radius:13px;
+  background:#fceaf2;
+  font-size:19px;
 }
 
 .category-name{
-  font-size:18px;
   font-weight:800;
-  text-align:right;
-}
-
-.category-total{
-  margin-top:13px;
-  font-size:22px;
-  font-weight:900;
-}
-
-.category-goal{
-  margin-top:3px;
-  color:#a996a1;
-  font-size:12px;
-}
-
-/* SORT */
-.sort-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-  gap:10px;
-}
-
-.sort-label{
-  color:#a18e99;
-  font-size:15px;
-}
-
-.sort-select{
-  direction:rtl;
-  border:2px solid #efdbe5;
-  background:#fffafd;
-  color:#554850;
-  border-radius:18px;
-  padding:9px 12px;
-  min-width:205px;
-  outline:none;
-}
-
-/* EXPENSE */
-.expense-item,
-.income-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:15px 0;
-  border-bottom:1px solid #f0e5ea;
-}
-
-.expense-item:last-child,
-.income-item:last-child{
-  border-bottom:0;
-}
-
-.expense-icon,
-.income-icon{
-  flex:0 0 55px;
-  width:55px;
-  height:55px;
-  border-radius:18px;
-  background:#fdebf3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-}
-
-.expense-info,
-.income-info{
-  flex:1;
-  min-width:0;
-}
-
-.expense-name,
-.income-name{
-  font-size:19px;
-  font-weight:850;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.expense-meta,
-.income-meta{
-  color:#a28f9a;
-  font-size:14px;
-  margin-top:3px;
-}
-
-.expense-right,
-.income-right{
-  text-align:left;
-  min-width:90px;
-}
-
-.expense-amount{
-  font-size:21px;
-  font-weight:900;
-}
-
-.income-amount{
-  font-size:21px;
-  font-weight:900;
-  color:#55a17f;
-}
-
-/* ACTIONS */
-.item-actions{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:8px;
-  margin-top:7px;
-}
-
-.edit-btn{
-  border:0;
-  background:transparent;
-  color:#d18aa8;
-  padding:2px 3px;
-  font-size:16px;
-  line-height:1;
-  min-width:24px;
-}
-
-.delete-btn{
-  border:0;
-  background:transparent;
-  color:#d18aa8;
-  padding:2px 0;
   font-size:13px;
 }
 
-/* PAYMENT SUMMARY */
-.payment-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.category-total{
+  margin-top:9px;
+  font-weight:850;
+  direction:ltr;
+  text-align:right;
 }
 
-.payment-card{
-  background:#fff7fb;
+.category-goal{
+  margin-top:7px;
+  font-size:11px;
+  color:#8e7d86;
+}
+
+.progress{
+  height:7px;
+  background:#f2e8ed;
   border-radius:20px;
-  padding:15px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress-fill{
+  height:100%;
+  border-radius:20px;
+  background:#d45b91;
+}
+
+/* סידור - בצד ימין */
+.sort-row{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  margin:-3px 0 10px;
+}
+
+.sort-select{
+  border:1px solid #eadde4;
+  border-radius:13px;
+  background:#fffafb;
+  color:#5b4b53;
+  padding:8px 11px;
+  font-size:12px;
+  width:auto;
+  min-width:145px;
+  direction:rtl;
+}
+
+.list-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid #f0e7eb;
+}
+
+.list-row:last-child{
+  border-bottom:0;
+}
+
+.row-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.row-icon{
+  width:40px;
+  height:40px;
+  flex-shrink:0;
+  border-radius:13px;
+  background:#fceaf2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+}
+
+.row-title{
+  font-weight:800;
+  font-size:14px;
+}
+
+.row-subtitle{
+  color:#95858d;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.row-amount{
+  font-weight:900;
+  direction:ltr;
+  white-space:nowrap;
+}
+
+.row-actions{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-top:5px;
+}
+
+.edit-button{
+  border:0;
+  background:transparent;
+  color:#d08ba7;
+  padding:2px 3px;
+  font-size:15px;
+  line-height:1;
+}
+
+.delete-button{
+  border:0;
+  background:#fff0f3;
+  color:#c84e76;
+  border-radius:9px;
+  padding:6px 9px;
+  font-size:11px;
+  margin-top:5px;
+}
+
+.payment-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.payment-box{
+  background:#fff8fb;
+  border-radius:17px;
+  padding:14px 5px;
   text-align:center;
 }
 
 .payment-icon{
-  font-size:27px;
+  font-size:22px;
 }
 
 .payment-name{
-  font-weight:800;
-  margin-top:4px;
+  font-size:11px;
+  color:#8e7d86;
+  margin-top:5px;
 }
 
 .payment-total{
-  font-size:19px;
+  margin-top:5px;
   font-weight:900;
-  margin-top:4px;
+  direction:ltr;
 }
 
-/* BUTTONS */
+.empty{
+  text-align:center;
+  color:#95858d;
+  padding:15px 5px;
+  font-size:14px;
+}
+
 .bottom-buttons{
   position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  max-width:820px;
-  margin:auto;
-  padding:12px 18px calc(12px + env(safe-area-inset-bottom));
-  background:rgba(255,248,251,.95);
-  backdrop-filter:blur(12px);
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 32px);
+  max-width:618px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-  z-index:50;
+  gap:9px;
+  z-index:10;
 }
 
-.main-btn{
+.bottom-button{
   border:0;
-  border-radius:25px;
-  padding:18px 10px;
-  color:#fff;
-  font-size:23px;
+  color:white;
+  padding:16px;
+  border-radius:19px;
   font-weight:900;
-  box-shadow:0 7px 18px rgba(150,100,125,.15);
+  font-size:16px;
+  box-shadow:0 8px 25px rgba(80,45,65,.18);
 }
 
-.expense-btn{
-  background:#d4568c;
+.expense-button{
+  background:#d45b91;
 }
 
-.income-btn{
-  background:#59a381;
-}
-
-/* MODAL */
-.modal-bg{
-  position:fixed;
-  inset:0;
-  background:rgba(55,40,50,.35);
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:100;
-  padding:0;
-}
-
-.modal-bg.show{
-  display:flex;
+.income-button{
+  background:#5b9d7d;
 }
 
 .modal{
-  width:100%;
-  max-width:820px;
-  max-height:92vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:32px 32px 0 0;
-  padding:24px 20px 35px;
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(50,35,45,.42);
+  z-index:20;
+  align-items:flex-end;
+  justify-content:center;
 }
 
-.modal-header{
+.modal.show{
+  display:flex;
+}
+
+.sheet{
+  width:100%;
+  max-width:650px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:28px 28px 0 0;
+  padding:22px 18px 30px;
+}
+
+.sheet-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
+  margin-bottom:12px;
 }
 
-.modal-title{
-  font-size:27px;
+.sheet-header h2{
+  margin:0;
+  font-size:21px;
+}
+
+.close{
+  border:0;
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  background:#f8edf2;
+}
+
+label{
+  display:block;
+  margin:13px 0 6px;
+  font-size:14px;
+  font-weight:800;
+}
+
+input,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid #eadde4;
+  border-radius:14px;
+  background:#fffafb;
+  font:inherit;
+  color:#3d3339;
+}
+
+.save-button{
+  width:100%;
+  margin-top:17px;
+  padding:15px;
+  border:0;
+  border-radius:15px;
+  background:#3d3339;
+  color:white;
   font-weight:900;
 }
 
-.close-btn{
-  border:0;
-  background:#fff0f5;
-  color:#b97894;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  font-size:20px;
-}
-
-/* FORM */
-.form-group{
-  margin-bottom:14px;
-}
-
-.form-label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:750;
-  color:#685b63;
-}
-
-.form-input,
-.form-select{
+.back-button{
   width:100%;
-  border:2px solid #f0dfe7;
-  border-radius:17px;
-  background:#fffafd;
-  padding:13px 14px;
-  outline:none;
-  color:#40383e;
+  border:0;
+  padding:13px;
+  border-radius:14px;
+  background:#f8edf2;
+  color:#4d3d45;
+  font-weight:800;
+  margin-top:12px;
 }
 
-.form-input:focus,
-.form-select:focus{
-  border-color:#db91ae;
+.category-summary{
+  background:#fff8fb;
+  border-radius:18px;
+  padding:16px;
+  text-align:center;
+  margin:12px 0;
+}
+
+.category-summary-number{
+  font-size:31px;
+  font-weight:900;
+  color:#d45b91;
 }
 
 .payment-options{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
 
 .payment-option{
-  border:2px solid #f0dfe7;
-  background:#fffafd;
-  border-radius:18px;
-  padding:12px 8px;
-  text-align:center;
-  color:#574b52;
+  border:1px solid #eadde4;
+  border-radius:14px;
+  background:#fffafb;
+  padding:12px 7px;
+  color:#4d3d45;
 }
 
 .payment-option.selected{
-  border-color:#d4568c;
+  border:2px solid #d45b91;
   background:#fff0f6;
 }
 
-.payment-option-icon{
+.payment-option span{
   display:block;
-  font-size:25px;
+  font-size:22px;
   margin-bottom:3px;
 }
 
-.save-btn{
-  width:100%;
-  border:0;
-  border-radius:21px;
-  background:#d4568c;
-  color:white;
-  padding:16px;
-  font-size:19px;
-  font-weight:900;
-  margin-top:8px;
-}
-
-/* EMPTY */
-.empty{
-  text-align:center;
-  color:#ad9ba4;
-  padding:25px 5px;
-}
-
-/* CATEGORY MODAL */
-.category-total-big{
-  background:#fff5f9;
-  border-radius:22px;
-  padding:18px;
-  text-align:center;
-  margin-bottom:15px;
-}
-
-.category-total-big div:first-child{
-  color:#a58e9a;
-  font-size:14px;
-}
-
-.category-total-big div:last-child{
-  font-size:30px;
-  font-weight:900;
-  margin-top:4px;
-}
-
-/* DREAMS */
-.dream{
-  background:#fff7fb;
-  border-radius:22px;
+.dream-card{
+  background:#fff8fb;
+  border-radius:20px;
   padding:16px;
   margin-bottom:10px;
 }
 
-.dream-head{
+.dream-top{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.dream-check{
+  width:28px;
+  height:28px;
+  border:2px solid #e2b4c8;
+  border-radius:9px;
+  background:white;
+  flex-shrink:0;
+  font-size:16px;
 }
 
 .dream-name{
+  font-size:16px;
   font-weight:900;
-  font-size:19px;
+}
+
+.dream-price{
+  color:#8c7a83;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.dream-saved{
+  margin-top:14px;
+  font-weight:850;
 }
 
 .dream-progress{
-  height:10px;
+  height:9px;
+  background:#eadfe4;
   border-radius:20px;
-  background:#f0e4e9;
-  margin:12px 0 7px;
   overflow:hidden;
+  margin-top:8px;
 }
 
 .dream-progress-fill{
   height:100%;
-  background:#d4568c;
+  background:#d45b91;
   border-radius:20px;
 }
 
-.dream-meta{
-  color:#9f8c96;
-  font-size:13px;
+.dream-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
 }
 
-/* DESKTOP */
-@media(min-width:700px){
-  .categories{
-    grid-template-columns:repeat(3,1fr);
+.dream-actions button{
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:9px;
+  background:#f8edf2;
+  color:#5b4a52;
+  font-size:12px;
+  font-weight:800;
+}
+
+.dream-purchased{
+  opacity:.58;
+}
+
+.purchased-title{
+  margin:25px 0 12px;
+  font-size:17px;
+  font-weight:900;
+  color:#81717a;
+}
+
+.edit-title{
+  color:#d45b91;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+@media(max-width:380px){
+  .balance{
+    font-size:36px;
   }
 
   .payment-grid{
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 }
 </style>
@@ -605,52 +653,112 @@ button{
 
   <div class="header">
     <h1>הכסף שלי 💕</h1>
-    <p>מעקב פשוט אחרי הכסף שלי</p>
+    <div class="subtitle">המקום הקטן שלי לעשות סדר בכסף</div>
+    <div class="swipe-hint">החליקי לצד כדי להגיע לחלומות שלך ✨</div>
   </div>
 
-  <div class="balance-card">
-    <div class="balance-label">היתרה שלי</div>
+  <div class="card balance-card">
+
+    <div class="small-label">כמה כסף יש לי עכשיו</div>
+
     <div class="balance" id="balance">₪0</div>
-    <div class="balance-sub" id="balanceSub">היתרה הכוללת</div>
+
+    <div class="button-grid">
+
+      <button class="main-button green" onclick="openModal('incomeModal')">
+        ＋ הכנסה חד־פעמית
+      </button>
+
+      <button class="secondary-button" onclick="openModal('openingModal')">
+        🏦 יתרת פתיחה
+      </button>
+
+    </div>
+
+    <div class="info" id="balanceInfo">
+      עדיין לא הוגדרה יתרת פתיחה
+    </div>
+
   </div>
 
-  <div class="period-card">
-    <div class="period-row">
-      <div>
-        <div class="period-title">תקופת המעקב</div>
-        <div class="period-dates" id="periodText"></div>
+
+  <!-- תקופת המעקב -->
+
+  <div class="card">
+
+    <div class="month-navigation">
+
+      <button class="arrow" onclick="changePeriod(-1)">‹</button>
+
+      <div class="month-center">
+
+        <div class="month-title" id="monthTitle"></div>
+
+        <div class="month-dates" id="monthDates"></div>
+
+        <button class="current-button" onclick="currentPeriod()">
+          חזרה לתקופה הנוכחית
+        </button>
+
       </div>
-      <button class="period-edit" onclick="openPeriodModal()">שינוי</button>
+
+      <button class="arrow" onclick="changePeriod(1)">›</button>
+
     </div>
+
   </div>
 
-  <div class="summary">
-    <div class="summary-card">
-      <div class="summary-title">הוצאות בתקופה</div>
-      <div class="summary-value expense-value" id="periodExpenses">₪0</div>
+
+  <!-- סיכום -->
+
+  <div class="card">
+
+    <div class="small-label">סיכום התקופה</div>
+
+    <div class="total" id="monthExpenseTotal">₪0</div>
+
+    <div class="money-grid">
+
+      <div class="money-box">
+        <div class="money-label">הכנסות</div>
+        <div class="money-value green-text" id="monthIncomeTotal">₪0</div>
+      </div>
+
+      <div class="money-box">
+        <div class="money-label">הוצאות</div>
+        <div class="money-value red-text" id="monthExpenseSmall">₪0</div>
+      </div>
+
     </div>
 
-    <div class="summary-card">
-      <div class="summary-title">הכנסות בתקופה</div>
-      <div class="summary-value income-value" id="periodIncome">₪0</div>
-    </div>
   </div>
 
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">קטגוריות</h2>
-    </div>
-    <div class="categories" id="categories"></div>
-  </section>
 
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">הוצאות בתקופה 🧾</h2>
-    </div>
+  <!-- קטגוריות -->
 
-    <!-- הסידור נמצא עכשיו בצד ימין -->
+  <div class="card">
+
+    <h2 class="section-title">קטגוריות 🗂️</h2>
+
+    <div class="category-grid" id="categories"></div>
+
+  </div>
+
+
+  <!-- הוצאות -->
+
+  <div class="card">
+
+    <h2 class="section-title">הוצאות בתקופה 🧾</h2>
+
+    <!-- הסידור בכוונה בצד ימין -->
     <div class="sort-row">
-      <select id="sortSelect" class="sort-select" onchange="changeSort()">
+
+      <select
+        id="expenseSort"
+        class="sort-select"
+        onchange="changeSort()"
+      >
         <option value="new">חדשות → ישנות</option>
         <option value="old">ישנות → חדשות</option>
         <option value="payment">לפי אמצעי תשלום</option>
@@ -659,586 +767,778 @@ button{
         <option value="high">סכום: גבוה → נמוך</option>
       </select>
 
-      <span class="sort-label">סידור</span>
     </div>
 
-    <div id="expensesList"></div>
-  </section>
+    <div id="expenses"></div>
 
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">הכנסות בתקופה 💚</h2>
-    </div>
+  </div>
 
-    <div id="incomesList"></div>
-  </section>
 
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">אמצעי תשלום</h2>
-    </div>
+  <!-- הכנסות -->
 
-    <div class="payment-grid" id="paymentSummary"></div>
-  </section>
+  <div class="card">
+
+    <h2 class="section-title">הכנסות בתקופה 💰</h2>
+
+    <div id="incomes"></div>
+
+  </div>
+
+
+  <!-- אמצעי תשלום -->
+
+  <div class="card">
+
+    <h2 class="section-title">איך שילמתי 💳</h2>
+
+    <div class="payment-grid" id="payments"></div>
+
+  </div>
 
 </div>
+
+
+<!-- כפתורים תחתונים -->
 
 <div class="bottom-buttons">
-  <button class="main-btn expense-btn" onclick="openExpenseModal()">+ הוצאה</button>
-  <button class="main-btn income-btn" onclick="openIncomeModal()">+ הכנסה</button>
+
+  <button
+    class="bottom-button income-button"
+    onclick="openModal('incomeModal')"
+  >
+    ＋ הכנסה
+  </button>
+
+  <button
+    class="bottom-button expense-button"
+    onclick="openNewExpense()"
+  >
+    ＋ הוצאה
+  </button>
+
 </div>
 
 
-<!-- EXPENSE MODAL -->
-<div class="modal-bg" id="expenseModal">
-  <div class="modal">
+<!-- חלומות -->
 
-    <div class="modal-header">
-      <div class="modal-title" id="expenseModalTitle">הוספת הוצאה</div>
-      <button class="close-btn" onclick="closeModal('expenseModal')">×</button>
+<div class="modal" id="dreamsModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>✨ החלומות שלי</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('dreamsModal')"
+      >
+        ✕
+      </button>
+
     </div>
 
-    <div class="form-group">
-      <label class="form-label">סכום</label>
-      <input class="form-input" type="number" id="expenseAmount" inputmode="decimal" placeholder="כמה הוצאתי?">
+    <div id="dreamsList"></div>
+
+    <button class="save-button" onclick="openNewDream()">
+      ＋ הוספת חלום
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- הוספה / עריכת חלום -->
+
+<div class="modal" id="dreamModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2 id="dreamModalTitle">✨ חלום חדש</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('dreamModal')"
+      >
+        ✕
+      </button>
+
     </div>
 
-    <div class="form-group">
-      <label class="form-label">קטגוריה</label>
-      <select class="form-select" id="expenseCategory"></select>
+    <div class="edit-title" id="dreamEditHint"></div>
+
+    <label>מה אני רוצה לקנות?</label>
+    <input
+      id="dreamName"
+      type="text"
+      placeholder="לדוגמה: עדשה למצלמה"
+    >
+
+    <label>מחיר יעד</label>
+    <input
+      id="dreamTarget"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 3000"
+    >
+
+    <label>כמה כבר חסכתי לחלום?</label>
+    <input
+      id="dreamSaved"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 500"
+    >
+
+    <label>הערה (לא חובה)</label>
+    <input
+      id="dreamNote"
+      type="text"
+      placeholder="לדוגמה: העדשה שאני רוצה להופעות"
+    >
+
+    <button class="save-button" onclick="saveDream()">
+      שמירת החלום ✨
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- כסף לחלום -->
+
+<div class="modal" id="dreamMoneyModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>💗 חסכתי לחלום</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('dreamMoneyModal')"
+      >
+        ✕
+      </button>
+
     </div>
 
-    <div class="form-group">
-      <label class="form-label">אמצעי תשלום</label>
+    <div class="info" id="dreamMoneyTitle"></div>
 
-      <div class="payment-options">
+    <label>כמה להוסיף?</label>
 
-        <button type="button" class="payment-option" data-payment="cash" onclick="selectPayment('cash')">
-          <span class="payment-option-icon">💸</span>
-          מזומן
-        </button>
+    <input
+      id="dreamMoneyAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 200"
+    >
 
-        <button type="button" class="payment-option" data-payment="visa" onclick="selectPayment('visa')">
-          <span class="payment-option-icon">💳</span>
-          ויזה
-        </button>
+    <button class="save-button" onclick="addDreamMoney()">
+      הוספת כסף לחלום
+    </button>
 
-        <button type="button" class="payment-option" data-payment="direct" onclick="selectPayment('direct')">
-          <span class="payment-option-icon">💵</span>
-          דיירקט
-        </button>
+  </div>
 
-        <button type="button" class="payment-option" data-payment="dad" onclick="selectPayment('dad')">
-          <span class="payment-option-icon">🫶🏼</span>
-          אבא
-        </button>
+</div>
 
+
+<!-- יעד קטגוריה -->
+
+<div class="modal" id="goalModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>🎯 הסכום הרצוי שלי</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('goalModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <div class="info" id="goalTitle"></div>
+
+    <label>כמה הייתי רוצה להוציא בתקופת המעקב?</label>
+
+    <input
+      id="goalAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 300"
+    >
+
+    <button class="save-button" onclick="saveGoal()">
+      שמירת הסכום הרצוי
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- הוצאה -->
+
+<div class="modal" id="expenseModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2 id="expenseModalTitle">הוספת הוצאה 💸</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('expenseModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <label>סכום</label>
+
+    <input
+      id="expenseAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 80"
+    >
+
+    <label>קטגוריה</label>
+
+    <select id="expenseCategory"></select>
+
+    <label>איך שילמתי?</label>
+
+    <div class="payment-options">
+
+      <button
+        type="button"
+        class="payment-option"
+        data-payment="cash"
+        onclick="selectPayment('cash')"
+      >
+        <span>💸</span>
+        מזומן
+      </button>
+
+      <button
+        type="button"
+        class="payment-option"
+        data-payment="visa"
+        onclick="selectPayment('visa')"
+      >
+        <span>💳</span>
+        ויזה
+      </button>
+
+      <button
+        type="button"
+        class="payment-option"
+        data-payment="direct"
+        onclick="selectPayment('direct')"
+      >
+        <span>💵</span>
+        דיירקט
+      </button>
+
+      <button
+        type="button"
+        class="payment-option"
+        data-payment="dad"
+        onclick="selectPayment('dad')"
+      >
+        <span>🫶🏼</span>
+        אבא
+      </button>
+
+    </div>
+
+    <label>על מה הוצאתי?</label>
+
+    <input
+      id="expenseDescription"
+      type="text"
+      placeholder="לדוגמה: כרטיס להופעה"
+    >
+
+    <label>תאריך</label>
+
+    <input
+      id="expenseDate"
+      type="date"
+    >
+
+    <button
+      class="save-button"
+      onclick="saveExpense()"
+    >
+      שמירת הוצאה
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- הכנסה -->
+
+<div class="modal" id="incomeModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>הוספת הכנסה חד־פעמית 💰</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('incomeModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <label>סכום</label>
+
+    <input
+      id="incomeAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 500"
+    >
+
+    <label>מאיפה הכסף?</label>
+
+    <input
+      id="incomeDescription"
+      type="text"
+      placeholder="לדוגמה: מתנה / החזר"
+    >
+
+    <label>תאריך</label>
+
+    <input
+      id="incomeDate"
+      type="date"
+    >
+
+    <button
+      class="save-button"
+      onclick="saveIncome()"
+    >
+      שמירת הכנסה
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- יתרת פתיחה -->
+
+<div class="modal" id="openingModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2>יתרת פתיחה 🏦</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('openingModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <label>כמה כסף יש לך עכשיו כשאת מתחילה?</label>
+
+    <input
+      id="openingAmount"
+      type="number"
+      inputmode="decimal"
+      placeholder="לדוגמה 4500"
+    >
+
+    <button
+      class="save-button"
+      onclick="saveOpening()"
+    >
+      שמירת יתרת פתיחה
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- קטגוריה -->
+
+<div class="modal" id="categoryModal">
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <h2 id="categoryModalTitle"></h2>
+
+      <button
+        class="close"
+        onclick="closeModal('categoryModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <div class="category-summary">
+
+      <div class="small-label">
+        סך ההוצאות בקטגוריה בתקופה
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="form-label">מה קניתי?</label>
-      <input class="form-input" id="expenseDescription" placeholder="למשל: קפה עם שיר">
-    </div>
+      <div
+        class="category-summary-number"
+        id="categoryModalTotal"
+      >
+        ₪0
+      </div>
 
-    <div class="form-group">
-      <label class="form-label">תאריך</label>
-      <input class="form-input" type="date" id="expenseDate">
-    </div>
-
-    <button class="save-btn" onclick="saveExpense()">שמירה</button>
-
-  </div>
-</div>
-
-
-<!-- INCOME MODAL -->
-<div class="modal-bg" id="incomeModal">
-  <div class="modal">
-
-    <div class="modal-header">
-      <div class="modal-title">הוספת הכנסה</div>
-      <button class="close-btn" onclick="closeModal('incomeModal')">×</button>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">סכום</label>
-      <input class="form-input" type="number" id="incomeAmount" inputmode="decimal">
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">מקור ההכנסה</label>
-      <input class="form-input" id="incomeDescription" placeholder="למשל: משכורת">
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">תאריך</label>
-      <input class="form-input" type="date" id="incomeDate">
-    </div>
-
-    <button class="save-btn" style="background:#59a381" onclick="saveIncome()">שמירה</button>
-
-  </div>
-</div>
-
-
-<!-- PERIOD MODAL -->
-<div class="modal-bg" id="periodModal">
-  <div class="modal">
-
-    <div class="modal-header">
-      <div class="modal-title">תקופת המעקב</div>
-      <button class="close-btn" onclick="closeModal('periodModal')">×</button>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">מתאריך</label>
-      <input class="form-input" type="date" id="periodStart">
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">עד תאריך</label>
-      <input class="form-input" type="date" id="periodEnd">
-    </div>
-
-    <button class="save-btn" onclick="savePeriod()">שמירה</button>
-
-  </div>
-</div>
-
-
-<!-- CATEGORY MODAL -->
-<div class="modal-bg" id="categoryModal">
-  <div class="modal">
-
-    <div class="modal-header">
-      <div class="modal-title" id="categoryModalTitle">קטגוריה</div>
-      <button class="close-btn" onclick="closeModal('categoryModal')">×</button>
-    </div>
-
-    <div class="category-total-big">
-      <div>סך ההוצאות בקטגוריה בתקופה</div>
-      <div id="categoryModalTotal">₪0</div>
     </div>
 
     <div id="categoryExpenses"></div>
 
+    <button
+      class="back-button"
+      onclick="closeModal('categoryModal')"
+    >
+      חזרה
+    </button>
+
   </div>
+
 </div>
 
 
 <script>
+
 /* =========================
-   DATA
+   נתונים
 ========================= */
 
-const EXPENSE_KEY = "moneyExpenses";
-const INCOME_KEY = "moneyIncomes";
-const GOALS_KEY = "moneyGoals";
-const SORT_KEY = "moneyExpenseSort";
-const PERIOD_START_KEY = "moneyPeriodStart";
-const PERIOD_END_KEY = "moneyPeriodEnd";
-const OPENING_BALANCE_KEY = "moneyOpeningBalance";
-const DREAMS_KEY = "moneyDreams";
-
 const categories = [
-  {id:"food", name:"אוכל בחוץ", icon:"🍔"},
-  {id:"car", name:"אחזקת רכב", icon:"🚗"},
-  {id:"other", name:"אחר", icon:"📦"},
-  {id:"clothes", name:"בגדים ואביזרים", icon:"👗"},
-  {id:"coffee", name:"בתי קפה", icon:"☕"},
-  {id:"events", name:"הופעות ואירועים", icon:"🎵"},
-  {id:"subscriptions", name:"מנויים ושירותים", icon:"📱"},
-  {id:"beauty", name:"טיפוח", icon:"💅"},
-  {id:"transport", name:"תחבורה", icon:"🚕"}
+  {name:"אוכל בחוץ",icon:"🍔"},
+  {name:"אחזקת רכב",icon:"🚗"},
+  {name:"אחר",icon:"📦"},
+  {name:"בגדים ואביזרים",icon:"👗"},
+  {name:"בתי קפה",icon:"☕"},
+  {name:"הופעות ואירועים",icon:"🎵"},
+  {name:"מנויים ושירותים",icon:"📱"},
+  {name:"טיפוח",icon:"💅"},
+  {name:"תחבורה",icon:"🚕"}
 ];
 
-const payments = {
-  cash:{name:"מזומן",icon:"💸"},
-  visa:{name:"ויזה",icon:"💳"},
-  direct:{name:"דיירקט",icon:"💵"},
-  dad:{name:"אבא",icon:"🫶🏼"}
-};
+const payments = [
+  {id:"visa",name:"ויזה",icon:"💳"},
+  {id:"direct",name:"דיירקט",icon:"💵"},
+  {id:"cash",name:"מזומן",icon:"💸"},
+  {id:"dad",name:"אבא",icon:"🫶🏼"}
+];
 
-let expenses = loadArray(EXPENSE_KEY);
-let incomes = loadArray(INCOME_KEY);
-let goals = loadObject(GOALS_KEY);
-let dreams = loadArray(DREAMS_KEY);
+let expenses =
+  JSON.parse(localStorage.getItem("moneyExpenses")) || [];
 
+let incomes =
+  JSON.parse(localStorage.getItem("moneyIncomes")) || [];
+
+let dreams =
+  JSON.parse(localStorage.getItem("moneyDreams")) || [];
+
+let goals =
+  JSON.parse(localStorage.getItem("moneyGoals")) || {};
+
+let openingBalance =
+  Number(localStorage.getItem("moneyOpeningBalance")) || 0;
+
+let monthOffset = 0;
+
+let selectedDreamId = null;
+let selectedGoalCategory = null;
+let editingDreamId = null;
 let editingExpenseId = null;
+
 let selectedPayment = "visa";
 
 
 /* =========================
-   HELPERS
+   שמירה
 ========================= */
 
-function loadArray(key){
-  try{
-    const value = JSON.parse(localStorage.getItem(key));
-    return Array.isArray(value) ? value : [];
-  }catch(e){
-    return [];
-  }
-}
-
-function loadObject(key){
-  try{
-    const value = JSON.parse(localStorage.getItem(key));
-    return value && typeof value === "object" && !Array.isArray(value) ? value : {};
-  }catch(e){
-    return {};
-  }
-}
-
 function saveData(){
-  localStorage.setItem(EXPENSE_KEY,JSON.stringify(expenses));
-  localStorage.setItem(INCOME_KEY,JSON.stringify(incomes));
-  localStorage.setItem(GOALS_KEY,JSON.stringify(goals));
-  localStorage.setItem(DREAMS_KEY,JSON.stringify(dreams));
+
+  localStorage.setItem(
+    "moneyExpenses",
+    JSON.stringify(expenses)
+  );
+
+  localStorage.setItem(
+    "moneyIncomes",
+    JSON.stringify(incomes)
+  );
+
+  localStorage.setItem(
+    "moneyDreams",
+    JSON.stringify(dreams)
+  );
+
+  localStorage.setItem(
+    "moneyGoals",
+    JSON.stringify(goals)
+  );
+
+  localStorage.setItem(
+    "moneyOpeningBalance",
+    String(openingBalance)
+  );
 }
+
+
+/* =========================
+   עזר
+========================= */
 
 function money(value){
-  return "₪" + Number(value || 0).toLocaleString("he-IL");
+
+  return "₪" +
+    Number(value || 0).toLocaleString(
+      "he-IL",
+      {maximumFractionDigits:2}
+    );
 }
 
-function getCategory(id){
-  return categories.find(c => c.id === id) || {
-    id:"other",
-    name:"אחר",
-    icon:"📦"
-  };
-}
+function todayString(){
 
-function getPayment(id){
-  return payments[id] || payments.visa;
-}
+  const d = new Date();
 
-function dateValue(date){
-  if(!date) return 0;
-  return new Date(date + "T00:00:00").getTime();
+  return d.getFullYear() +
+    "-" +
+    String(d.getMonth()+1).padStart(2,"0") +
+    "-" +
+    String(d.getDate()).padStart(2,"0");
 }
 
 function formatDate(date){
+
   if(!date) return "";
-  const parts = date.split("-");
-  return `${parts[2]}.${parts[1]}.${parts[0]}`;
+
+  return new Date(
+    date + "T12:00:00"
+  ).toLocaleDateString("he-IL");
 }
 
-function today(){
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
-  return `${y}-${m}-${day}`;
+function escapeHtml(value){
+
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 
 /* =========================
-   PERIOD
+   תקופה
 ========================= */
 
-function defaultPeriod(){
+function getCycle(){
+
   const now = new Date();
 
-  let year = now.getFullYear();
-  let month = now.getMonth();
+  let start;
 
-  if(now.getDate() < 10){
-    month--;
+  if(now.getDate() >= 10){
+
+    start = new Date(
+      now.getFullYear(),
+      now.getMonth() + monthOffset,
+      10
+    );
+
+  }else{
+
+    start = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1 + monthOffset,
+      10
+    );
+
   }
 
-  const start = new Date(year,month,10);
-
-  const end = new Date(start.getFullYear(),start.getMonth()+1,9);
+  const end = new Date(
+    start.getFullYear(),
+    start.getMonth()+1,
+    9,
+    23,
+    59,
+    59
+  );
 
   return {
-    start:toDateInput(start),
-    end:toDateInput(end)
+    start,
+    end
   };
 }
 
-function toDateInput(d){
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-}
+function changePeriod(value){
 
-function getPeriod(){
-  let start = localStorage.getItem(PERIOD_START_KEY);
-  let end = localStorage.getItem(PERIOD_END_KEY);
+  monthOffset += value;
 
-  if(!start || !end){
-    const p = defaultPeriod();
-
-    start = p.start;
-    end = p.end;
-
-    localStorage.setItem(PERIOD_START_KEY,start);
-    localStorage.setItem(PERIOD_END_KEY,end);
-  }
-
-  return {start,end};
-}
-
-function inPeriod(date){
-  const p = getPeriod();
-  return date >= p.start && date <= p.end;
-}
-
-function openPeriodModal(){
-  const p = getPeriod();
-
-  document.getElementById("periodStart").value = p.start;
-  document.getElementById("periodEnd").value = p.end;
-
-  openModal("periodModal");
-}
-
-function savePeriod(){
-  const start = document.getElementById("periodStart").value;
-  const end = document.getElementById("periodEnd").value;
-
-  if(!start || !end){
-    alert("בחרי תאריך התחלה וסיום");
-    return;
-  }
-
-  if(start > end){
-    alert("תאריך ההתחלה חייב להיות לפני תאריך הסיום");
-    return;
-  }
-
-  localStorage.setItem(PERIOD_START_KEY,start);
-  localStorage.setItem(PERIOD_END_KEY,end);
-
-  closeModal("periodModal");
   render();
 }
 
+function currentPeriod(){
 
-/* =========================
-   RENDER
-========================= */
+  monthOffset = 0;
 
-function render(){
-  renderPeriod();
-  renderBalance();
-  renderSummary();
-  renderCategories();
-  renderExpenses();
-  renderIncomes();
-  renderPaymentSummary();
-
-  const savedSort = localStorage.getItem(SORT_KEY) || "new";
-  document.getElementById("sortSelect").value = savedSort;
+  render();
 }
 
-function renderPeriod(){
-  const p = getPeriod();
+function inCurrentCycle(date){
 
-  document.getElementById("periodText").textContent =
-    `${formatDate(p.start)} – ${formatDate(p.end)}`;
+  if(!date) return false;
+
+  const cycle = getCycle();
+
+  const d = new Date(
+    date + "T12:00:00"
+  );
+
+  return d >= cycle.start &&
+         d <= cycle.end;
 }
 
-function renderBalance(){
-  const opening = Number(localStorage.getItem(OPENING_BALANCE_KEY) || 0);
+function currentExpenses(){
 
-  const totalIncome = incomes.reduce((sum,i)=>sum + Number(i.amount || 0),0);
-  const totalExpense = expenses.reduce((sum,e)=>sum + Number(e.amount || 0),0);
-
-  const balance = opening + totalIncome - totalExpense;
-
-  document.getElementById("balance").textContent = money(balance);
-
-  document.getElementById("balanceSub").textContent =
-    opening
-      ? `כולל יתרת פתיחה של ${money(opening)}`
-      : "היתרה הכוללת";
+  return expenses.filter(
+    e => inCurrentCycle(e.date)
+  );
 }
 
-function renderSummary(){
-  const periodExpenses = expenses
-    .filter(e=>inPeriod(e.date))
-    .reduce((sum,e)=>sum + Number(e.amount || 0),0);
+function currentIncomes(){
 
-  const periodIncome = incomes
-    .filter(i=>inPeriod(i.date))
-    .reduce((sum,i)=>sum + Number(i.amount || 0),0);
-
-  document.getElementById("periodExpenses").textContent = money(periodExpenses);
-  document.getElementById("periodIncome").textContent = money(periodIncome);
+  return incomes.filter(
+    i => inCurrentCycle(i.date)
+  );
 }
 
 
 /* =========================
-   CATEGORIES
+   יתרה
 ========================= */
 
-function renderCategories(){
-  const container = document.getElementById("categories");
+function getBalance(){
 
-  container.innerHTML = categories.map(cat=>{
+  const totalIncome =
+    incomes.reduce(
+      (sum,item) =>
+        sum + Number(item.amount || 0),
+      0
+    );
 
-    const total = expenses
-      .filter(e=>e.category === cat.id && inPeriod(e.date))
-      .reduce((sum,e)=>sum + Number(e.amount || 0),0);
+  const totalExpense =
+    expenses.reduce(
+      (sum,item) =>
+        sum + Number(item.amount || 0),
+      0
+    );
 
-    const goal = Number(goals[cat.id] || 0);
-
-    return `
-      <button class="category-card" onclick="openCategory('${cat.id}')">
-        <div class="category-top">
-          <div class="category-name">${cat.name}</div>
-          <div class="category-icon">${cat.icon}</div>
-        </div>
-
-        <div class="category-total">${money(total)}</div>
-
-        ${
-          goal
-          ? `<div class="category-goal">יעד: ${money(goal)} בתקופת המעקב</div>`
-          : `<div class="category-goal">לחצי כדי להגדיר סכום רצוי</div>`
-        }
-      </button>
-    `;
-  }).join("");
+  return openingBalance +
+    totalIncome -
+    totalExpense;
 }
 
 
 /* =========================
-   EXPENSES
+   מודלים
 ========================= */
 
-function renderExpenses(){
-  let list = expenses.filter(e=>inPeriod(e.date));
+function openModal(id){
 
-  const sort = localStorage.getItem(SORT_KEY) || "new";
+  document
+    .getElementById(id)
+    .classList.add("show");
 
-  if(sort === "new"){
-    list.sort((a,b)=>dateValue(b.date)-dateValue(a.date));
+  if(id === "expenseModal" && !editingExpenseId){
+
+    document.getElementById(
+      "expenseDate"
+    ).value = todayString();
+
   }
 
-  if(sort === "old"){
-    list.sort((a,b)=>dateValue(a.date)-dateValue(b.date));
+  if(id === "incomeModal"){
+
+    document.getElementById(
+      "incomeDate"
+    ).value = todayString();
+
   }
-
-  if(sort === "low"){
-    list.sort((a,b)=>Number(a.amount)-Number(b.amount));
-  }
-
-  if(sort === "high"){
-    list.sort((a,b)=>Number(b.amount)-Number(a.amount));
-  }
-
-  if(sort === "category"){
-    list.sort((a,b)=>{
-      const ca = getCategory(a.category).name;
-      const cb = getCategory(b.category).name;
-      return ca.localeCompare(cb,"he");
-    });
-  }
-
-  if(sort === "payment"){
-    list.sort((a,b)=>{
-      const pa = getPayment(a.payment).name;
-      const pb = getPayment(b.payment).name;
-      return pa.localeCompare(pb,"he");
-    });
-  }
-
-  const container = document.getElementById("expensesList");
-
-  if(!list.length){
-    container.innerHTML = `<div class="empty">אין הוצאות בתקופה הזו 💕</div>`;
-    return;
-  }
-
-  container.innerHTML = list.map(e=>{
-
-    const cat = getCategory(e.category);
-    const pay = getPayment(e.payment);
-
-    return `
-      <div class="expense-item">
-
-        <div class="expense-icon">${cat.icon}</div>
-
-        <div class="expense-info">
-
-          <div class="expense-name">
-            ${escapeHtml(e.description || cat.name)}
-          </div>
-
-          <div class="expense-meta">
-            ${formatDate(e.date)}
-            ·
-            ${pay.name} ${pay.icon}
-            ·
-            ${cat.name}
-          </div>
-
-          <div class="item-actions">
-
-            <!-- זה העיפרון שמפעיל עריכה -->
-            <button
-              type="button"
-              class="edit-btn"
-              onclick="event.stopPropagation(); editExpense('${e.id}')"
-              aria-label="עריכת הוצאה"
-              title="עריכה"
-            >✎</button>
-
-            <button
-              type="button"
-              class="delete-btn"
-              onclick="event.stopPropagation(); deleteExpense('${e.id}')"
-            >מחיקה</button>
-
-          </div>
-
-        </div>
-
-        <div class="expense-right">
-          <div class="expense-amount">${money(e.amount)}</div>
-        </div>
-
-      </div>
-    `;
-  }).join("");
 }
 
-function changeSort(){
-  const value = document.getElementById("sortSelect").value;
+function closeModal(id){
 
-  localStorage.setItem(SORT_KEY,value);
-
-  renderExpenses();
+  document
+    .getElementById(id)
+    .classList.remove("show");
 }
 
 
 /* =========================
-   EXPENSE MODAL
+   הוצאה חדשה
 ========================= */
 
-function populateCategories(){
-  const select = document.getElementById("expenseCategory");
+function openNewExpense(){
 
-  select.innerHTML = categories.map(cat=>
-    `<option value="${cat.id}">${cat.icon} ${cat.name}</option>`
-  ).join("");
-}
-
-function openExpenseModal(){
   editingExpenseId = null;
 
-  document.getElementById("expenseModalTitle").textContent = "הוספת הוצאה";
+  document.getElementById(
+    "expenseModalTitle"
+  ).textContent = "הוספת הוצאה 💸";
 
-  document.getElementById("expenseAmount").value = "";
-  document.getElementById("expenseDescription").value = "";
-  document.getElementById("expenseDate").value = today();
+  document.getElementById(
+    "expenseAmount"
+  ).value = "";
 
-  document.getElementById("expenseCategory").value = "other";
+  document.getElementById(
+    "expenseDescription"
+  ).value = "";
+
+  document.getElementById(
+    "expenseDate"
+  ).value = todayString();
+
+  document.getElementById(
+    "expenseCategory"
+  ).value = categories[0].name;
 
   selectedPayment = "visa";
+
   updatePaymentButtons();
 
   openModal("expenseModal");
@@ -1246,32 +1546,46 @@ function openExpenseModal(){
 
 
 /* =========================
-   EDIT EXPENSE
+   עריכת הוצאה
 ========================= */
 
 function editExpense(id){
 
-  const expense = expenses.find(e=>String(e.id) === String(id));
+  const expense = expenses.find(
+    e => String(e.id) === String(id)
+  );
 
   if(!expense){
+
     alert("לא הצלחתי למצוא את ההוצאה לעריכה");
+
     return;
   }
 
-  editingExpenseId = id;
+  editingExpenseId = expense.id;
 
-  document.getElementById("expenseModalTitle").textContent = "עריכת הוצאה";
+  document.getElementById(
+    "expenseModalTitle"
+  ).textContent = "עריכת הוצאה ✎";
 
-  document.getElementById("expenseAmount").value = expense.amount || "";
+  document.getElementById(
+    "expenseAmount"
+  ).value = expense.amount || "";
 
-  document.getElementById("expenseCategory").value =
-    expense.category || "other";
+  document.getElementById(
+    "expenseCategory"
+  ).value =
+    expense.category || categories[0].name;
 
-  document.getElementById("expenseDescription").value =
+  document.getElementById(
+    "expenseDescription"
+  ).value =
     expense.description || "";
 
-  document.getElementById("expenseDate").value =
-    expense.date || today();
+  document.getElementById(
+    "expenseDate"
+  ).value =
+    expense.date || todayString();
 
   selectedPayment =
     expense.payment || "visa";
@@ -1283,40 +1597,79 @@ function editExpense(id){
 
 
 /* =========================
-   SAVE EXPENSE
+   אמצעי תשלום
+========================= */
+
+function selectPayment(payment){
+
+  selectedPayment = payment;
+
+  updatePaymentButtons();
+}
+
+function updatePaymentButtons(){
+
+  document
+    .querySelectorAll(".payment-option")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "selected",
+        button.dataset.payment === selectedPayment
+      );
+
+    });
+}
+
+
+/* =========================
+   שמירת הוצאה
 ========================= */
 
 function saveExpense(){
 
-  const amount = Number(
-    document.getElementById("expenseAmount").value
-  );
+  const amount =
+    Number(
+      document.getElementById(
+        "expenseAmount"
+      ).value
+    );
 
   const category =
-    document.getElementById("expenseCategory").value;
+    document.getElementById(
+      "expenseCategory"
+    ).value;
 
   const description =
-    document.getElementById("expenseDescription").value.trim();
+    document.getElementById(
+      "expenseDescription"
+    ).value.trim();
 
   const date =
-    document.getElementById("expenseDate").value;
+    document.getElementById(
+      "expenseDate"
+    ).value;
 
-  if(!amount || amount <= 0){
-    alert("הכניסי סכום");
+  if(!amount || amount <= 0 || !date){
+
+    alert(
+      "צריך למלא סכום ותאריך ❤️"
+    );
+
     return;
   }
 
-  if(!date){
-    alert("בחרי תאריך");
-    return;
-  }
 
-  /* עריכה של הוצאה קיימת */
+  /* עריכה */
+
   if(editingExpenseId !== null){
 
-    const index = expenses.findIndex(
-      e=>String(e.id) === String(editingExpenseId)
-    );
+    const index =
+      expenses.findIndex(
+        e =>
+          String(e.id) ===
+          String(editingExpenseId)
+      );
 
     if(index !== -1){
 
@@ -1325,28 +1678,41 @@ function saveExpense(){
         amount,
         category,
         payment:selectedPayment,
-        description,
+        description:
+          description || "הוצאה",
         date
       };
 
     }
 
-  }else{
+  }
 
-    /* הוספת הוצאה חדשה */
+  /* הוצאה חדשה */
+
+  else{
+
     expenses.push({
-      id:String(Date.now()) + Math.random().toString(16).slice(2),
+
+      id:
+        Date.now() +
+        Math.floor(Math.random()*1000),
+
       amount,
+
       category,
+
       payment:selectedPayment,
-      description,
-      date,
-      createdAt:Date.now()
+
+      description:
+        description || "הוצאה",
+
+      date
+
     });
 
   }
 
-  localStorage.setItem(EXPENSE_KEY,JSON.stringify(expenses));
+  saveData();
 
   editingExpenseId = null;
 
@@ -1357,245 +1723,472 @@ function saveExpense(){
 
 
 /* =========================
-   PAYMENT
-========================= */
-
-function selectPayment(payment){
-  selectedPayment = payment;
-  updatePaymentButtons();
-}
-
-function updatePaymentButtons(){
-
-  document.querySelectorAll(".payment-option").forEach(button=>{
-    button.classList.toggle(
-      "selected",
-      button.dataset.payment === selectedPayment
-    );
-  });
-
-}
-
-
-/* =========================
-   DELETE
+   מחיקת הוצאה
 ========================= */
 
 function deleteExpense(id){
 
-  const expense = expenses.find(
-    e=>String(e.id) === String(id)
-  );
+  if(!confirm("למחוק את ההוצאה?")){
 
-  if(!expense) return;
+    return;
+  }
 
-  const ok = confirm(
-    `למחוק את ההוצאה של ${money(expense.amount)}?`
-  );
+  expenses =
+    expenses.filter(
+      expense =>
+        String(expense.id) !== String(id)
+    );
 
-  if(!ok) return;
-
-  expenses = expenses.filter(
-    e=>String(e.id) !== String(id)
-  );
-
-  localStorage.setItem(EXPENSE_KEY,JSON.stringify(expenses));
+  saveData();
 
   render();
 }
 
 
 /* =========================
-   INCOME
+   הכנסה
 ========================= */
-
-function renderIncomes(){
-
-  const list = incomes
-    .filter(i=>inPeriod(i.date))
-    .sort((a,b)=>dateValue(b.date)-dateValue(a.date));
-
-  const container = document.getElementById("incomesList");
-
-  if(!list.length){
-    container.innerHTML =
-      `<div class="empty">אין הכנסות בתקופה הזו</div>`;
-    return;
-  }
-
-  container.innerHTML = list.map(i=>`
-    <div class="income-item">
-
-      <div class="income-icon">💚</div>
-
-      <div class="income-info">
-        <div class="income-name">
-          ${escapeHtml(i.description || "הכנסה")}
-        </div>
-
-        <div class="income-meta">
-          ${formatDate(i.date)}
-        </div>
-      </div>
-
-      <div class="income-right">
-        <div class="income-amount">+${money(i.amount)}</div>
-      </div>
-
-    </div>
-  `).join("");
-}
-
-function openIncomeModal(){
-
-  document.getElementById("incomeAmount").value = "";
-  document.getElementById("incomeDescription").value = "";
-  document.getElementById("incomeDate").value = today();
-
-  openModal("incomeModal");
-}
 
 function saveIncome(){
 
-  const amount = Number(
-    document.getElementById("incomeAmount").value
-  );
+  const amount =
+    Number(
+      document.getElementById(
+        "incomeAmount"
+      ).value
+    );
 
   const description =
-    document.getElementById("incomeDescription").value.trim();
+    document.getElementById(
+      "incomeDescription"
+    ).value.trim();
 
   const date =
-    document.getElementById("incomeDate").value;
+    document.getElementById(
+      "incomeDate"
+    ).value;
 
-  if(!amount || amount <= 0){
-    alert("הכניסי סכום");
-    return;
-  }
+  if(!amount || amount <= 0 || !date){
 
-  if(!date){
-    alert("בחרי תאריך");
+    alert(
+      "צריך למלא סכום ותאריך ❤️"
+    );
+
     return;
   }
 
   incomes.push({
-    id:String(Date.now()) + Math.random().toString(16).slice(2),
+
+    id:
+      Date.now() +
+      Math.floor(Math.random()*1000),
+
     amount,
-    description,
-    date,
-    createdAt:Date.now()
+
+    description:
+      description || "הכנסה",
+
+    date
+
   });
 
-  localStorage.setItem(INCOME_KEY,JSON.stringify(incomes));
+  saveData();
 
   closeModal("incomeModal");
+
+  document.getElementById(
+    "incomeAmount"
+  ).value = "";
+
+  document.getElementById(
+    "incomeDescription"
+  ).value = "";
 
   render();
 }
 
 
 /* =========================
-   PAYMENT SUMMARY
+   יתרת פתיחה
 ========================= */
 
-function renderPaymentSummary(){
+function saveOpening(){
 
-  const container =
-    document.getElementById("paymentSummary");
+  const amount =
+    Number(
+      document.getElementById(
+        "openingAmount"
+      ).value
+    );
 
-  container.innerHTML =
-    Object.entries(payments).map(([id,payment])=>{
+  if(amount < 0 || isNaN(amount)){
 
-      const total = expenses
-        .filter(e=>inPeriod(e.date) && e.payment === id)
-        .reduce((sum,e)=>sum + Number(e.amount || 0),0);
+    alert(
+      "הכניסי סכום תקין ❤️"
+    );
 
-      return `
-        <div class="payment-card">
-          <div class="payment-icon">${payment.icon}</div>
-          <div class="payment-name">${payment.name}</div>
-          <div class="payment-total">${money(total)}</div>
-        </div>
-      `;
-    }).join("");
+    return;
+  }
+
+  openingBalance = amount;
+
+  saveData();
+
+  closeModal("openingModal");
+
+  document.getElementById(
+    "openingAmount"
+  ).value = "";
+
+  render();
 }
 
 
 /* =========================
-   CATEGORY MODAL
+   קטגוריות
 ========================= */
 
-function openCategory(categoryId){
+function renderCategorySelect(){
 
-  const category = getCategory(categoryId);
+  const select =
+    document.getElementById(
+      "expenseCategory"
+    );
 
-  const list = expenses.filter(
-    e=>e.category === categoryId && inPeriod(e.date)
-  );
+  select.innerHTML = "";
 
-  const total = list.reduce(
-    (sum,e)=>sum + Number(e.amount || 0),
-    0
-  );
+  categories.forEach(category => {
 
-  document.getElementById("categoryModalTitle").textContent =
-    `${category.icon} ${category.name}`;
+    const option =
+      document.createElement("option");
 
-  document.getElementById("categoryModalTotal").textContent =
+    option.value = category.name;
+
+    option.textContent =
+      category.name;
+
+    select.appendChild(option);
+
+  });
+}
+
+function renderCategories(){
+
+  const container =
+    document.getElementById("categories");
+
+  container.innerHTML = "";
+
+  const ex =
+    currentExpenses();
+
+  categories.forEach(category => {
+
+    const total =
+      ex
+        .filter(
+          e =>
+            e.category === category.name
+        )
+        .reduce(
+          (sum,e) =>
+            sum + Number(e.amount || 0),
+          0
+        );
+
+    const goal =
+      Number(
+        goals[category.name] || 0
+      );
+
+    let percent = 0;
+
+    if(goal > 0){
+
+      percent =
+        Math.min(
+          100,
+          (total / goal) * 100
+        );
+
+    }
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "category-button";
+
+    button.onclick = () =>
+      openCategory(category.name);
+
+    button.innerHTML = `
+
+      <div class="category-top">
+
+        <div class="category-icon">
+          ${category.icon}
+        </div>
+
+        <div class="category-name">
+          ${category.name}
+        </div>
+
+      </div>
+
+      <div class="category-total">
+        ${money(total)}
+      </div>
+
+      ${
+        goal > 0
+
+        ? `
+
+          <div class="category-goal">
+
+            רצוי: ${money(goal)}
+
+            ·
+
+            ${
+              total <= goal
+
+              ? "נשארו " +
+                money(goal-total)
+
+              : "עברתי ב־" +
+                money(total-goal)
+            }
+
+          </div>
+
+          <div class="progress">
+
+            <div
+              class="progress-fill"
+              style="width:${percent}%"
+            ></div>
+
+          </div>
+
+        `
+
+        :
+
+        `
+
+          <div class="category-goal">
+            לחצי כדי להגדיר סכום רצוי
+          </div>
+
+        `
+      }
+
+    `;
+
+    container.appendChild(button);
+
+  });
+}
+
+
+/* =========================
+   פתיחת קטגוריה
+========================= */
+
+function openCategory(categoryName){
+
+  const category =
+    categories.find(
+      c => c.name === categoryName
+    );
+
+  if(!category) return;
+
+  const categoryExpenses =
+    currentExpenses()
+      .filter(
+        e =>
+          e.category === categoryName
+      );
+
+  const total =
+    categoryExpenses.reduce(
+      (sum,e) =>
+        sum + Number(e.amount || 0),
+      0
+    );
+
+  document.getElementById(
+    "categoryModalTitle"
+  ).textContent =
+    category.icon +
+    " " +
+    category.name;
+
+  document.getElementById(
+    "categoryModalTotal"
+  ).textContent =
     money(total);
 
   const container =
-    document.getElementById("categoryExpenses");
-
-  if(!list.length){
-    container.innerHTML =
-      `<div class="empty">אין הוצאות בקטגוריה הזו בתקופה 💕</div>`;
-  }else{
-
-    list.sort(
-      (a,b)=>dateValue(b.date)-dateValue(a.date)
+    document.getElementById(
+      "categoryExpenses"
     );
 
-    container.innerHTML = list.map(e=>{
+  container.innerHTML = "";
 
-      const pay = getPayment(e.payment);
+  const goal =
+    Number(
+      goals[categoryName] || 0
+    );
 
-      return `
-        <div class="expense-item">
+  const goalButton =
+    document.createElement("button");
 
-          <div class="expense-icon">${category.icon}</div>
+  goalButton.className =
+    "back-button";
 
-          <div class="expense-info">
-            <div class="expense-name">
-              ${escapeHtml(e.description || category.name)}
+  goalButton.textContent =
+    goal > 0
+      ? "🎯 שינוי הסכום הרצוי"
+      : "🎯 הגדרת סכום רצוי";
+
+  goalButton.onclick = () => {
+
+    selectedGoalCategory =
+      categoryName;
+
+    document.getElementById(
+      "goalTitle"
+    ).textContent =
+      categoryName;
+
+    document.getElementById(
+      "goalAmount"
+    ).value =
+      goal || "";
+
+    closeModal("categoryModal");
+
+    openModal("goalModal");
+
+  };
+
+  container.appendChild(goalButton);
+
+  if(categoryExpenses.length === 0){
+
+    const empty =
+      document.createElement("div");
+
+    empty.className = "empty";
+
+    empty.textContent =
+      "אין עדיין הוצאות בקטגוריה הזאת בתקופה הזו 💕";
+
+    container.appendChild(empty);
+
+  }else{
+
+    categoryExpenses
+      .slice()
+      .sort(
+        (a,b) =>
+          new Date(b.date) -
+          new Date(a.date)
+      )
+      .forEach(expense => {
+
+        const payment =
+          payments.find(
+            p =>
+              p.id === expense.payment
+          );
+
+        const row =
+          document.createElement("div");
+
+        row.className =
+          "list-row";
+
+        row.innerHTML = `
+
+          <div class="row-left">
+
+            <div class="row-icon">
+              ${category.icon}
             </div>
 
-            <div class="expense-meta">
-              ${formatDate(e.date)}
-              · ${pay.name} ${pay.icon}
+            <div>
+
+              <div class="row-title">
+                ${escapeHtml(
+                  expense.description
+                )}
+              </div>
+
+              <div class="row-subtitle">
+
+                ${formatDate(
+                  expense.date
+                )}
+
+                ·
+
+                ${payment
+                  ? payment.name +
+                    " " +
+                    payment.icon
+                  : ""
+                }
+
+              </div>
+
+              <div class="row-actions">
+
+                <button
+                  class="edit-button"
+                  onclick="
+                    closeModal('categoryModal');
+                    editExpense('${expense.id}');
+                  "
+                  title="עריכה"
+                >
+                  ✎
+                </button>
+
+                <button
+                  class="delete-button"
+                  onclick="
+                    deleteExpense('${expense.id}');
+                    closeModal('categoryModal');
+                  "
+                >
+                  מחיקה
+                </button>
+
+              </div>
+
             </div>
 
-            <div class="item-actions">
-              <button
-                type="button"
-                class="edit-btn"
-                onclick="closeModal('categoryModal'); editExpense('${e.id}')"
-              >✎</button>
-
-              <button
-                type="button"
-                class="delete-btn"
-                onclick="closeModal('categoryModal'); deleteExpense('${e.id}')"
-              >מחיקה</button>
-            </div>
           </div>
 
-          <div class="expense-right">
-            <div class="expense-amount">${money(e.amount)}</div>
+          <div>
+
+            <div class="row-amount">
+              ${money(expense.amount)}
+            </div>
+
           </div>
 
-        </div>
-      `;
-    }).join("");
+        `;
+
+        container.appendChild(row);
+
+      });
+
   }
 
   openModal("categoryModal");
@@ -1603,47 +2196,1099 @@ function openCategory(categoryId){
 
 
 /* =========================
-   MODALS
+   יעדי קטגוריות
 ========================= */
 
-function openModal(id){
-  document.getElementById(id).classList.add("show");
+function saveGoal(){
+
+  const amount =
+    Number(
+      document.getElementById(
+        "goalAmount"
+      ).value
+    );
+
+  if(!selectedGoalCategory){
+
+    return;
+  }
+
+  if(amount < 0 || isNaN(amount)){
+
+    alert(
+      "הכניסי סכום תקין ❤️"
+    );
+
+    return;
+  }
+
+  if(amount === 0){
+
+    delete goals[
+      selectedGoalCategory
+    ];
+
+  }else{
+
+    goals[
+      selectedGoalCategory
+    ] = amount;
+
+  }
+
+  saveData();
+
+  closeModal("goalModal");
+
+  render();
 }
 
-function closeModal(id){
-  document.getElementById(id).classList.remove("show");
+
+/* =========================
+   חלומות
+========================= */
+
+function openNewDream(){
+
+  editingDreamId = null;
+
+  document.getElementById(
+    "dreamModalTitle"
+  ).textContent =
+    "✨ חלום חדש";
+
+  document.getElementById(
+    "dreamEditHint"
+  ).textContent = "";
+
+  document.getElementById(
+    "dreamName"
+  ).value = "";
+
+  document.getElementById(
+    "dreamTarget"
+  ).value = "";
+
+  document.getElementById(
+    "dreamSaved"
+  ).value = "";
+
+  document.getElementById(
+    "dreamNote"
+  ).value = "";
+
+  closeModal("dreamsModal");
+
+  openModal("dreamModal");
 }
 
-document.querySelectorAll(".modal-bg").forEach(bg=>{
-  bg.addEventListener("click",function(e){
-    if(e.target === bg){
-      bg.classList.remove("show");
+function openEditDream(id){
+
+  const dream =
+    dreams.find(
+      d =>
+        String(d.id) === String(id)
+    );
+
+  if(!dream) return;
+
+  editingDreamId = dream.id;
+
+  document.getElementById(
+    "dreamModalTitle"
+  ).textContent =
+    "✏️ עריכת חלום";
+
+  document.getElementById(
+    "dreamEditHint"
+  ).textContent =
+    "אפשר לשנות כאן כל פרט בחלום 💗";
+
+  document.getElementById(
+    "dreamName"
+  ).value =
+    dream.name || "";
+
+  document.getElementById(
+    "dreamTarget"
+  ).value =
+    dream.target || "";
+
+  document.getElementById(
+    "dreamSaved"
+  ).value =
+    dream.saved || "";
+
+  document.getElementById(
+    "dreamNote"
+  ).value =
+    dream.note || "";
+
+  closeModal("dreamsModal");
+
+  openModal("dreamModal");
+}
+
+function saveDream(){
+
+  const name =
+    document.getElementById(
+      "dreamName"
+    ).value.trim();
+
+  const target =
+    Number(
+      document.getElementById(
+        "dreamTarget"
+      ).value
+    );
+
+  const saved =
+    Number(
+      document.getElementById(
+        "dreamSaved"
+      ).value
+    );
+
+  const note =
+    document.getElementById(
+      "dreamNote"
+    ).value.trim();
+
+  if(!name || !target){
+
+    alert(
+      "צריך למלא שם ומחיר יעד ❤️"
+    );
+
+    return;
+  }
+
+  if(editingDreamId !== null){
+
+    const index =
+      dreams.findIndex(
+        d =>
+          String(d.id) ===
+          String(editingDreamId)
+      );
+
+    if(index !== -1){
+
+      dreams[index] = {
+        ...dreams[index],
+        name,
+        target,
+        saved:Math.max(0,saved || 0),
+        note
+      };
+
     }
-  });
-});
 
+  }else{
 
-/* =========================
-   SAFE TEXT
-========================= */
+    dreams.push({
 
-function escapeHtml(value){
-  return String(value || "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+      id:
+        Date.now() +
+        Math.floor(Math.random()*1000),
+
+      name,
+
+      target,
+
+      saved:
+        Math.max(0,saved || 0),
+
+      note,
+
+      purchased:false
+
+    });
+
+  }
+
+  saveData();
+
+  editingDreamId = null;
+
+  closeModal("dreamModal");
+
+  renderDreams();
+}
+
+function openDreamMoney(id){
+
+  selectedDreamId = id;
+
+  const dream =
+    dreams.find(
+      d =>
+        String(d.id) === String(id)
+    );
+
+  if(!dream) return;
+
+  document.getElementById(
+    "dreamMoneyTitle"
+  ).textContent =
+    dream.name;
+
+  document.getElementById(
+    "dreamMoneyAmount"
+  ).value = "";
+
+  closeModal("dreamsModal");
+
+  openModal("dreamMoneyModal");
+}
+
+function addDreamMoney(){
+
+  const amount =
+    Number(
+      document.getElementById(
+        "dreamMoneyAmount"
+      ).value
+    );
+
+  if(!amount || amount <= 0){
+
+    alert("הכניסי סכום ❤️");
+
+    return;
+  }
+
+  const dream =
+    dreams.find(
+      d =>
+        String(d.id) ===
+        String(selectedDreamId)
+    );
+
+  if(!dream) return;
+
+  dream.saved =
+    Number(dream.saved || 0) +
+    amount;
+
+  saveData();
+
+  closeModal("dreamMoneyModal");
+
+  renderDreams();
+}
+
+function deleteDream(id){
+
+  if(!confirm("למחוק את החלום?")){
+
+    return;
+  }
+
+  dreams =
+    dreams.filter(
+      d =>
+        String(d.id) !== String(id)
+    );
+
+  saveData();
+
+  renderDreams();
+}
+
+function toggleDreamPurchased(id){
+
+  const dream =
+    dreams.find(
+      d =>
+        String(d.id) === String(id)
+    );
+
+  if(!dream) return;
+
+  dream.purchased =
+    !dream.purchased;
+
+  saveData();
+
+  renderDreams();
+}
+
+function renderDreams(){
+
+  const container =
+    document.getElementById(
+      "dreamsList"
+    );
+
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  const active =
+    dreams.filter(
+      d => !d.purchased
+    );
+
+  const purchased =
+    dreams.filter(
+      d => d.purchased
+    );
+
+  if(active.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        עדיין אין חלומות 💕
+      </div>`;
+
+  }else{
+
+    active.forEach(
+      dream =>
+        container.appendChild(
+          createDreamElement(dream)
+        )
+    );
+
+  }
+
+  if(purchased.length){
+
+    const title =
+      document.createElement("div");
+
+    title.className =
+      "purchased-title";
+
+    title.textContent =
+      "חלומות שהגשמתי ✨";
+
+    container.appendChild(title);
+
+    purchased.forEach(
+      dream =>
+        container.appendChild(
+          createDreamElement(dream)
+        )
+    );
+
+  }
+}
+
+function createDreamElement(dream){
+
+  const target =
+    Number(dream.target || 0);
+
+  const saved =
+    Number(dream.saved || 0);
+
+  const percent =
+    target > 0
+      ? Math.min(
+          100,
+          (saved / target) * 100
+        )
+      : 0;
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "dream-card" +
+    (dream.purchased
+      ? " dream-purchased"
+      : "");
+
+  card.innerHTML = `
+
+    <div class="dream-top">
+
+      <button
+        class="dream-check"
+        onclick="
+          toggleDreamPurchased('${dream.id}')
+        "
+      >
+        ${dream.purchased ? "✓" : ""}
+      </button>
+
+      <div style="flex:1">
+
+        <div class="dream-name">
+          ${escapeHtml(dream.name)}
+        </div>
+
+        <div class="dream-price">
+          יעד: ${money(target)}
+        </div>
+
+        ${
+          dream.note
+            ? `<div class="dream-price">
+                 ${escapeHtml(dream.note)}
+               </div>`
+            : ""
+        }
+
+      </div>
+
+    </div>
+
+    <div class="dream-saved">
+      ${money(saved)} מתוך ${money(target)}
+    </div>
+
+    <div class="dream-progress">
+
+      <div
+        class="dream-progress-fill"
+        style="width:${percent}%"
+      ></div>
+
+    </div>
+
+    <div class="dream-actions">
+
+      ${
+        !dream.purchased
+
+          ? `<button
+               onclick="
+                 openDreamMoney('${dream.id}')
+               "
+             >
+               💗 הוספת כסף
+             </button>`
+
+          : ""
+      }
+
+      <button
+        onclick="
+          openEditDream('${dream.id}')
+        "
+      >
+        ✎ עריכה
+      </button>
+
+      <button
+        onclick="
+          deleteDream('${dream.id}')
+        "
+      >
+        מחיקה
+      </button>
+
+    </div>
+
+  `;
+
+  return card;
 }
 
 
 /* =========================
-   START
+   סידור הוצאות
 ========================= */
 
-populateCategories();
+function changeSort(){
+
+  const value =
+    document.getElementById(
+      "expenseSort"
+    ).value;
+
+  localStorage.setItem(
+    "moneyExpenseSort",
+    value
+  );
+
+  renderExpenses();
+}
+
+
+/* =========================
+   הוצאות
+========================= */
+
+function renderExpenses(){
+
+  const container =
+    document.getElementById(
+      "expenses"
+    );
+
+  let list =
+    currentExpenses().slice();
+
+  const sort =
+    localStorage.getItem(
+      "moneyExpenseSort"
+    ) || "new";
+
+  if(sort === "new"){
+
+    list.sort(
+      (a,b) =>
+        new Date(b.date) -
+        new Date(a.date)
+    );
+
+  }
+
+  if(sort === "old"){
+
+    list.sort(
+      (a,b) =>
+        new Date(a.date) -
+        new Date(b.date)
+    );
+
+  }
+
+  if(sort === "low"){
+
+    list.sort(
+      (a,b) =>
+        Number(a.amount) -
+        Number(b.amount)
+    );
+
+  }
+
+  if(sort === "high"){
+
+    list.sort(
+      (a,b) =>
+        Number(b.amount) -
+        Number(a.amount)
+    );
+
+  }
+
+  if(sort === "category"){
+
+    list.sort(
+      (a,b) =>
+        String(a.category)
+          .localeCompare(
+            String(b.category),
+            "he"
+          )
+    );
+
+  }
+
+  if(sort === "payment"){
+
+    list.sort(
+      (a,b) => {
+
+        const pa =
+          payments.find(
+            p => p.id === a.payment
+          );
+
+        const pb =
+          payments.find(
+            p => p.id === b.payment
+          );
+
+        return String(
+          pa ? pa.name : ""
+        ).localeCompare(
+          String(
+            pb ? pb.name : ""
+          ),
+          "he"
+        );
+
+      }
+    );
+
+  }
+
+  document.getElementById(
+    "expenseSort"
+  ).value = sort;
+
+  container.innerHTML = "";
+
+  if(!list.length){
+
+    container.innerHTML =
+      `<div class="empty">
+        אין הוצאות בתקופה הזו 💕
+      </div>`;
+
+    return;
+  }
+
+  list.forEach(expense => {
+
+    const category =
+      categories.find(
+        c =>
+          c.name === expense.category
+      );
+
+    const payment =
+      payments.find(
+        p =>
+          p.id === expense.payment
+      );
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "list-row";
+
+    row.innerHTML = `
+
+      <div class="row-left">
+
+        <div class="row-icon">
+          ${
+            category
+              ? category.icon
+              : "📦"
+          }
+        </div>
+
+        <div>
+
+          <div class="row-title">
+            ${escapeHtml(
+              expense.description || "הוצאה"
+            )}
+          </div>
+
+          <div class="row-subtitle">
+
+            ${formatDate(expense.date)}
+
+            ·
+
+            ${
+              payment
+                ? payment.name +
+                  " " +
+                  payment.icon
+                : ""
+            }
+
+            ·
+
+            ${
+              category
+                ? category.name
+                : ""
+            }
+
+          </div>
+
+          <div class="row-actions">
+
+            <!-- עיפרון עדין ולחיץ -->
+
+            <button
+              class="edit-button"
+              onclick="
+                editExpense('${expense.id}')
+              "
+              title="עריכה"
+              aria-label="עריכת הוצאה"
+            >
+              ✎
+            </button>
+
+            <button
+              class="delete-button"
+              onclick="
+                deleteExpense('${expense.id}')
+              "
+            >
+              מחיקה
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <div class="row-amount">
+          ${money(expense.amount)}
+        </div>
+
+      </div>
+
+    `;
+
+    container.appendChild(row);
+
+  });
+}
+
+
+/* =========================
+   הכנסות
+========================= */
+
+function renderIncomes(){
+
+  const container =
+    document.getElementById(
+      "incomes"
+    );
+
+  let list =
+    currentIncomes().slice();
+
+  list.sort(
+    (a,b) =>
+      new Date(b.date) -
+      new Date(a.date)
+  );
+
+  container.innerHTML = "";
+
+  if(!list.length){
+
+    container.innerHTML =
+      `<div class="empty">
+        אין הכנסות בתקופה הזו
+      </div>`;
+
+    return;
+  }
+
+  list.forEach(income => {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "list-row";
+
+    row.innerHTML = `
+
+      <div class="row-left">
+
+        <div class="row-icon">
+          💰
+        </div>
+
+        <div>
+
+          <div class="row-title">
+            ${escapeHtml(
+              income.description || "הכנסה"
+            )}
+          </div>
+
+          <div class="row-subtitle">
+            ${formatDate(income.date)}
+          </div>
+
+          <button
+            class="delete-button"
+            onclick="
+              deleteIncome('${income.id}')
+            "
+          >
+            מחיקה
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="row-amount green-text">
+        +${money(income.amount)}
+      </div>
+
+    `;
+
+    container.appendChild(row);
+
+  });
+}
+
+function deleteIncome(id){
+
+  if(!confirm("למחוק את ההכנסה?")){
+
+    return;
+  }
+
+  incomes =
+    incomes.filter(
+      income =>
+        String(income.id) !==
+        String(id)
+    );
+
+  saveData();
+
+  render();
+}
+
+
+/* =========================
+   אמצעי תשלום
+========================= */
+
+function renderPayments(){
+
+  const container =
+    document.getElementById(
+      "payments"
+    );
+
+  container.innerHTML = "";
+
+  payments.forEach(payment => {
+
+    const total =
+      currentExpenses()
+        .filter(
+          e =>
+            e.payment === payment.id
+        )
+        .reduce(
+          (sum,e) =>
+            sum + Number(e.amount || 0),
+          0
+        );
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "payment-box";
+
+    box.innerHTML = `
+
+      <div class="payment-icon">
+        ${payment.icon}
+      </div>
+
+      <div class="payment-name">
+        ${payment.name}
+      </div>
+
+      <div class="payment-total">
+        ${money(total)}
+      </div>
+
+    `;
+
+    container.appendChild(box);
+
+  });
+}
+
+
+/* =========================
+   רינדור
+========================= */
+
+function render(){
+
+  const cycle =
+    getCycle();
+
+  const monthNames = [
+    "ינואר",
+    "פברואר",
+    "מרץ",
+    "אפריל",
+    "מאי",
+    "יוני",
+    "יולי",
+    "אוגוסט",
+    "ספטמבר",
+    "אוקטובר",
+    "נובמבר",
+    "דצמבר"
+  ];
+
+  document.getElementById(
+    "monthTitle"
+  ).textContent =
+    `תקופת המעקב`;
+
+  document.getElementById(
+    "monthDates"
+  ).textContent =
+    `${formatDate(
+      cycle.start.getFullYear() +
+      "-" +
+      String(
+        cycle.start.getMonth()+1
+      ).padStart(2,"0") +
+      "-10"
+    )} – ${formatDate(
+      cycle.end.getFullYear() +
+      "-" +
+      String(
+        cycle.end.getMonth()+1
+      ).padStart(2,"0") +
+      "-09"
+    )}`;
+
+
+  /* יתרה */
+
+  document.getElementById(
+    "balance"
+  ).textContent =
+    money(getBalance());
+
+  document.getElementById(
+    "balanceInfo"
+  ).textContent =
+    openingBalance
+      ? `יתרת פתיחה: ${money(openingBalance)}`
+      : "עדיין לא הוגדרה יתרת פתיחה";
+
+
+  /* סיכום */
+
+  const periodExpenses =
+    currentExpenses();
+
+  const periodIncomes =
+    currentIncomes();
+
+  const expenseTotal =
+    periodExpenses.reduce(
+      (sum,e) =>
+        sum + Number(e.amount || 0),
+      0
+    );
+
+  const incomeTotal =
+    periodIncomes.reduce(
+      (sum,i) =>
+        sum + Number(i.amount || 0),
+      0
+    );
+
+  document.getElementById(
+    "monthExpenseTotal"
+  ).textContent =
+    money(expenseTotal);
+
+  document.getElementById(
+    "monthExpenseSmall"
+  ).textContent =
+    money(expenseTotal);
+
+  document.getElementById(
+    "monthIncomeTotal"
+  ).textContent =
+    money(incomeTotal);
+
+
+  renderCategories();
+
+  renderExpenses();
+
+  renderIncomes();
+
+  renderPayments();
+
+}
+
+
+/* =========================
+   התחלה
+========================= */
+
+renderCategorySelect();
+
 render();
+
 updatePaymentButtons();
+
+
+/* =========================
+   סגירת מודל בלחיצה בחוץ
+========================= */
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener(
+      "click",
+      function(event){
+
+        if(event.target === modal){
+
+          modal.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================
+   פתיחת חלומות בהחלקה
+========================= */
+
+let touchStartX = 0;
+
+document.addEventListener(
+  "touchstart",
+  function(e){
+
+    touchStartX =
+      e.changedTouches[0].screenX;
+
+  },
+  {passive:true}
+);
+
+document.addEventListener(
+  "touchend",
+  function(e){
+
+    const touchEndX =
+      e.changedTouches[0].screenX;
+
+    const difference =
+      touchEndX - touchStartX;
+
+    if(Math.abs(difference) < 80){
+
+      return;
+    }
+
+    if(difference < 0){
+
+      renderDreams();
+
+      openModal("dreamsModal");
+
+    }
+
+  },
+  {passive:true}
+);
 
 </script>
 
