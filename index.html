@@ -112,40 +112,46 @@ button{
   color:#91818a;
 }
 
-.month-navigation{
+/* תקופת המעקב */
+
+.period-selector{
   display:flex;
   align-items:center;
   gap:8px;
 }
 
-.arrow{
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:14px;
-  background:#f9edf3;
-  color:#c14f80;
-  font-size:25px;
-}
-
-.month-center{
+.period-date{
   flex:1;
+  min-width:0;
   text-align:center;
 }
 
-.month-title{
-  font-size:18px;
-  font-weight:850;
+.period-date-label{
+  color:#95858d;
+  font-size:11px;
+  margin-bottom:4px;
 }
 
-.month-dates{
-  margin-top:3px;
-  color:#95858d;
+.period-date input{
+  width:100%;
+  padding:9px 7px;
+  border:1px solid #eadde4;
+  border-radius:12px;
+  background:#fffafb;
+  color:#5b4b53;
+  font:inherit;
   font-size:12px;
+  text-align:center;
+}
+
+.period-separator{
+  color:#b29da7;
+  font-size:13px;
+  padding-top:17px;
 }
 
 .current-button{
-  margin-top:7px;
+  margin-top:10px;
   border:0;
   background:#f7edf2;
   color:#735c67;
@@ -264,6 +270,7 @@ button{
 }
 
 /* סידור - בצד ימין */
+
 .sort-row{
   display:flex;
   justify-content:flex-start;
@@ -643,6 +650,11 @@ select{
   .payment-grid{
     grid-template-columns:repeat(2,1fr);
   }
+
+  .period-date input{
+    font-size:11px;
+    padding:8px 4px;
+  }
 }
 </style>
 </head>
@@ -686,23 +698,50 @@ select{
 
   <div class="card">
 
-    <div class="month-navigation">
+    <div class="period-selector">
 
-      <button class="arrow" onclick="changePeriod(-1)">‹</button>
+      <div class="period-date">
 
-      <div class="month-center">
+        <div class="period-date-label">
+          מתאריך
+        </div>
 
-        <div class="month-title" id="monthTitle"></div>
-
-        <div class="month-dates" id="monthDates"></div>
-
-        <button class="current-button" onclick="currentPeriod()">
-          חזרה לתקופה הנוכחית
-        </button>
+        <input
+          type="date"
+          id="periodStart"
+          onchange="changeCustomPeriod()"
+        >
 
       </div>
 
-      <button class="arrow" onclick="changePeriod(1)">›</button>
+      <div class="period-separator">
+        –
+      </div>
+
+      <div class="period-date">
+
+        <div class="period-date-label">
+          עד תאריך
+        </div>
+
+        <input
+          type="date"
+          id="periodEnd"
+          onchange="changeCustomPeriod()"
+        >
+
+      </div>
+
+    </div>
+
+    <div style="text-align:center">
+
+      <button
+        class="current-button"
+        onclick="currentPeriod()"
+      >
+        חזרה לתקופה הנוכחית
+      </button>
 
     </div>
 
@@ -751,7 +790,6 @@ select{
 
     <h2 class="section-title">הוצאות בתקופה 🧾</h2>
 
-    <!-- הסידור בכוונה בצד ימין -->
     <div class="sort-row">
 
       <select
@@ -759,12 +797,19 @@ select{
         class="sort-select"
         onchange="changeSort()"
       >
-        <option value="new">חדשות → ישנות</option>
-        <option value="old">ישנות → חדשות</option>
+
+        <option value="new">מהחדש לישן</option>
+
+        <option value="old">מהישן לחדש</option>
+
         <option value="payment">לפי אמצעי תשלום</option>
+
         <option value="category">לפי קטגוריה</option>
-        <option value="low">סכום: נמוך → גבוה</option>
-        <option value="high">סכום: גבוה → נמוך</option>
+
+        <option value="low">מהסכום הנמוך לגבוה</option>
+
+        <option value="high">מהסכום הגבוה לנמוך</option>
+
       </select>
 
     </div>
@@ -871,6 +916,7 @@ select{
     <div class="edit-title" id="dreamEditHint"></div>
 
     <label>מה אני רוצה לקנות?</label>
+
     <input
       id="dreamName"
       type="text"
@@ -878,6 +924,7 @@ select{
     >
 
     <label>מחיר יעד</label>
+
     <input
       id="dreamTarget"
       type="number"
@@ -886,6 +933,7 @@ select{
     >
 
     <label>כמה כבר חסכתי לחלום?</label>
+
     <input
       id="dreamSaved"
       type="number"
@@ -894,6 +942,7 @@ select{
     >
 
     <label>הערה (לא חובה)</label>
+
     <input
       id="dreamNote"
       type="text"
@@ -1275,14 +1324,23 @@ let goals =
 let openingBalance =
   Number(localStorage.getItem("moneyOpeningBalance")) || 0;
 
-let monthOffset = 0;
-
 let selectedDreamId = null;
 let selectedGoalCategory = null;
 let editingDreamId = null;
 let editingExpenseId = null;
 
 let selectedPayment = "visa";
+
+
+/* =========================
+   שמירת תקופה
+========================= */
+
+let customPeriodStart =
+  localStorage.getItem("moneyPeriodStart") || "";
+
+let customPeriodEnd =
+  localStorage.getItem("moneyPeriodEnd") || "";
 
 
 /* =========================
@@ -1366,7 +1424,7 @@ function escapeHtml(value){
    תקופה
 ========================= */
 
-function getCycle(){
+function getDefaultCycle(){
 
   const now = new Date();
 
@@ -1376,7 +1434,7 @@ function getCycle(){
 
     start = new Date(
       now.getFullYear(),
-      now.getMonth() + monthOffset,
+      now.getMonth(),
       10
     );
 
@@ -1384,7 +1442,7 @@ function getCycle(){
 
     start = new Date(
       now.getFullYear(),
-      now.getMonth() - 1 + monthOffset,
+      now.getMonth() - 1,
       10
     );
 
@@ -1405,19 +1463,129 @@ function getCycle(){
   };
 }
 
-function changePeriod(value){
 
-  monthOffset += value;
+function getCycle(){
+
+  if(customPeriodStart && customPeriodEnd){
+
+    const start =
+      new Date(
+        customPeriodStart + "T00:00:00"
+      );
+
+    const end =
+      new Date(
+        customPeriodEnd + "T23:59:59"
+      );
+
+    if(
+      !isNaN(start.getTime()) &&
+      !isNaN(end.getTime()) &&
+      start <= end
+    ){
+
+      return {
+        start,
+        end
+      };
+
+    }
+
+  }
+
+  return getDefaultCycle();
+}
+
+
+function changeCustomPeriod(){
+
+  const start =
+    document.getElementById(
+      "periodStart"
+    ).value;
+
+  const end =
+    document.getElementById(
+      "periodEnd"
+    ).value;
+
+  if(!start || !end){
+
+    return;
+  }
+
+  const startDate =
+    new Date(start + "T00:00:00");
+
+  const endDate =
+    new Date(end + "T23:59:59");
+
+  if(startDate > endDate){
+
+    alert(
+      "תאריך ההתחלה צריך להיות לפני תאריך הסיום ❤️"
+    );
+
+    return;
+  }
+
+  customPeriodStart = start;
+  customPeriodEnd = end;
+
+  localStorage.setItem(
+    "moneyPeriodStart",
+    customPeriodStart
+  );
+
+  localStorage.setItem(
+    "moneyPeriodEnd",
+    customPeriodEnd
+  );
 
   render();
 }
+
 
 function currentPeriod(){
 
-  monthOffset = 0;
+  const cycle =
+    getDefaultCycle();
+
+  customPeriodStart =
+    cycle.start.getFullYear() +
+    "-" +
+    String(
+      cycle.start.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      cycle.start.getDate()
+    ).padStart(2,"0");
+
+  customPeriodEnd =
+    cycle.end.getFullYear() +
+    "-" +
+    String(
+      cycle.end.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      cycle.end.getDate()
+    ).padStart(2,"0");
+
+  localStorage.setItem(
+    "moneyPeriodStart",
+    customPeriodStart
+  );
+
+  localStorage.setItem(
+    "moneyPeriodEnd",
+    customPeriodEnd
+  );
 
   render();
 }
+
 
 function inCurrentCycle(date){
 
@@ -1659,9 +1827,6 @@ function saveExpense(){
     return;
   }
 
-
-  /* עריכה */
-
   if(editingExpenseId !== null){
 
     const index =
@@ -1686,8 +1851,6 @@ function saveExpense(){
     }
 
   }
-
-  /* הוצאה חדשה */
 
   else{
 
@@ -2893,8 +3056,6 @@ function renderExpenses(){
 
           <div class="row-actions">
 
-            <!-- עיפרון עדין ולחיץ -->
-
             <button
               class="edit-button"
               onclick="
@@ -3105,44 +3266,15 @@ function render(){
   const cycle =
     getCycle();
 
-  const monthNames = [
-    "ינואר",
-    "פברואר",
-    "מרץ",
-    "אפריל",
-    "מאי",
-    "יוני",
-    "יולי",
-    "אוגוסט",
-    "ספטמבר",
-    "אוקטובר",
-    "נובמבר",
-    "דצמבר"
-  ];
+  document.getElementById(
+    "periodStart"
+  ).value =
+    customPeriodStart;
 
   document.getElementById(
-    "monthTitle"
-  ).textContent =
-    `תקופת המעקב`;
-
-  document.getElementById(
-    "monthDates"
-  ).textContent =
-    `${formatDate(
-      cycle.start.getFullYear() +
-      "-" +
-      String(
-        cycle.start.getMonth()+1
-      ).padStart(2,"0") +
-      "-10"
-    )} – ${formatDate(
-      cycle.end.getFullYear() +
-      "-" +
-      String(
-        cycle.end.getMonth()+1
-      ).padStart(2,"0") +
-      "-09"
-    )}`;
+    "periodEnd"
+  ).value =
+    customPeriodEnd;
 
 
   /* יתרה */
@@ -3212,6 +3344,52 @@ function render(){
 /* =========================
    התחלה
 ========================= */
+
+function initializePeriod(){
+
+  if(!customPeriodStart || !customPeriodEnd){
+
+    const cycle =
+      getDefaultCycle();
+
+    customPeriodStart =
+      cycle.start.getFullYear() +
+      "-" +
+      String(
+        cycle.start.getMonth()+1
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        cycle.start.getDate()
+      ).padStart(2,"0");
+
+    customPeriodEnd =
+      cycle.end.getFullYear() +
+      "-" +
+      String(
+        cycle.end.getMonth()+1
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        cycle.end.getDate()
+      ).padStart(2,"0");
+
+    localStorage.setItem(
+      "moneyPeriodStart",
+      customPeriodStart
+    );
+
+    localStorage.setItem(
+      "moneyPeriodEnd",
+      customPeriodEnd
+    );
+
+  }
+
+}
+
+
+initializePeriod();
 
 renderCategorySelect();
 
